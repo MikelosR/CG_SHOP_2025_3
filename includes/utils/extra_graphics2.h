@@ -29,7 +29,7 @@ protected:
     void drawTriangulation() {
         QGraphicsScene* scene = this->scene();
 
-        // Calculate the bounding box for the points to set the scene rectangle
+        //Calculate the bounding box for the points to set the scene rectangle
         double min_x = std::numeric_limits<double>::max();
         double min_y = std::numeric_limits<double>::max();
         double max_x = std::numeric_limits<double>::lowest();
@@ -45,7 +45,7 @@ protected:
             max_y = std::max(max_y, y);
         }
 
-        // Include the polygon bounding box in the scene bounds
+        //Include the polygon bounding box in the scene bounds
         double polygon_min_x = std::numeric_limits<double>::max();
         double polygon_min_y = std::numeric_limits<double>::max();
         double polygon_max_x = std::numeric_limits<double>::lowest();
@@ -59,7 +59,7 @@ protected:
             polygon_max_y = std::max(polygon_max_y, y);
         }
 
-        double margin = 30; // Padding around the triangulation
+        double margin = 30; //Padding around the triangulation
         double sceneHeight = max_y - min_y;
         scene->setSceneRect(std::min(min_x, polygon_min_x) - margin, 
                             std::min(min_y, polygon_min_y) - margin, 
@@ -67,7 +67,8 @@ protected:
                             std::max(max_y, polygon_max_y) - min_y + 2 * margin);
 
         // --- Draw the Polygon Boundary ---
-        QPen polygonPen(Qt::blue); // Choose a color for the polygon boundary
+        QPen polygonPen(Qt::red); //Choose a color for the polygon boundary
+        polygonPen.setWidth(25);
         QPolygonF polygonPoints;
         for (auto vertex = polygon.vertices_begin(); vertex != polygon.vertices_end(); ++vertex) {
             double x = CGAL::to_double(vertex->x());
@@ -76,31 +77,40 @@ protected:
         }
         scene->addPolygon(polygonPoints, polygonPen);
 
+
         // --- Draw the Edges of the Triangulation ---
         QPen edgePen(QColor(0, 0, 0, 255)); // Fully opaque black color
-        edgePen.setWidth(1); // Optional: thicker edges for visibility
-
         for (auto eit = cdt.finite_edges_begin(); eit != cdt.finite_edges_end(); ++eit) {
             auto source = eit->first->vertex((eit->second + 1) % 3)->point();
             auto target = eit->first->vertex((eit->second + 2) % 3)->point();
+
+            //Check if this edge is constrained
+            if (cdt.is_constrained(*eit)) {
+                edgePen.setColor(QColor(0, 200, 0)); //Set color to green for constrained edges
+                edgePen.setWidth(25);
+            } else {
+                edgePen.setColor(QColor(0, 0, 0, 255)); //Set back to black for unconstrained edges
+                edgePen.setWidth(3);
+            }
+
             scene->addLine(
                 CGAL::to_double(source.x()), sceneHeight - CGAL::to_double(source.y()) + min_y,
-                CGAL::to_double(target.x()), sceneHeight - CGAL::to_double(target.y()) + min_y, edgePen);
+                CGAL::to_double(target.x()), sceneHeight - CGAL::to_double(target.y()) + min_y,
+                edgePen);
         }
-
+   
         // --- Draw the Vertices of the Triangulation ---
-        QBrush regularVertexBrush(QColor(255, 0, 0, 255)); // Fully opaque red color
-        QPen vertexPen(Qt::black); // Optional: black border for better visibility       
-
+        QBrush regularVertexBrush(QColor(255, 0, 0, 255)); //Fully opaque red color
+        QPen vertexPen(Qt::black); //Optional: black border for better visibility
         for (auto vit = cdt.finite_vertices_begin(); vit != cdt.finite_vertices_end(); ++vit) {
             Point_2 p = vit->point();
             double x = CGAL::to_double(p.x());
             double y = sceneHeight - CGAL::to_double(p.y()) + min_y;
 
-            // Draw the point red color
-            scene->addEllipse(x - 10, y - 10, 20, 20, vertexPen, regularVertexBrush);
+            //Draw the point red color
+            scene->addEllipse(x - 5, y - 5, 10, 10, vertexPen, regularVertexBrush);
 
-            // Add coordinates as text
+            //Add coordinates as text
             std::ostringstream oss;
             oss << "(" << x << ", " << CGAL::to_double(p.y()) << ")";
             auto textItem = scene->addText(QString::fromStdString(oss.str()));
@@ -108,9 +118,9 @@ protected:
 
             textItem->setToolTip(QString::fromStdString(oss.str()));
 
-            // Set the font size
+            //Set the font size
             QFont font = textItem->font();
-            font.setPointSize(25);
+            font.setPointSize(30);
             textItem->setFont(font);
         }
 
@@ -124,40 +134,40 @@ protected:
             Point_2 p2 = fit->vertex(1)->point();
             Point_2 p3 = fit->vertex(2)->point();
 
-            // Check if triangle is obtuse and inside the region boundary
+            //Check if triangle is obtuse and inside the region boundary
             bool isObtuseTriangle = is_obtuse(fit);
             bool faceInside = is_face_inside_region(fit, polygon);
 
-            // Check if the triangle is obtuse
+            //Check if the triangle is obtuse
             if (isObtuseTriangle && faceInside) {
-                // Draw the triangle with a light color
+                //Draw the triangle with a light color
                 QPolygonF triangle;
                 triangle << QPointF(CGAL::to_double(p1.x()), sceneHeight - CGAL::to_double(p1.y()) + min_y)
                         << QPointF(CGAL::to_double(p2.x()), sceneHeight - CGAL::to_double(p2.y()) + min_y)
                         << QPointF(CGAL::to_double(p3.x()), sceneHeight - CGAL::to_double(p3.y()) + min_y);
                 scene->addPolygon(triangle, QPen(Qt::NoPen), obtuseTriangleBrush);
 
-                // Identify and draw vertices with the correct color
+                //Identify and draw vertices with the correct color
                 for (int i = 0; i < 3; ++i) {
                     Point_2 vertex = fit->vertex(i)->point();
                     bool isObtuseVertex = (find_obtuse_vertex(p1, p2, p3) == vertex);
                     double x = CGAL::to_double(vertex.x());
                     double y = sceneHeight - CGAL::to_double(vertex.y()) + min_y;
 
-                    // Draw vertices based on their color category
+                    //Draw vertices based on their color category
                     if (polygon.bounded_side(vertex) != CGAL::ON_UNBOUNDED_SIDE) {
                         // If the vertex is obtuse, draw it green
                         if (isObtuseVertex) {
                             QBrush vertexBrush = obtuseVertexBrush;
-                            scene->addEllipse(x - 10, y - 10, 20, 20, QPen(Qt::NoPen), vertexBrush);
+                            scene->addEllipse(x - 5, y - 5, 10, 10, QPen(Qt::NoPen), vertexBrush);
                         }
                     }
                 }
             }
 
-            // If face is outside of the boundary
+            //If face is outside of the boundary
             if (!faceInside) {
-                // Draw the triangle with a light black color
+                //Draw the triangle with a light black color
                 QPolygonF triangle2;
                 triangle2 << QPointF(CGAL::to_double(p1.x()), sceneHeight - CGAL::to_double(p1.y()) + min_y)
                         << QPointF(CGAL::to_double(p2.x()), sceneHeight - CGAL::to_double(p2.y()) + min_y)
@@ -213,9 +223,9 @@ protected:
     // Override wheel event for zooming
     void wheelEvent(QWheelEvent* event) override {
         if (event->angleDelta().y() > 0) {
-            scale(1.2, 1.2); // Zoom in
+            scale(1.2, 1.2); //Zoom in
         } else {
-            scale(1 / 1.2, 1 / 1.2); // Zoom out
+            scale(1 / 1.2, 1 / 1.2); //Zoom out
         }
         event->accept();
     }

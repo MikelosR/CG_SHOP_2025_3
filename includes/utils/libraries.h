@@ -14,17 +14,20 @@
 #include <CGAL/Line_2.h>
 #include <CGAL/squared_distance_2.h>
 #include <CGAL/Polygon_2_algorithms.h>
+#include <CGAL/intersection_2.h>
 
 //Standard C++ libraries
 #include <iostream>
 #include <vector>
 #include <set>
+#include <unordered_map>
 #include <string>
 #include <cmath>
 #include <optional>
 #include <random>
 #include <fstream>
 #include <boost/json.hpp>
+#include <algorithm>
 
 //Other libraries
 #include <stdio.h>

@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
     //./opt_triangulation -i tests/test_Local.json -o solution_output.json
     
     read_json(input_path, jv);
-
+    Custom_CDT custom_cdt;
     vector<Point_2> points;
     vector<pair<int, int>> additional_constraints;
     vector<int> region_boundary;
@@ -115,12 +115,39 @@ int main(int argc, char** argv) {
                 additional_constraints.emplace_back(idx1, idx2);
             }
         }
-        /******************************** */
-        //Check if the instance has constraints (3rd Task)
+
+        //Create a polygon from region boundary
+        for (int index : region_boundary) {
+            polygon.push_back(points[index]);
+        }
+
+        //Make the cdt
+        for (const auto& point : points) {
+            custom_cdt.insert(point);
+        }
+        
+        //Insert additional constraints
+        for (const auto& constraint : additional_constraints) {
+            custom_cdt.insert_constraint(points[constraint.first], points[constraint.second]);
+        }
+
+        /*********************************/
+        //Check if the polygon is convex (3rd Task)
+        if(polygon.is_convex()) is_polygon_convex = true;
+        //Check if the polygon (boundary) has straight lines (3rd Task)
+        if(boundary_straight_lines(polygon)) has_boundary_straight_lines = true;
         if(!additional_constraints.empty()) has_constraints = true;
+
+        cout<<"the instance has constraints: "<<has_constraints<<" and is convex: "<<is_polygon_convex<<endl;
+        cout<<"has_boundary_straight_lines: "<<has_boundary_straight_lines<<endl;
+
+        //3rd Task
+        if(!has_constraints && !is_polygon_convex && !has_boundary_straight_lines) cout<<"AkANoNiStO"<<endl;
+
+        /*********************************/        
         //Check if the instance has opened or closed constraints
         if(has_constraints){
-            if(are_constraints_closed(additional_constraints, points.size())) {
+            if(are_constraints_closed(additional_constraints, points.size(), points, polygon)) {
                 has_closed_constraints = true;
                 cout<<"has_closed_constraints: "<<has_closed_constraints<<endl;
             }
@@ -130,49 +157,21 @@ int main(int argc, char** argv) {
                 cout<<"has_open_constraints: "<<has_open_constraints<<endl;
             }
         }
-        
     }
     else {
         cerr<<"Jv is not object: safe exit"<<endl;
         return 0;
-    }
-
-    //Create a polygon from region boundary
-    for (int index : region_boundary) {
-        polygon.push_back(points[index]);
-    }
-    /******************************** */
-    //Check if the polygon is convex (3rd Task)
-    if(polygon.is_convex()) is_polygon_convex = true;
-    //Check if the polygon (boundary) has straight lines (3rd Task)
-    if(boundary_straight_lines(polygon)) has_boundary_straight_lines = true;
-
-    cout<<"the instance has constraints: "<<has_constraints<<" and is convex: "<<is_polygon_convex<<endl;
-    cout<<"has_boundary_straight_lines: "<<has_boundary_straight_lines<<endl;
-
-    //3rd Task
-    if(!has_constraints && !is_polygon_convex && !has_boundary_straight_lines) cout<<"AkANoNiStO"<<endl;
-    
-    //Make the cdt
-    Custom_CDT custom_cdt;
-    for (const auto& point : points) {
-        custom_cdt.insert(point);
-    }
-
-    //Insert additional constraints
-    for (const auto& constraint : additional_constraints) {
-        custom_cdt.insert_constraint(points[constraint.first], points[constraint.second]);
     }
     
     //////////// PHASE 2: FLIPS & STEINER POINTS //////////////////////////////
     int obtuses_faces = count_obtuse_triangles(custom_cdt, polygon);
     int init_obtuse_faces = obtuses_faces;
     int initial_vertexes = count_vertices(custom_cdt);
-    cout<<"Initial number of obtuses: "<<obtuses_faces<<endl;
-    cout<<"Initial number of vertexes: "<<initial_vertexes<<endl;
+    cout<<"Initial number of obtuses: "<<init_obtuse_faces<<endl;
+    cout<<"Initial number of vertexes: "<<custom_cdt.number_of_vertices()<<endl;
     //CGAL::draw(custom_cdt);
     double success;
-    
+
     Custom_CDT simulated_cdt = custom_cdt;
     //Run task1 if delaunay parameter is false
     if(!delaunay) {
@@ -214,7 +213,7 @@ int main(int argc, char** argv) {
     if(init_obtuse_faces > 0) success = ((double)obtuses_faces/(double)init_obtuse_faces)*100;
     cout<<100-success<<"%"<<" obtuse triangles reduction success"<<endl;
     cout<<"Final form of Custom CDT "<<endl;
-    CGAL::draw(simulated_cdt);
+    //CGAL::draw(simulated_cdt);
     //print_polygon_edges(simulated_polygon);
     
     /*Print from Extra_Graphics*/
@@ -228,7 +227,7 @@ int main(int argc, char** argv) {
         max_y = max(max_y, y);
     }
     QApplication app(argc, argv);
-    CDTGraphicsView view(custom_cdt, polygon);
+    CDTGraphicsView view(simulated_cdt, polygon);
     view.setRenderHint(QPainter::Antialiasing);
     view.setWindowTitle("Delaunay Triangulation with Point Coordinates");
     view.resize(1000, 1000);

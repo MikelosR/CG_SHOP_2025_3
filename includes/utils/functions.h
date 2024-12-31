@@ -67,8 +67,6 @@ bool is_it_worth_flip(const Point_2& p1, const Point_2& p2, const Point_2& p3, c
 void update_polygon(Polygon& polygon, const Point_2& steiner_point, const Point_2& point1, const Point_2& point2);
 bool is_point_inside_region(const Point_2& point, const Polygon& polygon);
 bool is_face_inside_region(const Face_handle& face, const Polygon& polygon);
-//If an edge of the face lies into the border of the boundary, => face == face of boundary
-bool is_face_on_boundary(const Custom_CDT& cdt, Face_handle face, const Polygon& polygon);
 bool is_edge_inside_region(const Point_2& point1, const Point_2& point2, const Polygon& polygon);
 bool is_edge_on_boundary(const Point_2& p1, const Point_2& p2, const Polygon& polygon);
 Point_2 compute_centroid(const vector<Point_2>& points);
@@ -95,6 +93,22 @@ std_string format_double(double value);
 
 //3rd task
 bool boundary_straight_lines(const Polygon& polygon);
-bool are_constraints_closed(const vector<pair<int, int>>& additional_constraints, int num_points);
-void method_output(const vector<int> count_steiners, std_string method_name, const std_string& name_of_instance, const int num_steiners, const int num_obtuses);
+bool are_constraints_closed(const vector<pair<int, int>>& additional_constraints, int num_points, const vector<Point_2>& points, 
+                            const Polygon& polygon);
+bool is_closed_from_boundary(const vector<pair<int, int>>& additional_constraints, const vector<Point_2>& points, 
+                            const vector<int> degree, const Polygon& polygon);
+bool is_closed_from_circle(const vector<pair<int, int>>& additional_constraints, const vector<Point_2>& points, 
+                            const vector<int> degree, const Polygon& polygon);
+void method_output(const vector<int> count_steiners, std_string method_name, const std_string& name_of_instance, 
+                    const int num_steiners, const int num_obtuses);
+bool is_same_edge(const Segment_2& seg1, const Segment_2& seg2);
+
+vector<Face_handle> find_faces_intersecting_polygon_edges(const Custom_CDT& cdt, const Polygon& polygon);
+vector<Face_handle> find_faces_inside_boundary(const Custom_CDT& cdt, const Polygon& polygon);
+bool are_constraints_open(const vector<pair<int, int>>& additional_constraints, int num_points);
+vector<Segment_2> find_shared_edges(CDT& cdt, const Polygon& polygon);
+vector<Segment_2> find_non_touching_boundary_edges(const Polygon& polygon, const CDT& cdt, vector<Segment_2>& shared_edges);
+vector<Segment_2> edges_new_boundary(const Polygon& polygon, vector<Segment_2>& shared_edges);
+
+
 #endif

@@ -9,22 +9,25 @@ configurations = {
     "local": {
         "method": "local",
         "parameters": {"L": 50},
-        "delaunay": True
+        "delaunay": True,
+        "randomization": True
     },
     "sa": {
         "method": "sa",
-        "parameters": {"alpha": 2.4, "beta": 0.2, "L": 1450, "batch_size": 5},
-        "delaunay": True
+        "parameters": {"alpha": 2.4, "beta": 0.2, "L": 1050, "batch_size": 4},
+        "delaunay": True,
+        "randomization": True
     },
     "ant": {
         "method": "ant",
         "parameters": {"alpha": 2.4, "beta": 0.2, "xi": 1.0, "psi": 2.0, "lambda": 0.2, "kappa": 10, "L": 50},
-        "delaunay": True
+        "delaunay": True,
+        "randomization": True
     }
 }
 
 # Select which configuration to apply (choose from: "local", "sa", "ant")
-selected_configuration = "sa"  # Change this to "local" or "ant" as needed
+selected_configuration = "ant"  # Change this to "local" or "ant" as needed
 
 # Validate selection
 if selected_configuration not in configurations:

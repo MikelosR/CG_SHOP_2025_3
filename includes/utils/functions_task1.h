@@ -60,8 +60,8 @@ Point_2 find_obtuse_vertex_1(const Point_2 &v1, const Point_2 &v2, const Point_2
 
 //Steiner methods
 void insert_circumcenter_centroid_1(Custom_CDT &custom_cdt, const Polygon &polygon);
-void insert_projection_1(Custom_CDT &custom_cdt, const Polygon polygon);
-void insert_midpoint_1(Custom_CDT &custom_cdt, const Polygon &polygon);
+void insert_projection_1(Custom_CDT &custom_cdt, Polygon& polygon);
+void insert_midpoint_1(Custom_CDT &custom_cdt, Polygon& polygon);
 void insert_orthocenter_1(Custom_CDT &custom_cdt, const Polygon &polygon);
 
 Point_2 find_medial_of_longest_side(const Point_2 &p1, const Point_2 &p2, const Point_2 &p3);
@@ -70,7 +70,7 @@ Point_2 find_orthocenter(const Point_2 &p1, const Point_2 &p2, const Point_2 &p3
 
 bool is_point_inside_region(const Point_2 &point, const Polygon polygon);
 
-bool is_edge_in_boundary(const Point_2 &p1, const Point_2 &p2, const Polygon &polygon);
+bool is_edge_on_boundary_1(const Point_2 &p1, const Point_2 &p2, const Polygon &polygon);
 
 bool can_insert_centroid(Custom_CDT &custom_cdt, Face_handle &triangleA, const Point_2 &centroid, const Polygon &polygon);
 
@@ -82,3 +82,5 @@ bool is_face_on_boundary(const Custom_CDT &cdt, Custom_CDT::Face_handle face);
 bool is_steiner_point(Vertex_handle vertex, const std::vector<Point_2> &original_points);
 
 void run_task1(Custom_CDT& custom_cdt, Polygon& polygon);
+bool is_face_inside_region_1(const Face_handle& face, const Polygon& polygon);
+void update_polygon_1(Polygon& polygon, const Point_2& steiner_point, const Point_2& p1, const Point_2& p2);

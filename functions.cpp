@@ -243,7 +243,6 @@ bool insert_adjacent_steiner(Custom_CDT& custom_cdt, const Face_handle& face1, c
     if(is_polygon_convex(unique_points)){
         custom_cdt.insert_no_flip(adjacent_steiner);
         start_the_flips(custom_cdt, polygon);
-        cout<<"ADJACENT INSERTED"<<endl;
         return true;
     }
     return false;
@@ -415,8 +414,7 @@ bool should_accept_bad_steiner(const double deltaE,const double T) {
 //Simualated annealing method
 void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, const double& beta, const int& batch_size, const std_string& name_of_instance){
     int obtuse_faces = count_obtuse_triangles(custom_cdt, polygon);
-    int init_vertices = count_vertices(custom_cdt);
-    return;
+    int init_vertices = custom_cdt.number_of_vertices();
     double T = 1.0, delta_E = 0.0, E_new = 0.0, cooling_rate = 0.99, min_temp = 1e-6;
     double best_E = calculate_energy(obtuse_faces, 0, alpha, beta);
     int num_of_transition = 0, random_steiner = 0;
@@ -431,14 +429,14 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
     std::mt19937 rng(std::random_device{}()); //Initialize RNG
     std::uniform_int_distribution<int> dist(0, 4); //Define distribution
     //As we have progress continue
-    while(progress){
+    //while(progress){
         progress = false;
-        start = count_obtuse_triangles(best_cdt, polygon);
-        if(start == 0) break;
+        //start = count_obtuse_triangles(best_cdt, polygon);
+        //if(start == 0) break;
         T = 1.0;
         num_of_transition = 0;
         fill(temp_counter_steiner.begin(), temp_counter_steiner.end(), 0);
-        start_the_flips(best_cdt, polygon);
+        //start_the_flips(best_cdt, polygon);
         curent_cdt = best_cdt;
         simulate_cdt = best_cdt;
 
@@ -450,14 +448,14 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 if (!is_obtuse(face)) continue;
                 if (!is_face_inside_region(face, polygon)) continue;
                 random_steiner = dist(rng);
-                cout<<"initial steiner method: "<<random_steiner<<endl;
+                //cout<<"initial steiner method: "<<random_steiner<<endl;
                 switch(random_steiner){
                     //If circumcenter steiner is outside of the boundary, continue
                     case 0: 
                         if(!insert_circumcenter(simulate_cdt, face, polygon, steiner_point)){
                             //--face;
                             //Optional because if circumcenter return false, didnt insert steiner in the simulate cdt
-                            cout<<"Circumcenter false"<<endl;
+                            //cout<<"Circumcenter false"<<endl;
                             continue;
                         }
                         break;
@@ -482,10 +480,10 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                     default: break;
                 }
                 obtuse_faces = count_obtuse_triangles(simulate_cdt, polygon);
-                counter_steiner = count_vertices(simulate_cdt) - init_vertices;
+                counter_steiner = simulate_cdt.number_of_vertices() - init_vertices;
                 E_new = calculate_energy(obtuse_faces, counter_steiner, alpha, beta);
                 delta_E = E_new - best_E;
-                cout<<"Outside"<<endl;
+                /*cout<<"Outside"<<endl;
                 for (int i = 0; i < temp_counter_steiner.size(); i++) cout<<temp_counter_steiner[i]<< " ";
                 cout<<endl;
                 for (int i = 0; i < count_steiners.size(); i++) cout<<count_steiners[i]<< " ";
@@ -494,7 +492,7 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 cout << "Before if(delta_E == 0): E_new = " << E_new << ", best_E = " << best_E << ", delta_E = " << delta_E << endl;
                 cout << fixed << setprecision(15) << "delta_E = " << delta_E << endl;
                 cout<<"count_vertices(simulate_cdt): "<<count_vertices(simulate_cdt)<<" count_vertices(curent_cdt): "<<count_vertices(curent_cdt)<<endl;
-                cout<<endl;
+                cout<<endl;*/
                 //For any undetectable program error
                 if (delta_E == 0) {
                     simulate_cdt = curent_cdt;
@@ -517,24 +515,23 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                     num_of_transition = 0;
                     //Update the counters for steiners
                     temp_counter_steiner[random_steiner]++;
-                    cout<<"Original"<<endl;
+                    /*cout<<"Original"<<endl;
                     for (int i = 0; i < temp_counter_steiner.size(); i++) cout<<temp_counter_steiner[i]<< " ";
-                    cout<<endl;
+                    cout<<endl;*/
                     
                     //CGAL::draw(best_cdt);
                     for(int i = 0; i < temp_counter_steiner.size(); ++i) {
                         count_steiners[i] += temp_counter_steiner[i];
                     }
-                    for (int i = 0; i < count_steiners.size(); i++) cout<<count_steiners[i]<< " ";
-                    cout<<endl;
-                    cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl; 
+                    /*for (int i = 0; i < count_steiners.size(); i++) cout<<count_steiners[i]<< " ";
+                    cout<<endl;*/
+                    //cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl; 
                     if(accumulate(count_steiners.begin(),count_steiners.end(),0) != best_num_steiner){
                         cout<<"WROOONG "<<accumulate(count_steiners.begin(),count_steiners.end(),0)<<" != "<<best_num_steiner<<endl;
-                        
                         return;
                     }
-                    cout<<"restart 1"<<endl;
-                    cout<<endl;
+                    /*cout<<"restart 1"<<endl;
+                    cout<<endl;*/
                     
                     //For projection or midpoint check if the steiner inserted in the boundary of polygon and update the polygon
                     if(random_steiner == 1) update_polygon(polygon, steiner_point, longest_edge.source(), longest_edge.target());
@@ -554,16 +551,16 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                         curent_cdt = best_cdt;
                         num_of_transition = 0;
                         fill(temp_counter_steiner.begin(), temp_counter_steiner.end(), 0);
-                        cout<<"restart 2"<<endl;
+                        //cout<<"restart 2"<<endl;
                     }
-                    cout<<"Accept"<<endl;
+                    /*cout<<"Accept"<<endl;
                     for (int i = 0; i < temp_counter_steiner.size(); i++) cout<<temp_counter_steiner[i]<< " ";
                     cout<<endl;
                     for (int i = 0; i < count_steiners.size(); i++) cout<<count_steiners[i]<< " ";
                     cout<<endl;
                     cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl;
                     cout<<"count_vertices(simulate_cdt): "<<count_vertices(simulate_cdt)<<" count_vertices(curent_cdt): "<<count_vertices(curent_cdt)<<endl;
-                    cout<<endl;
+                    cout<<endl;*/
                     break;
                 }
                 //Go up to the "valley", Update temperature (increase)
@@ -575,7 +572,7 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 if(obtuse_faces == 1) face--;
                 //Case that we didn't insert this steiner into simulate_cdt. So, take back the previous simulate_cdt (custom_cdt)
                 simulate_cdt = curent_cdt;
-                cout<<"FLED"<<endl;
+                /*cout<<"FLED"<<endl;
                 for (int i = 0; i < temp_counter_steiner.size(); i++) cout<<temp_counter_steiner[i]<< " ";
                 cout<<endl;
                 for (int i = 0; i < count_steiners.size(); i++) cout<<count_steiners[i]<< " ";
@@ -584,28 +581,27 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 cout << "Before if(delta_E == 0): E_new = " << E_new << ", best_E = " << best_E << ", delta_E = " << delta_E << endl;
                 cout << fixed << setprecision(15) << "delta_E = " << delta_E << endl;
                 cout<<"count_vertices(simulate_cdt): "<<count_vertices(simulate_cdt)<<" count_vertices(curent_cdt): "<<count_vertices(curent_cdt)<<endl;
-                cout<<endl;
+                cout<<endl;*/
 
             }
             //Update temperature (decrease)
             T = T*(cooling_rate);
-            //cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl; 
+            cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl; 
         }
-        end = count_obtuse_triangles(best_cdt, polygon);
-        if(end < start && end > 0) progress = true;
-    }
+        /*end = count_obtuse_triangles(best_cdt, polygon);
+        if(end < start && end > 0) progress = true;*/
+    //}
     //"Return" the best cdt
     custom_cdt = best_cdt;
     std_string method_name = "SA";
     end = count_obtuse_triangles(best_cdt, polygon);
-    cout<<"best_num_steiner: "<<best_num_steiner<<endl;
-    best_num_steiner = count_vertices(best_cdt) - init_vertices;
+    best_num_steiner = best_cdt.number_of_vertices() - init_vertices;
     method_output(count_steiners, method_name, name_of_instance, best_num_steiner, end);
 }
 
 //Ant colony method
 void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance){
-    int init_vertices = count_vertices(custom_cdt);
+    int init_vertices = custom_cdt.number_of_vertices();
     int obtuse_faces = count_obtuse_triangles(custom_cdt, polygon);
     int new_obtuse_faces = obtuse_faces; 
     int best_obtuses = new_obtuse_faces;
@@ -756,7 +752,7 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
 
         //Update the best triangulation and the best_E
         new_obtuse_faces = count_obtuse_triangles(best_cdt, polygon);
-        counter_steiner = count_vertices(best_cdt) - init_vertices;
+        counter_steiner = best_cdt.number_of_vertices() - init_vertices;
         best_E = calculate_energy(new_obtuse_faces, counter_steiner, alpha, beta);
         
         /*Update pheromones*/
@@ -786,7 +782,6 @@ bool have_conflict(Ant& ant1, Ant& ant2){
     }
     return false;
 }
-
 
 //Keep the final ants that we take for the best triangulation
 vector<Ant> save_the_best(vector<Ant>& ants){
@@ -873,7 +868,6 @@ Face_handle give_random_obtuse(Custom_CDT& custom_cdt, Polygon& polygon) {
     
     return obtuse_faces[index];
 }
-
 
 //Update affected faces
 void affected_faces(Custom_CDT& best_cdt, Ant& ant) {
@@ -981,9 +975,6 @@ SteinerMethod selectSteinerMethod(const double& ro, const vector<double>& taf, v
     return static_cast<SteinerMethod>(SteinerMethod::NUM_METHODS - 1);
 }
 
-//DELETE
-static int counter = 0;
-
 void updatePheromones(vector<double>& taf, vector<double>& delta_taf, vector<Ant> selected_ants, double lamda) {
     SteinerMethod sp;
     //If a method has been selected at least once, set a value of 1 in the same index of steinerMethod
@@ -1046,11 +1037,11 @@ double calculate_radius_to_height(const Face_handle& face, const Custom_CDT& cdt
 bool has_obtuse_neighbors(const Custom_CDT& custom_cdt, const Face_handle& face, const Polygon& polygon){
     for (int i = 0; i < 3; ++i) {
         Face_handle neighbor = face->neighbor(i);
+        //Take the opposite edge from the vertex i 
+        if (custom_cdt.is_constrained(make_pair(face, i))) continue;
         //Because we have just an iterator, this iterator may go out of bounds
         //because he doesn't have the supervision of for loop
         if(custom_cdt.is_infinite(neighbor) || !is_face_inside_region(neighbor, polygon)) continue;
-        //Take the opposite edge from the vertex i 
-        if (custom_cdt.is_constrained(make_pair(face, i))) continue;
         if(is_obtuse(neighbor)) return true;
     }
     return false;
@@ -1105,14 +1096,16 @@ bool insert_circumcenter(Custom_CDT& circumcenter_cdt, const Face_handle& face, 
     //Circumcenter must be inside of the boundary
     if (is_point_inside_region(circumcenter, polygon) && is_circumcenter_in_neighbor(circumcenter_cdt, face, circumcenter)){
         if(is_convex(p1, p2, p3, circumcenter)){
-            circumcenter_steiner = circumcenter;
-            circumcenter_cdt.insert_no_flip(circumcenter);
-            start_the_flips(circumcenter_cdt, polygon);
-            return true;
+            //Check the face that the circumcenter will enter
+            Face_handle locate_face = circumcenter_cdt.locate(circumcenter);
+            if(is_face_inside_region(locate_face, polygon)){
+                circumcenter_steiner = circumcenter;
+                circumcenter_cdt.insert_no_flip(circumcenter);
+                start_the_flips(circumcenter_cdt, polygon);
+                return true;
+            }
         }
-        else return false;
     }
-    else return false;
     return false;
 }
 
@@ -1138,7 +1131,6 @@ bool is_circumcenter_in_neighbor(const Custom_CDT& cdt, const Face_handle& face,
             return true; //Circumcenter is inside or on the boundary of the neighbor face
         }
     }
-
     return false; //Circumcenter is not in or on any neighbor face
 }
 
@@ -1195,21 +1187,22 @@ void start_the_flips(Custom_CDT& cdt, const Polygon& polygon){
             //The index of the edge within the face edge->first
             int i = edge->second;
             Face_handle f2 = f1->neighbor(i);
-
-            if (cdt.is_infinite(f1) || cdt.is_infinite(f2)) continue;
             
+            if (cdt.is_infinite(f1) || cdt.is_infinite(f2)) continue;
+            if(cdt.is_constrained(*edge)) continue;
+            if(!(is_face_inside_region(f1, polygon)) || !(is_face_inside_region(f2, polygon))) continue;
+
             Point_2 p1 = f1->vertex(cdt.ccw(i))->point(); //First vertex on the shared edge (Counter-Clock Wise)
             Point_2 p3 = f1->vertex(cdt.cw(i))->point();  //Second vertex on the shared edge (Clock Wise)
             Point_2 p2 = f1->vertex(i)->point();          //Opposite vertex in the first triangle
-            //Check if edge is inside of the boundary
+
+            //Check if edge is on boundary or inside of the boundary
             if(!is_edge_inside_region(p1, p3, polygon)) continue;
+            if(is_edge_on_boundary(p1, p3, polygon)) continue;
 
             //Mirror index gets the index of the vertex in f2 that is opposite to this shared edge
             int mirror_index = cdt.mirror_index(f1, i);
-            Point_2 p4 = f2->vertex(mirror_index)->point(); 
-            //if the edge is constraints or on boundary
-            if (cdt.is_constrained(*edge) || is_edge_on_boundary(p1, p3, polygon)) continue;
-            
+            Point_2 p4 = f2->vertex(mirror_index)->point();         
             if(is_it_worth_flip(p1, p2, p3, p4)){
                 cdt.flip(f1, i);
                 progress = true;
@@ -1220,7 +1213,6 @@ void start_the_flips(Custom_CDT& cdt, const Polygon& polygon){
     }
 }
 
-
 //If 1 point is on the boundary
 bool is_point_inside_region(const Point_2& point, const Polygon& polygon) {
     //Check if the point is inside the polygon
@@ -1228,131 +1220,59 @@ bool is_point_inside_region(const Point_2& point, const Polygon& polygon) {
 }
 
 //If face is inside of region boundary
-/*bool is_face_inside_region(const Face_handle& face, const Polygon& polygon) {
-    Point_2 p1 = face->vertex(0)->point();
-    Point_2 p2 = face->vertex(1)->point();
-    Point_2 p3 = face->vertex(2)->point();
-
-    //Check if the triangle's vertices and midpoints are inside the region
-    bool vertices_inside = (polygon.bounded_side(p1) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p1) == CGAL::ON_BOUNDARY) &&
-                           (polygon.bounded_side(p2) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p2) == CGAL::ON_BOUNDARY) &&
-                           (polygon.bounded_side(p3) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p3) == CGAL::ON_BOUNDARY);
-
-    bool midpoints_inside = 
-        (polygon.bounded_side(CGAL::midpoint(p1, p2)) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(CGAL::midpoint(p1, p2)) == CGAL::ON_BOUNDARY) &&
-        (polygon.bounded_side(CGAL::midpoint(p1, p3)) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(CGAL::midpoint(p1, p3)) == CGAL::ON_BOUNDARY) &&
-        (polygon.bounded_side(CGAL::midpoint(p2, p3)) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(CGAL::midpoint(p2, p3)) == CGAL::ON_BOUNDARY);
-
-    return vertices_inside && midpoints_inside;
-}*/
-
 bool is_face_inside_region(const Face_handle& face, const Polygon& polygon) {
     Point_2 p1 = face->vertex(0)->point();
     Point_2 p2 = face->vertex(1)->point();
     Point_2 p3 = face->vertex(2)->point();
+    //Calculate the centroid of the triangle
+    /*Point_2 centroid = CGAL::centroid(p1, p2, p3);
 
-    // Check if vertices are inside or on the boundary of the polygon
+    //Check if the centroid is inside or on the boundary of the polygon
+    bool centroid_inside = (polygon.bounded_side(centroid) == CGAL::ON_BOUNDED_SIDE ||
+                            polygon.bounded_side(centroid) == CGAL::ON_BOUNDARY);*/
+
+    //Check if vertices are inside or on the boundary of the polygon
     bool vertices_inside = 
         (polygon.bounded_side(p1) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p1) == CGAL::ON_BOUNDARY) &&
         (polygon.bounded_side(p2) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p2) == CGAL::ON_BOUNDARY) &&
         (polygon.bounded_side(p3) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p3) == CGAL::ON_BOUNDARY);
 
-    // Check if edges are fully inside or on the boundary
+    if (!vertices_inside) return false;
+
+    //Check if edges are fully inside or on the boundary
     bool edges_inside = 
         (polygon.bounded_side(CGAL::midpoint(p1, p2)) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(CGAL::midpoint(p1, p2)) == CGAL::ON_BOUNDARY) &&
         (polygon.bounded_side(CGAL::midpoint(p1, p3)) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(CGAL::midpoint(p1, p3)) == CGAL::ON_BOUNDARY) &&
         (polygon.bounded_side(CGAL::midpoint(p2, p3)) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(CGAL::midpoint(p2, p3)) == CGAL::ON_BOUNDARY);
+    
+    if (!edges_inside) return false;
 
-    // Ensure no edges intersect the polygon boundary
-    Segment_2 line1(p1, p2);
-    Segment_2 line2(p1, p3);
-    Segment_2 line3(p2, p3);
-    bool edge_intersects_boundary = true;
-    unsigned int count_intersections = 0;
+    //The lines of the face
+    Segment_2 line1(p1, p2), line2(p1, p3), line3(p2, p3);
+    //bool edge_intersects_boundary = true;
+    //For every edge of the polygon (boundary)
     for (auto edge = polygon.edges_begin(); edge != polygon.edges_end(); ++edge) {
+        //if(!edge_intersects_boundary) break;
         Segment_2 poly_edge(*edge);
-
-        // Check intersections for each face edge
-        std::vector<Segment_2> face_edges = {line1, line2, line3};
+        //Check intersections for each face edge
+        vector<Segment_2> face_edges = {line1, line2, line3};
+        //Check every line of the face if it has intersection with the curent polygon edge
         for (const auto& face_edge : face_edges) {
             auto result = CGAL::intersection(face_edge, poly_edge);
+            //If we have intersection between edge face and edge polygon (curent)
             if (result) {
-                // If intersection is a segment
-                if (const Segment_2* intersection_segment = boost::get<Segment_2>(&*result)) {
-                    Point_2 int_p1 = intersection_segment->source();
-                    Point_2 int_p2 = intersection_segment->target();
-
-                    // Check conditions for the intersection segment
-                    bool first_point_on_edge = false;
-                    bool second_point_on_edge = false;
-                    bool second_point_on_vertex = false;
-
-                    // Check if int_p1 is on any of the face's edges
-                    for (const auto& edge : face_edges) {
-                        if (CGAL::collinear_are_ordered_along_line(edge.source(), int_p1, edge.target())) {
-                            first_point_on_edge = true;
-                            break;
-                        }
-                    }
-
-                    // Check if int_p2 is on any of the face's edges
-                    for (const auto& edge : face_edges) {
-                        if (CGAL::collinear_are_ordered_along_line(edge.source(), int_p2, edge.target())) {
-                            second_point_on_edge = true;
-                            break;
-                        }
-                    }
-
-                    // Check if int_p2 coincides with any vertex of the face
-                    second_point_on_vertex = (int_p2 == p1 || int_p2 == p2 || int_p2 == p3);
-
-                    // Condition for invalid intersection
-                    if (!(first_point_on_edge && (second_point_on_edge || second_point_on_vertex))) {
-                        edge_intersects_boundary = false;
-                        break;
+                //Check if the intersection return point (not segment, line etc)
+                if (const Point_2* point = boost::get<Point_2>(&*result)) {
+                    //Check also for clean intersection, not intersection like the polygon edge intersect vertex of face
+                    if ((*point != face_edge.source()) && (*point != face_edge.target()) && face_edge.has_on(*point)){
+                        return false;
                     }
                 }
             }
         }
-        if (!edge_intersects_boundary) break; // Early exit if invalid edge found
     }
-    /*for (auto edge = polygon.edges_begin(); edge != polygon.edges_end(); ++edge) {
-        if (CGAL::intersection(line1, *edge)) count_intersections++;
-        if (CGAL::intersection(line2, *edge)) count_intersections++;
-        if (CGAL::intersection(line3, *edge)) count_intersections++;
-            //edge_intersects_boundary = false;
-        if(count_intersections > 1) {
-            edge_intersects_boundary = false;
-            break;
-        }
-        if(CGAL::intersection(line1, *edge) || CGAL::intersection(line2, *edge) || CGAL::intersection(line3, *edge)){
-            edge_intersects_boundary = false;
-        }
-        edge_intersects_boundary = 0;
-    }*/
-
-    return vertices_inside && edges_inside && edge_intersects_boundary;
+    return true;  //&& centroid_inside;
 }
-
-
-//Found if this face is on the boundary!!
-//If one edge of the face lies into cdt boundary => the face is face on boundary
-bool is_face_on_boundary(const Custom_CDT& cdt, Face_handle face, const Polygon& polygon) {
-    //Loop through each edge of the face
-    for (int i = 0; i < 3; ++i) {
-        //Get the two endpoints of the edge
-        Point_2 p1 = face->vertex(cdt.cw(i))->point();
-        Point_2 p2 = face->vertex(cdt.ccw(i))->point();
-
-        //Check if this edge lies on the boundary of the polygon or if one neighbor of this edge is the infinite face
-
-        if (is_edge_on_boundary(p1, p2, polygon) || cdt.is_infinite(face->neighbor(i))) {
-            return true; // he face is on the boundary of the polygon
-        }
-    }
-    return false; //None of the edges lie on the polygon boundary
-}
-
 
 //If edge is inside of region boundary
 bool is_edge_inside_region(const Point_2& p1, const Point_2& p2, const Polygon& polygon){
@@ -1361,9 +1281,23 @@ bool is_edge_inside_region(const Point_2& p1, const Point_2& p2, const Polygon& 
     bool points_inside_region = 
         (polygon.bounded_side(p1) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p1) == CGAL::ON_BOUNDARY) && 
         (polygon.bounded_side(p2) == CGAL::ON_BOUNDED_SIDE || polygon.bounded_side(p2) == CGAL::ON_BOUNDARY);
-    return mids_inside_region;
+    
+    //Check if this edge indersect with an edge of polygon (boundary)
+    Segment_2 edge(p1, p2);
+    for (auto edge_it = polygon.edges_begin(); edge_it != polygon.edges_end(); ++edge_it) {
+        Segment_2 poly_edge(*edge_it);
+        auto result = CGAL::intersection(edge, poly_edge);
+        if (result) {
+            if (const Point_2* point = boost::get<Point_2>(&*result)) {
+                //If intersection is a point, check if it's not an endpoint
+                if (*point != p1 && *point != p2 && edge.has_on(*point)) {
+                    return false; //Edge intersects at a point other than endpoints
+                }
+            }
+        }
+    }
+    return mids_inside_region && mids_inside_region;
 }
-
 
 //Function to check if an edge is part of the boundary of the polygon
 bool is_edge_on_boundary(const Point_2& p1, const Point_2& p2, const Polygon& polygon) {
@@ -1375,7 +1309,6 @@ bool is_edge_on_boundary(const Point_2& p1, const Point_2& p2, const Polygon& po
     }
     return false;
 }
-
 
 Point_2 find_obtuse_vertex(const Point_2& v1, const Point_2& v2, const Point_2& v3) {
     //Calculate squared distances
@@ -1565,30 +1498,101 @@ std_string convert_to_string(const K::FT& coord) {
 }
 
 /*3rd Task*/
-bool are_constraints_closed(const vector<pair<int, int>>& additional_constraints, int num_points) {
+bool are_constraints_closed(const vector<pair<int, int>>& additional_constraints, int num_points, const vector<Point_2>& points, const Polygon& polygon) {
     if(additional_constraints.empty()) return false;
-    vector<int> degree(num_points, 0);
     
+    vector<int> degree(num_points, 0);
     //Counting how many times each vertex appears in the constraints
     for (const auto& constraint : additional_constraints) {
         degree[constraint.first]++;
         degree[constraint.second]++;
     }
+    //We have to cases for closed constraints. Circle with adge of boundary and classic circle
+    bool closed_from_boundary = is_closed_from_boundary(additional_constraints, points, degree, polygon);
+    if(closed_from_boundary) {
+        cout<<"we found closed_from_boundary"<<endl;
+        return true;
+    }
+    bool closed_from_circle = is_closed_from_circle(additional_constraints, points, degree, polygon);
+    if(closed_from_circle) {
+        cout<<"we found closed_from_circle"<<endl;
+        return true;
+    }
+    return false;
+}
 
-    //Check if all vertices in the constraints have even degrees
-    for (int d : degree) {
-        if (d % 2 != 0 && d > 0) { //Ignore vertices with zero degree
-            return false;
+//If exists closed constrains with circle
+bool is_closed_from_circle(const vector<pair<int, int>>& additional_constraints, const vector<Point_2>& points, 
+                            const vector<int> degree, const Polygon& polygon){
+    Point first_point;
+    bool found_first_pair = false;
+    for (const auto& constraint : additional_constraints) {
+        int a = constraint.first;
+        int b = constraint.second;
+        
+        /*cout<<"point a : "<<points[a]<<endl;
+        cout<<"point b : "<<points[b]<<endl;
+        cout<<"degree[a, b] : "<<degree[a]<<" , "<<degree[b]<<endl;
+        cout<<"found_first_pair : "<<found_first_pair<<endl;
+        cout<<"a: "<<a<<" on boundary? "<<polygon.has_on_boundary(points[a])<<endl;
+        cout<<"b: "<<b<<" on boundary? "<<polygon.has_on_boundary(points[b])<<endl;*/
+        
+        //Check if both vertices have even degrees or the vertex is on boundary
+        if ((degree[a] == 2 && degree[b] == 2)) {
+            if (!found_first_pair) {
+                //Save the first pair
+                first_point = points[a];
+                found_first_pair = true;
+            }
+            //Found a closed shape
+            if(points[b] == first_point) return true;
+            continue;
+        }
+        if(degree[a] == 1 || degree[b] == 1) {
+            found_first_pair = false;
         }
     }
+    return false; //No closed shapes found
 
-    return true; //All vertices have even degrees, forming closed polygons
+}
+
+//If exists closed constrains with boundary edge
+bool is_closed_from_boundary(const vector<pair<int, int>>& additional_constraints, const vector<Point_2>& points, 
+                            const vector<int> degree, const Polygon& polygon){
+    bool touch_boundary = false, non_boundary = false;
+    for (const auto& constraint : additional_constraints) {
+        int a = constraint.first;
+        int b = constraint.second;
+        
+        /*cout<<"point a : "<<points[a]<<endl;
+        cout<<"point b : "<<points[b]<<endl;
+        cout<<"degree[a, b] : "<<degree[a]<<" , "<<degree[b]<<endl;
+        cout<<"a: "<<a<<" on boundary? "<<polygon.has_on_boundary(points[a])<<endl;
+        cout<<"b: "<<b<<" on boundary? "<<polygon.has_on_boundary(points[b])<<endl;*/
+        
+        //Check if both vertices have even degrees or the vertex is on boundary
+        if ((!touch_boundary && polygon.has_on_boundary(points[a])) && degree[b] == 2){
+            touch_boundary = true;
+            //Avoid parallel edges on the boundary to be considered closed_from_boundary
+            if(!polygon.has_on_boundary(points[b])) non_boundary = true;
+            continue;
+        }
+        if(touch_boundary && (!polygon.has_on_boundary(points[a]) || !polygon.has_on_boundary(points[b]))) non_boundary = true;
+        //If the edge touxh again the boundary and touch_boundary == true, we have closed constraints
+        if(polygon.has_on_boundary(points[b]) && touch_boundary && non_boundary) return true;
+        //Restart
+        if(degree[b] == 1) {
+            touch_boundary = false;
+            non_boundary = false;
+        }
+    }
+    return false;                        
+
 }
 
 bool boundary_straight_lines(const Polygon& polygon){
     if (polygon.size() < 2) return true; //A polygon with fewer than 2 points has no edges to check
     
-
     //Iterate through the edges of the polygon
     auto prev = polygon.vertices_end() - 1; //Last vertex
     for (auto curr = polygon.vertices_begin(); curr != polygon.vertices_end(); ++curr) {
@@ -1617,4 +1621,196 @@ void method_output(const vector<int> count_steiners, std_string method_name, con
     }
     outFile<<endl;
     outFile.close();
+}
+
+//Return only the faces that edges from the polygon intersect faces of the cdt (dead_faces)
+vector<Face_handle> find_faces_intersecting_polygon_edges(const Custom_CDT& cdt, const Polygon& polygon) {
+    vector<Face_handle> intersecting_faces;
+
+    //Iterate over all faces of the triangulation
+    for (auto face = cdt.finite_faces_begin(); face != cdt.finite_faces_end(); ++face) {
+        //Get the three edges of the current face
+        Point_2 p1 = face->vertex(0)->point();
+        Point_2 p2 = face->vertex(1)->point();
+        Point_2 p3 = face->vertex(2)->point();
+        Segment_2 face_edges[3] = { Segment_2(p1, p2), Segment_2(p2, p3), Segment_2(p3, p1) };
+
+        //Check for intersection with any edge of the polygon
+        bool intersects = false;
+        for (auto edge = polygon.edges_begin(); edge != polygon.edges_end(); ++edge) {
+            Segment_2 poly_edge(*edge);
+
+            for (const auto& face_edge : face_edges) {
+                auto result = CGAL::intersection(face_edge, poly_edge);
+
+                //If there is an intersection
+                if (result) {
+                    if (const Point_2* point = boost::get<Point_2>(&*result)) {
+                        //Ensure it's a clean intersection (not at the endpoints)
+                        if ((*point != face_edge.source()) && (*point != face_edge.target()) && face_edge.has_on(*point)) {
+                            intersects = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            //Stop checking if an intersection is found
+            if (intersects) break;
+        }
+        //If the face intersects, add it to the result
+        if (intersects) intersecting_faces.push_back(face);
+        
+    }
+    return intersecting_faces;
+}
+
+//Return all the faces inside of the boundary
+vector<Face_handle> find_faces_inside_boundary(const Custom_CDT& cdt, const Polygon& polygon){
+    vector<Face_handle> faces_inside_boundary;
+
+    // Iterate over all faces of the triangulation
+    for (auto face = cdt.finite_faces_begin(); face != cdt.finite_faces_end(); ++face) {
+        if(is_face_inside_region(face, polygon)) faces_inside_boundary.push_back(face);
+    }
+    return faces_inside_boundary;
+}
+
+//Check if the 2 segmets is equals
+bool is_same_edge(const Segment_2& seg1, const Segment_2& seg2) {
+    return (seg1.source() == seg2.source() && seg1.target() == seg2.target()) ||
+            (seg1.source() == seg2.target() && seg1.target() == seg2.source());
+}
+
+//Find shared edges between all the faces inside of the boundary and with the faces outside of the boundary
+vector<Segment_2> find_shared_edges(CDT& cdt, const Polygon& polygon) {
+    // vectors to store edges from inside and outside faces
+    vector<Segment_2> edges_inside;
+    vector<Segment_2> edges_outside;
+    // Iterate through all finite faces
+    for (auto fit = cdt.finite_faces_begin(); fit != cdt.finite_faces_end(); ++fit) {
+        // Get vertices of the current face
+        Point_2 p1 = fit->vertex(0)->point();
+        Point_2 p2 = fit->vertex(1)->point();
+        Point_2 p3 = fit->vertex(2)->point();
+
+        // Check if the face is inside or outside the polygon
+        bool faceInside = is_face_inside_region(fit, polygon);
+
+        // Create segments for each edge of the face
+        Segment_2 edge1(p1, p2);
+        Segment_2 edge2(p2, p3);
+        Segment_2 edge3(p3, p1);
+
+        // Store edges based on face location
+        if (faceInside) {
+            
+            if (find(edges_inside.begin(), edges_inside.end(), edge1) == edges_inside.end()) {
+                edges_inside.push_back(edge1);
+            }
+            if (find(edges_inside.begin(), edges_inside.end(), edge2) == edges_inside.end()) {
+                edges_inside.push_back(edge2);
+            }
+            if (find(edges_inside.begin(), edges_inside.end(), edge3) == edges_inside.end()) {
+                edges_inside.push_back(edge3);
+            }
+        } 
+        else {
+            
+           if (find(edges_outside.begin(), edges_outside.end(), edge1) == edges_outside.end()) {
+                edges_outside.push_back(edge1);
+            }
+            if (find(edges_outside.begin(), edges_outside.end(), edge2) == edges_outside.end()) {
+                edges_outside.push_back(edge2);
+            }
+            if (find(edges_outside.begin(), edges_outside.end(), edge3) == edges_outside.end()) {
+                edges_outside.push_back(edge3);
+            }
+        }
+    }
+
+    // Find shared edges between inside and outside
+    vector<Segment_2> sharedEdges;
+    for (const auto& edge1 : edges_inside) {
+        for (const auto& edge2 : edges_outside) {
+            if(is_same_edge(edge1, edge2)){
+                sharedEdges.push_back(edge1); // Store shared edge
+                break;
+            }
+        }
+    }
+    return sharedEdges;
+}
+
+//The other edges that have not touch with faces outside of the boundary
+vector<Segment_2> find_non_touching_boundary_edges(const Polygon& polygon, const CDT& cdt, vector<Segment_2>& shared_edges ) {
+    vector<Segment_2> non_touching_edges;
+
+    // Iterate through each edge of the polygon
+    for (auto edge = polygon.edges_begin(); edge != polygon.edges_end(); ++edge) {
+        Segment_2 poly_edge(*edge); // Convert to Segment_2
+
+        bool break_loop = false;
+
+        // Check if this edge intersects with any face inside of the boundary
+        for (auto fit = cdt.finite_faces_begin(); fit != cdt.finite_faces_end(); ++fit) {
+            if (!is_face_inside_region(fit, polygon)) continue;
+            if (break_loop) break;
+            // Get vertices of the current face
+            Point_2 p1 = fit->vertex(0)->point();
+            Point_2 p2 = fit->vertex(1)->point();
+            Point_2 p3 = fit->vertex(2)->point();
+
+            // Create segments for each edge of the face
+            Segment_2 face_edges[3] = { Segment_2(p1, p2), Segment_2(p2, p3), Segment_2(p3, p1) };
+            Segment_2 winner;
+            // Check for intersection with any edge of the face
+            for (const auto& face_edge : face_edges) {
+
+                if (is_same_edge(poly_edge, face_edge)) {
+                    for (const auto& shared_edge : shared_edges){
+                        if(is_same_edge(poly_edge, shared_edge)){
+                            //This edge exists in the shared_edges vector, brake
+                            break_loop = true;
+                            break;
+                        }
+                    }
+                    //If this edge doesnt exists in the shared_edges vector and is border edge, insert it
+                    if (!break_loop) non_touching_edges.push_back(poly_edge);           
+                }
+            }  
+        }
+    }
+
+    return non_touching_edges; // Return non-touching edges
+}
+
+vector<Segment_2> edges_new_boundary(const Polygon& polygon, vector<Segment_2>& shared_edges){
+    vector<Segment_2> edges_new_boundary;
+    if(shared_edges.empty() || polygon.is_empty()) return edges_new_boundary;
+    //Point_2 p1, p2, p3;
+
+    for(const auto& shared_edge : shared_edges) {
+        bool found = false;
+        for (auto edge_it = polygon.edges_begin(); edge_it != polygon.edges_end(); ++edge_it) {
+            //if(is_same_edge(*edge_it, shared_edge)){
+            if(*edge_it == shared_edge){
+                found = true;
+                break;
+            }
+        }
+        if(!found)edges_new_boundary.push_back(shared_edge);
+    }
+
+    cout<<"size: "<<edges_new_boundary.size()<<endl;
+    for(int i = 0; i < edges_new_boundary.size(); i++){
+       Point_2 p1 = edges_new_boundary[i].source();
+       Point_2 p2 = edges_new_boundary[i].target();
+
+       cout << "Edge " << i << ": (" 
+         << CGAL::to_double(p1.x()) << ", " 
+         << CGAL::to_double(p1.y()) << ") - (" 
+         << CGAL::to_double(p2.x()) << ", " 
+         << CGAL::to_double(p2.y()) << ")" << endl;
+    }
+    return edges_new_boundary;
 }
