@@ -126,7 +126,6 @@ method 2 was selected 21 times
 method 3 was selected 0 times
 method 4 was selected 0 times
 
-
 Number of obtuses: 35
 SA method, with number of steiners: 155 for the instance cgshop2025_examples_point-set_100_5da0b4c3
 method 0 was selected 6 times
@@ -134,94 +133,6 @@ method 1 was selected 8 times
 method 2 was selected 138 times
 method 3 was selected 0 times
 method 4 was selected 3 times
-
-Number of obtuses: 11
-Ant method, with number of steiners: 8 for the instance simple-polygon-exterior-20_20_eb63a5b6
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 7 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 11
-Ant method, with number of steiners: 8 for the instance simple-polygon-exterior-20_20_eb63a5b6
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 7 times
-method 3 was selected 1 times
-method 4 was selected 0 times
-
-Number of obtuses: 6
-Ant method, with number of steiners: 0 for the instance simple-polygon-exterior-20_20_eb63a5b6
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 5
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 6
-Ant method, with number of steiners: 0 for the instance simple-polygon-exterior-20_20_eb63a5b6
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 7
-Ant method, with number of steiners: 0 for the instance simple-polygon-exterior-20_20_eb63a5b6
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 3
-Ant method, with number of steiners: 1 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 1 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 3
-Ant method, with number of steiners: 1 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 1 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 3
-Ant method, with number of steiners: 1 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 1 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 3
-Ant method, with number of steiners: 1 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 1 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 4
-SA method, with number of steiners: 20 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 20 times
-method 3 was selected 0 times
-method 4 was selected 0 times
 
 Number of obtuses: 0
 SA method, with number of steiners: 28 for the instance simple-polygon_80_7b8f6c4c
@@ -231,11 +142,99 @@ method 2 was selected 25 times
 method 3 was selected 0 times
 method 4 was selected 0 times
 
+Number of obtuses: 2
+SA method, with number of steiners: 33 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
+method 1 was selected 0 times
+method 2 was selected 32 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 1
+SA method, with number of steiners: 19 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 18 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 0
+SA method, with number of steiners: 33 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 3 times
+method 2 was selected 30 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 85
+SA method, with number of steiners: 81 for the instance point-set_250_93dd622a
+method 0 was selected 0 times
+method 1 was selected 9 times
+method 2 was selected 69 times
+method 3 was selected 0 times
+method 4 was selected 3 times
+
+Number of obtuses: 90
+SA method, with number of steiners: 76 for the instance point-set_250_93dd622a
+method 0 was selected 1 times
+method 1 was selected 5 times
+method 2 was selected 64 times
+method 3 was selected 0 times
+method 4 was selected 6 times
+
+
+Number of obtuses: 5
+Local Search method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Local Search method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+Number of obtuses: 6
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
+method 1 was selected 0 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
 Number of obtuses: 5
 Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
 method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 6
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
 method 1 was selected 0 times
-method 2 was selected 13 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 6
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
+method 1 was selected 0 times
+method 2 was selected 9 times
 method 3 was selected 0 times
 method 4 was selected 0 times
 
@@ -279,75 +278,154 @@ method 2 was selected 10 times
 method 3 was selected 0 times
 method 4 was selected 0 times
 
-Number of obtuses: 3
-Ant method, with number of steiners: 1 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
+Number of obtuses: 6
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
 method 1 was selected 0 times
-method 2 was selected 1 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 3
-Ant method, with number of steiners: 1 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 3 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 5
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 5
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 5
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 5
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
+method 2 was selected 9 times
 method 3 was selected 0 times
 method 4 was selected 0 times
 
 Number of obtuses: 6
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
 method 1 was selected 0 times
-method 2 was selected 0 times
-method 3 was selected 0 times
-method 4 was selected 0 times
-
-Number of obtuses: 5
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
-method 1 was selected 0 times
-method 2 was selected 0 times
+method 2 was selected 9 times
 method 3 was selected 0 times
 method 4 was selected 0 times
 
 Number of obtuses: 6
-Ant method, with number of steiners: 0 for the instance simple-polygon_80_7b8f6c4c
-method 0 was selected 0 times
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
 method 1 was selected 0 times
-method 2 was selected 0 times
+method 2 was selected 9 times
 method 3 was selected 0 times
 method 4 was selected 0 times
+
+Number of obtuses: 6
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
+method 1 was selected 0 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 0 times
+method 2 was selected 11 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 0 times
+method 2 was selected 11 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 6
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
+method 1 was selected 0 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 6
+Ant method, with number of steiners: 10 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 1 times
+method 1 was selected 0 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 0 times
+method 2 was selected 11 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 0 times
+method 2 was selected 11 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 5
+Ant method, with number of steiners: 11 for the instance simple-polygon_80_7b8f6c4c
+method 0 was selected 0 times
+method 1 was selected 0 times
+method 2 was selected 11 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+
+
+Number of obtuses: 7
+Local Search method, with number of steiners: 10 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 2 times
+method 1 was selected 3 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+method 5 was selected 0 times
+
+Number of obtuses: 7
+Local Search method, with number of steiners: 10 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 2 times
+method 1 was selected 3 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+method 5 was selected 0 times
+
+Number of obtuses: 7
+Local Search method, with number of steiners: 10 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 2 times
+method 1 was selected 3 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+method 5 was selected 0 times
+
+Number of obtuses: 7
+Local Search method, with number of steiners: 10 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 2 times
+method 1 was selected 3 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+method 5 was selected 0 times
+
+Number of obtuses: 7
+Local Search method, with number of steiners: 10 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 2 times
+method 1 was selected 3 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+method 5 was selected 0 times
 

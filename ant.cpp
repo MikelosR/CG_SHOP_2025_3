@@ -3,7 +3,7 @@
 //Constructor
 Ant::Ant(const Custom_CDT& initial_cdt): ant_cdt(initial_cdt), ant_energy(0.0), DeltaE(0.0), ant_conflict(false),
     ant_reduce_obtuses(false), num_of_obtuses(-1), ant_steiner_point(0,0), ant_steiner_method(NUM_METHODS),
-    longest_edge(Point_2(0, 0), Point_2(0, 0)), opposite_edge(Point_2(0, 0), Point_2(0, 0)){}
+    longest_edge(Point_2(0, 0), Point_2(0, 0)), opposite_edge(Point_2(0, 0), Point_2(0, 0)), ant_conflict_loser(false){}
 
 Ant::Ant() :
     ant_cdt(Custom_CDT()),
@@ -13,16 +13,16 @@ Ant::Ant() :
     num_of_obtuses(-1),
     ant_conflict(false),
     ant_reduce_obtuses(false),
+    ant_conflict_loser(false),
     longest_edge(Point_2(0, 0), Point_2(0, 0)),
     opposite_edge(Point_2(0, 0), Point_2(0, 0)) {
 }
 
 //Copy Constructor
 Ant::Ant(const Ant& other): ant_cdt(other.ant_cdt), ant_energy(other.ant_energy), DeltaE(other.DeltaE), 
-    ant_conflict(other.ant_conflict), ant_reduce_obtuses(other.ant_reduce_obtuses), 
-    num_of_obtuses(other.num_of_obtuses), ant_steiner_point(other.ant_steiner_point), 
-    ant_steiner_method(other.ant_steiner_method), ant_affect_faces(other.ant_affect_faces),
-    longest_edge(other.longest_edge), opposite_edge(other.opposite_edge) {   
+    ant_conflict(other.ant_conflict), ant_reduce_obtuses(other.ant_reduce_obtuses), ant_conflict_loser(other.ant_conflict_loser),
+    num_of_obtuses(other.num_of_obtuses), ant_steiner_point(other.ant_steiner_point), ant_steiner_method(other.ant_steiner_method), 
+    ant_affect_faces(other.ant_affect_faces), longest_edge(other.longest_edge), opposite_edge(other.opposite_edge) {   
 }
 
 void Ant::set_Custom_CDT(Custom_CDT& new_cdt) {
@@ -47,6 +47,7 @@ void Ant::initialize_Ants(vector<Ant>& ants, Custom_CDT& best_cdt){
         ants[i].set_steiner_method(NUM_METHODS);
         ants[i].clear_ant_affect_faces();
         ants[i].set_conflict(false);
+        ants[i].set_conflict_loser(false);
         ants[i].set_longest_edge_midpoint(default_edge);
         ants[i].set_opposite_edge_projection(default_edge);
     }
@@ -94,9 +95,13 @@ void Ant::set_opposite_edge_projection(Segment_2 in_opposite_edge){
     opposite_edge = in_opposite_edge;
 }
 
+void Ant::set_conflict_loser(bool in_ant_conflict_loser){
+    ant_conflict_loser = in_ant_conflict_loser;
+}
+
 
 ///////////////Getters
-std::set<Face_handle>& Ant::get_affected_faces(){
+set<Face_handle>& Ant::get_affected_faces(){
     return ant_affect_faces;
 }
 
@@ -134,6 +139,10 @@ bool Ant::get_reduce_obtuses(){
 
 bool Ant::get_conflict() const{
     return ant_conflict;
+}
+
+bool Ant::get_conflict_loser() const{
+    return ant_conflict_loser;
 }
 
 int Ant::get_num_of_obtuses() const{

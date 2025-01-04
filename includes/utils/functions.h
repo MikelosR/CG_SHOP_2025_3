@@ -27,6 +27,7 @@ bool insert_adjacent_steiner(Custom_CDT& custom_cdt, const Face_handle& face, co
 void insert_adjacent_steiner_local_search(Custom_CDT& custom_cdt, const Face_handle& face1, const Polygon& polygon, Point_2& adjacent_steiner);
 bool insert_circumcenter(Custom_CDT& circumcenter_cdt, const Face_handle& face, const Polygon& polygon, Point_2& circumcenter_steiner);
 void insert_centroid(Custom_CDT& centroid_cdt, const Face_handle& face, const Polygon& polygon, Point_2& centroid_steiner);
+void insert_steiner_around_centroid(Custom_CDT& custom_cdt, Face_handle face, Polygon& polygon, Point_2& steiner_around_centroid);
 
 //Helper function for circumcenter, checking if the circumcenter was placed in neighbor face
 bool is_circumcenter_in_neighbor(const Custom_CDT& cdt, const Face_handle& face, const Point_2& circumcenter);
@@ -109,6 +110,8 @@ bool are_constraints_open(const vector<pair<int, int>>& additional_constraints, 
 vector<Segment_2> find_shared_edges(CDT& cdt, const Polygon& polygon);
 vector<Segment_2> find_non_touching_boundary_edges(const Polygon& polygon, const CDT& cdt, vector<Segment_2>& shared_edges);
 vector<Segment_2> edges_new_boundary(const Polygon& polygon, vector<Segment_2>& shared_edges);
+double p_sum_function(int n_steiner, int previous_obtuses, int obtuse_faces);
+double compute_bounding_circle_radius(Face_handle face, const Point_2& centroid);
 
 
 #endif

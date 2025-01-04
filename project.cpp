@@ -166,7 +166,7 @@ int main(int argc, char** argv) {
     //////////// PHASE 2: FLIPS & STEINER POINTS //////////////////////////////
     int obtuses_faces = count_obtuse_triangles(custom_cdt, polygon);
     int init_obtuse_faces = obtuses_faces;
-    int initial_vertexes = count_vertices(custom_cdt);
+    int initial_vertexes = custom_cdt.number_of_vertices();
     cout<<"Initial number of obtuses: "<<init_obtuse_faces<<endl;
     cout<<"Initial number of vertexes: "<<custom_cdt.number_of_vertices()<<endl;
     //CGAL::draw(custom_cdt);
@@ -188,7 +188,6 @@ int main(int argc, char** argv) {
 
     //Flips
     start_the_flips(simulated_cdt, simulated_polygon);
-
     //Local Search
     if(run_Local_Search){
         cout<<"Local Search is starting.."<<endl;

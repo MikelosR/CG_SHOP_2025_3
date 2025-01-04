@@ -27,6 +27,7 @@ public:
     void set_Custom_CDT(Custom_CDT& new_cdt);
     void set_DeltaE(double in_DeltaE);
     void set_conflict(bool in_conflict);
+    void set_conflict_loser(bool in_ant_conflict_loser);
     //Static because we want to call it without an instance of Ant
     static void initialize_Ants(vector<Ant>& ants, Custom_CDT& best_cdt);
     void set_reduce_obtuses(bool in_ant_reduce_obtuses);
@@ -42,6 +43,7 @@ public:
     const Point_2& get_steiner_point() const;
     bool get_reduce_obtuses();
     bool get_conflict() const;
+    bool get_conflict_loser() const;
     double get_energy() const;
     double get_DeltaE() const;
     int get_num_of_obtuses() const;
@@ -49,7 +51,7 @@ public:
     Segment_2 get_opposite_edge_projection() const;
 
 private:
-    std::set<Face_handle> ant_affect_faces;
+    set<Face_handle> ant_affect_faces;
     SteinerMethod ant_steiner_method;
     Custom_CDT ant_cdt;
     Point_2 ant_steiner_point;
@@ -60,6 +62,7 @@ private:
     double ant_energy;
     double DeltaE;
     bool ant_conflict;
+    bool ant_conflict_loser;
     bool ant_reduce_obtuses;
     int num_of_obtuses;
 };
