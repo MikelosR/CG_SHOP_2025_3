@@ -613,6 +613,7 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
     std_string method_name = "SA";
     best_num_steiner = best_cdt.number_of_vertices() - init_vertices;
     method_output(count_steiners, method_name, name_of_instance, best_num_steiner, best_obtuse_faces);
+    
 }
 
 //Ant colony method
