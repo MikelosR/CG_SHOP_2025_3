@@ -592,6 +592,43 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
         T = T*(cooling_rate);
         //cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl; 
     }
+
+    //Try to insert insert_steiner_around_centroid (3rd task)
+    if(obtuse_faces > 0){
+        int initial_vertexes = best_cdt.number_of_vertices();
+        int obtuses_before = 0, obtuses_after = 0;
+        int progress = true;
+        Point_2 steiner_temp;
+        Custom_CDT simulated_cdt = best_cdt;
+        Custom_CDT curent_cdt = best_cdt;
+        cout<<"Obtuses before insert_steiner_around_centroid : "<<count_obtuse_triangles(simulated_cdt, polygon)<<endl;
+        while(progress){
+            progress = false;
+            for (auto face = curent_cdt.finite_faces_begin(); face != curent_cdt.finite_faces_end(); ++face) {
+                if (!is_obtuse(face)) continue;
+                if (!is_face_inside_region(face, polygon)) continue;
+                //cout<<"Cdt before insertion"<<endl;
+                obtuses_before = count_obtuse_triangles(simulated_cdt, polygon);
+                //cout<<"Obtuses before : "<<obtuses_before<<endl;
+                //CGAL::draw(simulated_cdt);
+                insert_steiner_around_centroid(simulated_cdt, face, polygon, steiner_temp);
+                //cout<<"Cdt after insertion"<<endl;
+                obtuses_after = count_obtuse_triangles(simulated_cdt, polygon);
+                //cout<<"Obtuses after : "<<obtuses_after<<endl;
+                //CGAL::draw(simulated_cdt);
+                //cout<<"inserted: "<<simulated_cdt.number_of_vertices() - initial_vertexes<<" steiners"<<endl;
+                //cout<<endl;
+                if(obtuses_before > obtuses_after){
+                    curent_cdt = simulated_cdt;
+                    progress = true;
+                    break;
+                }
+                simulated_cdt = curent_cdt;
+            }
+        }
+        best_cdt = curent_cdt;
+        cout<<"Obtuses after insert_steiner_around_centroid : "<<count_obtuse_triangles(best_cdt, polygon)<<endl;
+    }
     //"Return" the best cdt
     custom_cdt = best_cdt;
     double front;
@@ -600,14 +637,12 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
     else front = 0.5;
     /*cout<<"best_num_steiner : "<<best_num_steiner<<endl;
     cout<<"p_sum : "<<p_sum_best<<endl;
-    cout<<"(1/(best_num_steiner - 1)) : "<<fixed<<setprecision(numeric_limits<double>::max_digits10)<<front<<endl;
+    cout<<"(1/(best_num_steiner - 1)) : "<<front<<endl;
     
     cout<<"front * p_sum: "<<front * p_sum_best<<endl;*/
     time(&end_time);
     double time_taken = double(end_time - start_time); 
-    cout << "Time taken by program is : " << fixed 
-        << time_taken << setprecision(5); 
-    cout << " sec " << endl;
+    cout<<"Time taken by program is : "<<" sec "<<endl;
     std_string method_name = "SA";
     best_num_steiner = best_cdt.number_of_vertices() - init_vertices;
     method_output(count_steiners, method_name, name_of_instance, best_num_steiner, best_obtuse_faces);
@@ -616,7 +651,6 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
 //Ant colony method
 void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance){
     int init_vertices = custom_cdt.number_of_vertices();
-    return;
     int obtuse_faces = count_obtuse_triangles(custom_cdt, polygon);
     int new_obtuse_faces = obtuse_faces; 
     int best_obtuses = new_obtuse_faces;

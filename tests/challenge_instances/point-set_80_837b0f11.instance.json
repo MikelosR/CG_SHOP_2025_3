@@ -174,9 +174,12 @@
     ],
     "num_constraints": 0,
     "additional_constraints": [],
-    "method": "local",
+    "method": "sa",
     "parameters": {
-        "L": 100
+        "alpha": 2.4,
+        "beta": 0.2,
+        "L": 1050,
+        "batch_size": 4
     },
     "delaunay": true
 }

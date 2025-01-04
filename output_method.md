@@ -429,3 +429,43 @@ method 3 was selected 0 times
 method 4 was selected 0 times
 method 5 was selected 0 times
 
+Number of obtuses: 4
+SA method, with number of steiners: 31 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 1 times
+method 1 was selected 4 times
+method 2 was selected 24 times
+method 3 was selected 0 times
+method 4 was selected 1 times
+
+Number of obtuses: 2
+SA method, with number of steiners: 50 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 45 times
+method 3 was selected 0 times
+method 4 was selected 3 times
+
+Number of obtuses: 3
+SA method, with number of steiners: 39 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 1 times
+method 1 was selected 0 times
+method 2 was selected 36 times
+method 3 was selected 0 times
+method 4 was selected 2 times
+
+Number of obtuses: 1
+SA method, with number of steiners: 48 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 1 times
+method 1 was selected 3 times
+method 2 was selected 40 times
+method 3 was selected 1 times
+method 4 was selected 3 times
+
+Number of obtuses: 2
+SA method, with number of steiners: 38 for the instance simple_polygon_with_exterior_20_080
+method 0 was selected 1 times
+method 1 was selected 3 times
+method 2 was selected 30 times
+method 3 was selected 2 times
+method 4 was selected 2 times
+
