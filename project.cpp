@@ -14,14 +14,14 @@ namespace bj = boost::json;
 using boost_string = bj::string;
 using std_string = std::string;
 
-
 int main(int argc, char** argv) {
 
     bool run_Simulated_Annealing = false, run_Local_Search = false, run_Ant_Colony = false;
     bool has_constraints= false, is_polygon_convex = false, has_closed_constraints = false, has_open_constraints = false;
-    bool has_boundary_straight_lines = false;
+    bool has_boundary_straight_lines = false, unspecified = false;
     double alpha = 2.2, beta = 0.1, chi = 3.0, psi = 1.0, lamda = 0.5, kappa = 5;
     int L = 1230, batch_size = 5;
+    int sum_convex_no_constraints = 0, sum_convex_open = 0, sum_convex_closed = 0, sum_convex_parallel = 0, sum_unspecified_boundary = 0; 
     value jv;
 
     std_string input_path, output_path;
@@ -68,7 +68,7 @@ int main(int argc, char** argv) {
         delaunay = obj.at("delaunay").as_bool();
 
         //Output method and delaunay
-        cout<<"method: "<<method<<endl;
+        //cout<<"method: "<<method<<endl;
         L = parameters_obj.at("L").as_int64();
         
         //Chosen method
@@ -138,23 +138,25 @@ int main(int argc, char** argv) {
         if(boundary_straight_lines(polygon)) has_boundary_straight_lines = true;
         if(!additional_constraints.empty()) has_constraints = true;
 
-        cout<<"the instance has constraints: "<<has_constraints<<" and is convex: "<<is_polygon_convex<<endl;
-        cout<<"has_boundary_straight_lines: "<<has_boundary_straight_lines<<endl;
+        //cout<<"the instance has constraints: "<<has_constraints<<" and is convex: "<<is_polygon_convex<<endl;
+        //cout<<"has_boundary_straight_lines: "<<has_boundary_straight_lines<<endl;
 
         //3rd Task
-        if(!has_constraints && !is_polygon_convex && !has_boundary_straight_lines) cout<<"AkANoNiStO"<<endl;
-
+        if(!has_constraints && !is_polygon_convex && !has_boundary_straight_lines) {
+            unspecified = true;
+            //cout<<"AkANoNiStO"<<endl;
+        }
         /*********************************/        
         //Check if the instance has opened or closed constraints
         if(has_constraints){
             if(are_constraints_closed(additional_constraints, points.size(), points, polygon)) {
                 has_closed_constraints = true;
-                cout<<"has_closed_constraints: "<<has_closed_constraints<<endl;
+                //cout<<"has_closed_constraints: "<<has_closed_constraints<<endl;
             }
             //If has not closed constraints and we have constraint, so we have open constraints
             else{
                 has_open_constraints = true;
-                cout<<"has_open_constraints: "<<has_open_constraints<<endl;
+                //cout<<"has_open_constraints: "<<has_open_constraints<<endl;
             }
         }
     }
@@ -162,7 +164,39 @@ int main(int argc, char** argv) {
         cerr<<"Jv is not object: safe exit"<<endl;
         return 0;
     }
-    
+
+    std_string category = "Null";
+    if(is_polygon_convex && !has_constraints){
+        category = "CONVEX_NO_CONSTRAINTS";
+        
+        //cout<<"instance : "<<instance_uid<<" belongs to the category : CONVEX_NO_CONSTRAINTS"<<endl;
+        sum_convex_no_constraints++;
+    }
+    if(is_polygon_convex && has_open_constraints){
+        category = "CONVEX_OPEN_CONSTRAINTS";
+        
+        //cout<<"instance : "<<instance_uid<<" belongs to the category : CONVEX_OPEN_CONSTRAINTS"<<endl;
+        sum_convex_open++;
+    }
+    if(is_polygon_convex && has_closed_constraints){
+        category = "CONVEX_CLOSED_CONSTRAINTS";
+        
+        //cout<<"instance : "<<instance_uid<<" belongs to the category : CONVEX_CLOSED_CONSTRAINTS"<<endl;
+        sum_convex_closed++;
+    }
+    if(!is_polygon_convex && has_boundary_straight_lines){
+        category = "NOT_CONVEX_PARALLEL_N0_CONSTRAINTS";
+        
+        //cout<<"instance : "<<instance_uid<<" belongs to the category : NOT_CONVEX_PARALLEL_N0_CONSTRAINTS"<<endl;
+        sum_convex_parallel++;
+    }
+    if(!is_polygon_convex && unspecified){
+        category = "UNSPECIFIED_BOUNDARY";
+        
+        //cout<<"instance : "<<instance_uid<<" belongs to the category : UNSPECIFIED_BOUNDARY"<<endl;
+        sum_unspecified_boundary++;
+    }
+    //stats_output(instance_uid, category);
     //////////// PHASE 2: FLIPS & STEINER POINTS //////////////////////////////
     int obtuses_faces = count_obtuse_triangles(custom_cdt, polygon);
     int init_obtuse_faces = obtuses_faces;
@@ -185,7 +219,7 @@ int main(int argc, char** argv) {
     }
 
     simulated_polygon = polygon;
-
+    
     //Flips
     start_the_flips(simulated_cdt, simulated_polygon);
     //Local Search

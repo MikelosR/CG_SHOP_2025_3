@@ -90,7 +90,7 @@ protected:
                 edgePen.setWidth(25);
             } else {
                 edgePen.setColor(QColor(0, 0, 0, 255)); //Set back to black for unconstrained edges
-                edgePen.setWidth(3);
+                edgePen.setWidth(5);
             }
 
             scene->addLine(

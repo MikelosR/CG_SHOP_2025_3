@@ -113,5 +113,6 @@ vector<Segment_2> edges_new_boundary(const Polygon& polygon, vector<Segment_2>& 
 double p_sum_function(int n_steiner, int previous_obtuses, int obtuse_faces);
 double compute_bounding_circle_radius(Face_handle face, const Point_2& centroid);
 void try_steiner_around_centroid(Custom_CDT& cdt, Polygon& polygon);
+void stats_output(const std_string& name_of_instance, const std_string& category);
 
 #endif

@@ -8,7 +8,7 @@ directory = "tests/challenge_instances"
 configurations = {
     "local": {
         "method": "local",
-        "parameters": {"L": 100},
+        "parameters": {"L": 150},
         "delaunay": True
     },
     "sa": {
@@ -24,7 +24,7 @@ configurations = {
 }
 
 #Select which configuration to apply (choose from: "local", "sa", "ant")
-selected_configuration = "ant"  # Change this to "local" or "ant" as needed
+selected_configuration = "local"  # Change this to "local" or "ant" as needed
 
 #Validate selection
 if selected_configuration not in configurations:
