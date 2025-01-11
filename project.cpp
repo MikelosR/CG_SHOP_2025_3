@@ -121,11 +121,31 @@ int main(int argc, char** argv) {
             polygon.push_back(points[index]);
         }
 
+         // Insert region boundary as constraints
+        for (size_t i = 0; i < region_boundary.size(); ++i) {
+            int idx1 = region_boundary[i];
+            int idx2 = region_boundary[(i + 1) % region_boundary.size()]; // Wrap around to form a loop
+            custom_cdt.insert_constraint(points[idx1], points[idx2]);
+        }
+
         //Make the cdt
         for (const auto& point : points) {
             custom_cdt.insert(point);
         }
-        
+
+        for (auto fit = custom_cdt.finite_faces_begin(); fit != custom_cdt.finite_faces_end(); ++fit) {
+            for (int i = 0; i < 3; ++i) { // Each triangle has 3 edges
+                Point_2 p1 = fit->vertex((i + 1) % 3)->point();
+                Point_2 p2 = fit->vertex((i + 2) % 3)->point();
+
+                // Check if the edge is constrained and on the boundary
+                if (custom_cdt.is_constrained(CDT::Edge(fit, i)) && is_edge_on_boundary(p1, p2, polygon)) {
+                    // Remove the constraint from the edge
+                    custom_cdt.remove_constraint(fit, i);
+                }
+            }
+        }
+
         //Insert additional constraints
         for (const auto& constraint : additional_constraints) {
             custom_cdt.insert_constraint(points[constraint.first], points[constraint.second]);
@@ -203,9 +223,9 @@ int main(int argc, char** argv) {
     int initial_vertexes = custom_cdt.number_of_vertices();
     cout<<"Initial number of obtuses: "<<init_obtuse_faces<<endl;
     cout<<"Initial number of vertexes: "<<custom_cdt.number_of_vertices()<<endl;
-    //CGAL::draw(custom_cdt);
+    CGAL::draw(custom_cdt);
     double success;
-
+    bool randomization = false;
     Custom_CDT simulated_cdt = custom_cdt;
     //Run task1 if delaunay parameter is false
     if(!delaunay) {
@@ -225,7 +245,7 @@ int main(int argc, char** argv) {
     //Local Search
     if(run_Local_Search){
         cout<<"Local Search is starting.."<<endl;
-        local_search(simulated_cdt, simulated_polygon, L, instance_uid);
+        local_search(simulated_cdt, simulated_polygon, L, instance_uid, randomization);
         cout <<"**Number of Obtuses after from Local Search: "<<count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
     }
 
@@ -241,8 +261,11 @@ int main(int argc, char** argv) {
         ant_colony(simulated_cdt, simulated_polygon, alpha, beta, chi, psi, lamda , L, kappa, instance_uid);
         cout <<"**Number of Obtuses after from Ant Colony: "<<count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
     }
+
     obtuses_faces = count_obtuse_triangles(simulated_cdt, simulated_polygon);
+    cout<<"Final obtuses faces: "<<obtuses_faces<<endl;
     cout<<"Sum of steiners: "<<count_vertices(simulated_cdt) - initial_vertexes<<endl;
+    cout<<"Final number of vertexes: "<<simulated_cdt.number_of_vertices()<<endl;
     if(init_obtuse_faces > 0) success = ((double)obtuses_faces/(double)init_obtuse_faces)*100;
     cout<<100-success<<"%"<<" obtuse triangles reduction success"<<endl;
     cout<<"Final form of Custom CDT "<<endl;
@@ -273,7 +296,7 @@ int main(int argc, char** argv) {
     view.show();
     //////////// PHASE 3: JSON FILE OUTPUT //////////////////////////////
 
-    output(jv, simulated_cdt, points, obtuses_faces, output_path);
+    output(jv, simulated_cdt, points, obtuses_faces, output_path, randomization);
 
     return app.exec();
     //return 0;

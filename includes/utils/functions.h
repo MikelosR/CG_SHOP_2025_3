@@ -37,7 +37,7 @@ Segment_2 find_longest_edge(const Face_handle& face);
 bool has_obtuse_neighbors(const Custom_CDT& custom_cdt, const Face_handle& face, const Polygon& polygon);
 
 //Algorithms
-void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_string& name_of_instance);
+void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_string& name_of_instance, bool& randomization);
 void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, const double& beta, const int& batch_size, const std_string& name_of_instance);
 void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance);
 
@@ -87,7 +87,7 @@ Point_2 find_obtuse_vertex(const Point_2& v1, const Point_2& v2, const Point_2& 
 
 //JSON INPUT - OUTPUT METHODS
 void read_json(const std_string& filename, value& jv);
-void output(value jv, Custom_CDT custom_cdt, vector<Point_2> points, int obtuse_count, std_string output_path);
+void output(value jv, Custom_CDT custom_cdt, vector<Point_2> points, int obtuse_count, std_string output_path, bool randomization);
 bool is_steiner_point(Vertex_handle vertex, const vector<Point_2>& original_points);
 std_string convert_to_string(const FT& coord);
 std_string format_double(double value);

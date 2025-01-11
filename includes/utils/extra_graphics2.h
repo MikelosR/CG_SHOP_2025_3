@@ -59,7 +59,7 @@ protected:
             polygon_max_y = std::max(polygon_max_y, y);
         }
 
-        double margin = 30; //Padding around the triangulation
+        double margin = 100; //Padding around the triangulation
         double sceneHeight = max_y - min_y;
         scene->setSceneRect(std::min(min_x, polygon_min_x) - margin, 
                             std::min(min_y, polygon_min_y) - margin, 
@@ -68,7 +68,7 @@ protected:
 
         // --- Draw the Polygon Boundary ---
         QPen polygonPen(Qt::red); //Choose a color for the polygon boundary
-        polygonPen.setWidth(25);
+        polygonPen.setWidth(3000);
         QPolygonF polygonPoints;
         for (auto vertex = polygon.vertices_begin(); vertex != polygon.vertices_end(); ++vertex) {
             double x = CGAL::to_double(vertex->x());
@@ -87,10 +87,10 @@ protected:
             //Check if this edge is constrained
             if (cdt.is_constrained(*eit)) {
                 edgePen.setColor(QColor(0, 200, 0)); //Set color to green for constrained edges
-                edgePen.setWidth(25);
+                edgePen.setWidth(2950);
             } else {
                 edgePen.setColor(QColor(0, 0, 0, 255)); //Set back to black for unconstrained edges
-                edgePen.setWidth(5);
+                edgePen.setWidth(250);
             }
 
             scene->addLine(
@@ -100,7 +100,7 @@ protected:
         }
    
         // --- Draw the Vertices of the Triangulation ---
-        QBrush regularVertexBrush(QColor(255, 0, 0, 255)); //Fully opaque red color
+        QBrush regularVertexBrush(QColor(0, 0, 255, 255)); //Fully opaque red color
         QPen vertexPen(Qt::black); //Optional: black border for better visibility
         for (auto vit = cdt.finite_vertices_begin(); vit != cdt.finite_vertices_end(); ++vit) {
             Point_2 p = vit->point();
@@ -108,19 +108,19 @@ protected:
             double y = sceneHeight - CGAL::to_double(p.y()) + min_y;
 
             //Draw the point red color
-            scene->addEllipse(x - 5, y - 5, 10, 10, vertexPen, regularVertexBrush);
+            scene->addEllipse(x - 1300, y - 1300, 2600, 2600, vertexPen, regularVertexBrush);
 
             //Add coordinates as text
             std::ostringstream oss;
-            oss << "(" << x << ", " << CGAL::to_double(p.y()) << ")";
+            oss<<fixed<<setprecision(0)<<"("<<x<<", "<<CGAL::to_double(p.y()) << ")";
             auto textItem = scene->addText(QString::fromStdString(oss.str()));
-            textItem->setPos(x + 15, y + 15);
+            textItem->setPos(x + 250, y + 250);
 
             textItem->setToolTip(QString::fromStdString(oss.str()));
 
             //Set the font size
             QFont font = textItem->font();
-            font.setPointSize(30);
+            font.setPointSize(6000);
             textItem->setFont(font);
         }
 
@@ -159,7 +159,7 @@ protected:
                         // If the vertex is obtuse, draw it green
                         if (isObtuseVertex) {
                             QBrush vertexBrush = obtuseVertexBrush;
-                            scene->addEllipse(x - 5, y - 5, 10, 10, QPen(Qt::NoPen), vertexBrush);
+                            scene->addEllipse(x - 1300, y - 1300, 2600, 2600, QPen(Qt::NoPen), vertexBrush);
                         }
                     }
                 }
@@ -228,8 +228,7 @@ protected:
             scale(1 / 1.2, 1 / 1.2); //Zoom out
         }
         event->accept();
-    }
-
+    }      
 private:
     CDT& cdt;
     const Polygon& polygon;

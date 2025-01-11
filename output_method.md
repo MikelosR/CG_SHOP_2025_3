@@ -968,3 +968,395 @@ method 2 was selected 18 times
 method 3 was selected 1 times
 method 4 was selected 1 times
 
+Number of obtuses: 4
+Local Search method, with number of steiners: 3 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 1 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 10 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 5 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 4 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 6 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 4 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 10 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 9 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 10 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 9 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 8 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 10 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 10 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 6 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 9 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 8 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 13 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 3 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 10 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 2 times
+method 2 was selected 8 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 12 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 11 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 10 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 9 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 7 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 3 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 2 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 3 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 2 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 14 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 13 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 6 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 4
+Local Search method, with number of steiners: 8 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 3 times
+method 2 was selected 5 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 3
+Local Search method, with number of steiners: 11 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 10 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
+Number of obtuses: 2
+Local Search method, with number of steiners: 7 for the instance ortho_20_e2aff192
+method 0 was selected 0 times
+method 1 was selected 1 times
+method 2 was selected 6 times
+method 3 was selected 0 times
+method 4 was selected 0 times
+
