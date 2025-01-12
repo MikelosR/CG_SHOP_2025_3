@@ -101,7 +101,7 @@ bool is_closed_from_boundary(const vector<pair<int, int>>& additional_constraint
 bool is_closed_from_circle(const vector<pair<int, int>>& additional_constraints, const vector<Point_2>& points, 
                             const vector<int> degree, const Polygon& polygon);
 void method_output(const vector<int> count_steiners, std_string method_name, const std_string& name_of_instance, 
-                    const int num_steiners, const int num_obtuses);
+                    const int num_steiners, const int num_obtuses, bool randomization, vector<Point_2>& random_steiners);
 bool is_same_edge(const Segment_2& seg1, const Segment_2& seg2);
 
 vector<Face_handle> find_faces_intersecting_polygon_edges(const Custom_CDT& cdt, const Polygon& polygon);
@@ -112,7 +112,7 @@ vector<Segment_2> find_non_touching_boundary_edges(const Polygon& polygon, const
 vector<Segment_2> edges_new_boundary(const Polygon& polygon, vector<Segment_2>& shared_edges);
 double p_sum_function(int n_steiner, int previous_obtuses, int obtuse_faces);
 double compute_bounding_circle_radius(Face_handle face, const Point_2& centroid);
-void try_steiner_around_centroid(Custom_CDT& cdt, Polygon& polygon);
+void try_steiner_around_centroid(Custom_CDT& cdt, Polygon& polygon, Point_2& random_steiner);
 void stats_output(const std_string& name_of_instance, const std_string& category);
 
 #endif

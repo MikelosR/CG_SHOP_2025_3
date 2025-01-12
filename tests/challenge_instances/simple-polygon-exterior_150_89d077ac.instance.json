@@ -910,7 +910,7 @@
     ],
     "method": "local",
     "parameters": {
-        "L": 150
+        "L": 50
     },
     "delaunay": true
 }

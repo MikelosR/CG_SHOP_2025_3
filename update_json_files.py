@@ -8,7 +8,7 @@ directory = "tests/challenge_instances"
 configurations = {
     "local": {
         "method": "local",
-        "parameters": {"L": 150},
+        "parameters": {"L": 50},
         "delaunay": True
     },
     "sa": {

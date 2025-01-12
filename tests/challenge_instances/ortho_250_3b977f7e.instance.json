@@ -761,7 +761,7 @@
     "additional_constraints": [],
     "method": "local",
     "parameters": {
-        "L": 120
+        "L": 50
     },
     "delaunay": true
 }

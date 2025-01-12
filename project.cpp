@@ -133,7 +133,7 @@ int main(int argc, char** argv) {
             custom_cdt.insert(point);
         }
 
-        for (auto fit = custom_cdt.finite_faces_begin(); fit != custom_cdt.finite_faces_end(); ++fit) {
+        /*for (auto fit = custom_cdt.finite_faces_begin(); fit != custom_cdt.finite_faces_end(); ++fit) {
             for (int i = 0; i < 3; ++i) { // Each triangle has 3 edges
                 Point_2 p1 = fit->vertex((i + 1) % 3)->point();
                 Point_2 p2 = fit->vertex((i + 2) % 3)->point();
@@ -144,7 +144,7 @@ int main(int argc, char** argv) {
                     custom_cdt.remove_constraint(fit, i);
                 }
             }
-        }
+        }*/
 
         //Insert additional constraints
         for (const auto& constraint : additional_constraints) {
@@ -223,7 +223,7 @@ int main(int argc, char** argv) {
     int initial_vertexes = custom_cdt.number_of_vertices();
     cout<<"Initial number of obtuses: "<<init_obtuse_faces<<endl;
     cout<<"Initial number of vertexes: "<<custom_cdt.number_of_vertices()<<endl;
-    CGAL::draw(custom_cdt);
+    //CGAL::draw(custom_cdt);
     double success;
     bool randomization = false;
     Custom_CDT simulated_cdt = custom_cdt;
@@ -264,7 +264,7 @@ int main(int argc, char** argv) {
 
     obtuses_faces = count_obtuse_triangles(simulated_cdt, simulated_polygon);
     cout<<"Final obtuses faces: "<<obtuses_faces<<endl;
-    cout<<"Sum of steiners: "<<count_vertices(simulated_cdt) - initial_vertexes<<endl;
+    cout<<"Sum of steiners: "<<simulated_cdt.number_of_vertices() - initial_vertexes<<endl;
     cout<<"Final number of vertexes: "<<simulated_cdt.number_of_vertices()<<endl;
     if(init_obtuse_faces > 0) success = ((double)obtuses_faces/(double)init_obtuse_faces)*100;
     cout<<100-success<<"%"<<" obtuse triangles reduction success"<<endl;
