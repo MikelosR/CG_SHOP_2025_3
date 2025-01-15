@@ -34,15 +34,12 @@
     ],
     "num_constraints": 0,
     "additional_constraints": [],
-    "method": "ant",
+    "method": "sa",
     "parameters": {
         "alpha": 2.4,
         "beta": 0.2,
-        "xi": 1.0,
-        "psi": 2.0,
-        "lambda": 0.2,
-        "kappa": 10,
-        "L": 150
+        "L": 1050,
+        "batch_size": 4
     },
     "delaunay": true
 }
