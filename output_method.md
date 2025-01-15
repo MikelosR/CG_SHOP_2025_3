@@ -62,3 +62,64 @@ Centroid was selected: 1 times
 Random steiner was selected: 1 times
 ** 
 
+** SA method, with number of steiners: 122 for the instance ortho_150_53eb4022
+Number of obtuses: 12
+Used Random steiner: true
+The Random steiner inserted at: 87859.268004955127253 -102667.611817090524710 => 
+
+Circumcenter was selected: 3 times
+Midpoint was selected: 6 times
+Projection was selected: 110 times
+Polygon method was selected: 2 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+** 
+
+** SA method, with number of steiners: 141 for the instance ortho_150_53eb4022
+Number of obtuses: 6
+Used Random steiner: false
+Circumcenter was selected: 2 times
+Midpoint was selected: 6 times
+Projection was selected: 131 times
+Polygon method was selected: 1 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 80 for the instance ortho_150_53eb4022
+Number of obtuses: 26
+Used Random steiner: false
+Circumcenter was selected: 1 times
+Midpoint was selected: 7 times
+Projection was selected: 67 times
+Polygon method was selected: 1 times
+Centroid was selected: 4 times
+Random steiner was selected: 0 times
+** 
+
+** Ant method, with number of steiners: 24 for the instance ortho_150_53eb4022
+Number of obtuses: 35
+Used Random steiner: true
+The Random steiner inserted at: 120318.193623302504420 667194.515989817911759 => 1025282.358551120036282 -252237.536706774757477 => 107563.503741159060155 -86395.279961797888973 => 1030108.899173391750082 -278228.425295979366638 => 713080.728562539443374 953876.726874956744723 => 
+
+Circumcenter was selected: 1 times
+Midpoint was selected: 0 times
+Projection was selected: 15 times
+Polygon method was selected: 1 times
+Centroid was selected: 2 times
+Random steiner was selected: 5 times
+** 
+
+** Ant method, with number of steiners: 43 for the instance simple-polygon-exterior-20_250_eb5ab92f
+Number of obtuses: 175
+Used Random steiner: true
+The Random steiner inserted at: 84.795891939493174 62.903414624998803 => 59.315538940345292 -22.526679548864287 => 
+
+Circumcenter was selected: 4 times
+Midpoint was selected: 0 times
+Projection was selected: 33 times
+Polygon method was selected: 2 times
+Centroid was selected: 2 times
+Random steiner was selected: 2 times
+** 
+

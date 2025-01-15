@@ -158,7 +158,7 @@ void insert_projection(Custom_CDT& custom_cdt, const Face_handle& face, Polygon&
         cout<<"WHAAAAAAAAAAAAAAAAAAAAAAAAAAT"<<endl;
         cout<<"projected_point.x: "<<projected_point.x()<<" projected_point.y: "<<projected_point.y()<<endl;
         custom_cdt.insert_no_flip(projected_point);
-        start_the_flips(custom_cdt, polygon);
+        //start_the_flips(custom_cdt, polygon);
     }
 }
 
@@ -328,7 +328,6 @@ void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_st
     unsigned int num_of_obtuses = 0, num_of_steiners = 0, obtuse_custom = 0;
     bool progress = true, try_randomization = false;
     int obtuse_best_cdt = 0;
-    //int dont_use_circumcenter = false;
     //3rd task
     int init_vertices = custom_cdt.number_of_vertices();
     double p_sum = 0.0;
@@ -342,11 +341,6 @@ void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_st
             if (!is_obtuse(face)) continue;
             if (!is_face_inside_region(face, polygon)) continue;
             
-            /*num_of_obtuses = count_obtuse_triangles(custom_cdt, polygon);
-            if (num_of_obtuses == 0) {
-                progress = false;
-                break;
-            }*/
             //Create temporary CDT copies for each method
             Custom_CDT cdt_circum = custom_cdt;
             Custom_CDT cdt_midpoint = custom_cdt;
@@ -381,9 +375,8 @@ void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_st
             //Apply the best method
             if (obtuses_after[min_index] < obtuse_best_cdt) {
                 
-                //if(dont_use_circumcenter && min_index == 0) cerr<<"You choose the circumcenter but it was outside of the boundary"<<endl;
-                //custom_cdt.insert_no_flip(steiner_points[min_index]);
-                //start_the_flips(custom_cdt, polygon);
+                custom_cdt.insert_no_flip(steiner_points[min_index]);
+                start_the_flips(custom_cdt, polygon);
                 num_of_obtuses = count_obtuse_triangles(custom_cdt, polygon);
                 custom_cdt = cdt_variants[min_index];
                 best_cdt = custom_cdt;
@@ -405,10 +398,10 @@ void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_st
                 //p_sum += p_sum_function(num_of_steiners - 1, num_of_obtuses, obtuses_after[min_index]);
                 cout<<"inserted : "<<min_index<<" method"<<endl;
                 
-                cout<<" obtuses_after[min_index]: "<<obtuses_after[min_index]<<" num_of_obtuses before: "<<num_of_obtuses<<endl;
+                /*cout<<" obtuses_after[min_index]: "<<obtuses_after[min_index]<<" num_of_obtuses before: "<<num_of_obtuses<<endl;
                 for(int i = 0; i < count_steiners.size(); ++i) {
                     cout<<" count_steiners[i] : "<<count_steiners[i]<<endl;
-                }
+                }*/
                 //For projection or midpoint check if the steiner inserted in the boundary of polygon and update the polygon
                 if(min_index == 1) update_polygon(polygon, steiner_points[min_index], longest_edge.source(), longest_edge.target());
                 if(min_index == 2) update_polygon(polygon, steiner_points[min_index], opposide_edge.source(), opposide_edge.target());
@@ -419,43 +412,27 @@ void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_st
         obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
         cout<<"L: "<<L<<" obtuse_custom: "<<obtuse_custom<<" obtuse_best_cdt: "<<obtuse_best_cdt<<endl;
         //custom_cdt = best_cdt;
-        //if(!progress){
-            if(!progress){
-                L--;
-                custom_cdt = best_cdt;
-                cout<<"Try random++++"<<endl;
-                int before = count_obtuse_triangles(custom_cdt, polygon);
-                try_steiner_around_centroid(custom_cdt, polygon, temp_random_steiner);
-                obtuse_custom = count_obtuse_triangles(custom_cdt, polygon);
-                obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
-                cout<<" before: "<<before<<" After inserting random: "<<obtuse_custom<<" obtuse_best_cdt : "<<obtuse_best_cdt<<endl;
-                try_randomization = true;
-                if(obtuse_custom < obtuse_best_cdt) {
-                    in_randomization = true;
-                    best_cdt = custom_cdt;
-                    count_steiners[5]++;
-                    random_steiners.emplace_back(temp_random_steiner);
-                    try_randomization = false;
-                    cout<<"RANDOM WINNER Hamodrakoid inserted: "<<fixed<<setprecision(15)<<temp_random_steiner<<endl;
-                }
-                //Try this new cdt
-            }
-            /*obtuse_custom = count_obtuse_triangles(custom_cdt, polygon);
+        
+        if(!progress){
+            L--;
+            custom_cdt = best_cdt;
+            cout<<"Try random++++"<<endl;
+            int before = count_obtuse_triangles(custom_cdt, polygon);
+            try_steiner_around_centroid(custom_cdt, polygon, temp_random_steiner);
+            obtuse_custom = count_obtuse_triangles(custom_cdt, polygon);
             obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
-            cout<<"L: "<<L<<" obtuse_custom: "<<obtuse_custom<<" obtuse_best_cdt: "<<obtuse_best_cdt<<endl;
-            //Save the best cdt
-            if(obtuse_best_cdt > obtuse_custom) {
+            cout<<" before: "<<before<<" After inserting random: "<<obtuse_custom<<" obtuse_best_cdt : "<<obtuse_best_cdt<<endl;
+            try_randomization = true;
+            if(obtuse_custom < obtuse_best_cdt) {
+                in_randomization = true;
                 best_cdt = custom_cdt;
-                //If after inserting random steiner and we reduce the obtuses
-                if(try_randomization) {
-                    in_randomization = true;
-                    cout<<"Hiiiiihaaaaaa, Hamodrakoid inserted: "<<fixed<<setprecision(15)<<temp_random_steiner<<endl;
-                    random_steiners.emplace_back(temp_random_steiner);
-                    count_steiners[5]++;
-                    try_randomization = false;
-                }
-            }  */        
-        //}
+                count_steiners[5]++;
+                random_steiners.emplace_back(temp_random_steiner);
+                try_randomization = false;
+                cout<<"RANDOM WINNER Hamodrakoid inserted: "<<fixed<<setprecision(15)<<temp_random_steiner<<endl;
+            }
+            //Try this new cdt
+        }
     }
     custom_cdt = best_cdt;
     double front;
@@ -510,35 +487,35 @@ double p_sum_function(int n_steiner, int previous_obtuses, int obtuse_faces){
 
 
 //Simualated annealing method
-void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, const double& beta, const int& batch_size, const std_string& name_of_instance){
+void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, 
+                        const double& beta, const int& batch_size, const std_string& name_of_instance, bool& randomization){
     int obtuse_faces = count_obtuse_triangles(custom_cdt, polygon);
     int init_vertices = custom_cdt.number_of_vertices();
     double T = 1.0, delta_E = 0.0, E_new = 0.0, cooling_rate = 0.99, min_temp = 1e-6;
     double best_E = calculate_energy(obtuse_faces, 0, alpha, beta);
     int num_of_transition = 0, random_steiner = 0;
-    vector<int> count_steiners(5, 0), temp_counter_steiner(5,0);
+    vector<int> count_steiners(6, 0), temp_counter_steiner(6,0);
     Custom_CDT simulate_cdt = custom_cdt, best_cdt = custom_cdt, curent_cdt = custom_cdt;
-    Point_2 steiner_point;
+   
     //These edges are Midpoint and opposite Projection edges, we need these edges to check, if these steiners was entered on the boundary
     Segment_2 longest_edge, opposite_edge;
     int best_num_steiner = 0, best_obtuse_faces = obtuse_faces, counter_steiner = 0;
-    bool obtuse_neighbors = false, is_polygon_convex = false;
+    bool obtuse_neighbors = false, is_polygon_convex = false, try_randomization = false;
     std::mt19937 rng(std::random_device{}()); //Initialize RNG
     std::uniform_int_distribution<int> dist(0, 4); //Define distribution
     double p_sum = 0.0, p_sum_best = 0.0, temp_p_sum = 0;
     int previous_obtuses = obtuse_faces, previous_num_steiner = 0;
     //As we have progress continue
     fill(temp_counter_steiner.begin(), temp_counter_steiner.end(), 0);
-    //start_the_flips(best_cdt, polygon);
-    curent_cdt = best_cdt;
-    simulate_cdt = best_cdt;
     time_t start_time, end_time; 
     time(&start_time);
+    vector<Point_2> vector_random_steiners;
+    Point_2 temp_random_steiner, steiner_point;
 
     for (int i = 0; i < max_iterations && T > min_temp; ++i) {
         if (obtuse_faces == 0) break;
         //After from brake, or finite_faces_end(), keep the simulate_cdt as curent_cdt
-        //curent_cdt = simulate_cdt;
+        curent_cdt = simulate_cdt;
         for (auto face = curent_cdt.finite_faces_begin(); face != curent_cdt.finite_faces_end(); ++face){
             if (!is_obtuse(face)) continue;
             if (!is_face_inside_region(face, polygon)) continue;
@@ -548,7 +525,6 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 //If circumcenter steiner is outside of the boundary, continue
                 case 0: 
                     if(!insert_circumcenter(simulate_cdt, face, polygon, steiner_point)){
-                        //--face;
                         continue;
                     }
                     break;
@@ -569,7 +545,10 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
             counter_steiner = simulate_cdt.number_of_vertices() - init_vertices;
             E_new = calculate_energy(obtuse_faces, counter_steiner, alpha, beta);
             delta_E = E_new - best_E;
-
+            if(try_randomization){
+                cout<<"***Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<
+                random_steiner<<" obtuse_faces: "<<obtuse_faces<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", E_new: "<<E_new<<endl; 
+            }
             /*cout<<"1) i : "<<i<<" obtuse_faces : "<<obtuse_faces<<" previous_obtuses: "<<previous_obtuses<<" p_sum : "<<
             p_sum<<" temp_p_sum : "<<temp_p_sum<<" counter_steiner : "<<counter_steiner<<
             " best_obtuse_faces : "<<best_obtuse_faces<<" best_num_steiner : "<<best_num_steiner<<endl;*/
@@ -592,6 +571,7 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 //Optional for prints
                 best_obtuse_faces = obtuse_faces;
                 best_num_steiner = counter_steiner;
+                
                 //3rd task
                 p_sum += p_sum_function(counter_steiner - 1, previous_obtuses, obtuse_faces) + temp_p_sum;
                 previous_obtuses = obtuse_faces;
@@ -606,8 +586,16 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 for(int i = 0; i < temp_counter_steiner.size(); ++i) {
                     count_steiners[i] += temp_counter_steiner[i];
                 }
+
+                if(try_randomization){
+                    cout<<"Hiiiihaaaaaa, random steiner was helping me: "<<temp_random_steiner<<endl;
+                    vector_random_steiners.emplace_back(temp_random_steiner);
+                    randomization = true;
+                    try_randomization = false;
+                }
+
                 //DELETE DEBUG
-                if(accumulate(count_steiners.begin(),count_steiners.end(),0) != best_num_steiner){
+                if(accumulate(count_steiners.begin(), count_steiners.end(), 0) != best_num_steiner){
                     cout<<"WROOONG "<<accumulate(count_steiners.begin(),count_steiners.end(),0)<<" != "<<best_num_steiner<<endl;
                     return;
                 }
@@ -634,6 +622,30 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                     num_of_transition = 0;
                     temp_p_sum = 0;
                     fill(temp_counter_steiner.begin(), temp_counter_steiner.end(), 0);
+                    //Try to insert insert_steiner_around_centroid (3rd task)
+                    if(i > max_iterations/2.5) {
+                        cout<<"Try random ++"<<" number_of_vertices() BEFORE: "<<simulate_cdt.number_of_vertices()<<" T: "<<T<<endl;
+                        try_steiner_around_centroid(simulate_cdt, polygon, temp_random_steiner);
+                        cout<<"Try random ++"<<" number_of_vertices() AFTER: "<<simulate_cdt.number_of_vertices()<<" T: "<<T<<endl;
+                        temp_counter_steiner[5]++;
+                        try_randomization = true;
+                        num_of_transition++;
+                        curent_cdt = simulate_cdt;
+                        obtuse_faces = count_obtuse_triangles(simulate_cdt, polygon);
+                        if(best_obtuse_faces > obtuse_faces) {
+                            cout<<"Hiiiihaaa, random steiner LEGEND: "<<temp_random_steiner<<endl;
+                            vector_random_steiners.emplace_back(temp_random_steiner);
+                            randomization = true;
+                            count_steiners[5]++;
+                            fill(temp_counter_steiner.begin(), temp_counter_steiner.end(), 0);
+                            best_cdt = curent_cdt;
+                            simulate_cdt = curent_cdt;
+                            best_obtuse_faces = obtuse_faces;
+                            num_of_transition = 0;
+                            try_randomization = false;
+                            
+                        }
+                    }
                 }
                 break;
             }
@@ -649,11 +661,10 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
         }
         //Update temperature (decrease)
         T = T*(cooling_rate);
-        //cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl; 
+        if(!try_randomization) cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" random_steiner: "<<random_steiner<<", DeltaE: "<<delta_E<<" best_E: "<<best_E<<", Steiner points: "<<best_num_steiner<<endl; 
     }
-
-    //Try to insert insert_steiner_around_centroid (3rd task)
-    //if(obtuse_faces > 0) try_steiner_around_centroid(best_cdt, polygon);
+    
+    //simulate_cdt = best_cdt;  
 
     //"Return" the best cdt
     custom_cdt = best_cdt;
@@ -668,31 +679,112 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
     cout<<"front * p_sum: "<<front * p_sum_best<<endl;*/
     time(&end_time);
     double time_taken = double(end_time - start_time); 
-    cout<<"Time taken by program is : "<<" sec "<<endl;
+    cout<<"Time taken by program is : "<<" sec "<<time_taken<<endl;
     std_string method_name = "SA";
     best_num_steiner = best_cdt.number_of_vertices() - init_vertices;
-    //method_output(count_steiners, method_name, name_of_instance, best_num_steiner, best_obtuse_faces);
+    method_output(count_steiners, method_name, name_of_instance, best_num_steiner, best_obtuse_faces, randomization, vector_random_steiners);
     
 }
 
+void insert_steiner_into_specific_area(Custom_CDT& simulate_cdt, vector<Face_handle>& vector_new_faces, 
+                                        int random_steiner, Polygon& polygon){
+    // Check if the vector is not empty
+    if (vector_new_faces.empty()) {
+        cerr << "Error: The vector of new faces is empty." << endl;
+        return;
+    }
+
+    // Create a random number generator
+    std::random_device rd;  // Obtain a random number from hardware
+    std::mt19937 eng(rd()); // Seed the generator
+    std::uniform_int_distribution<> distr(0, vector_new_faces.size() - 1); // Define the range
+
+    //Generate a random index
+    int random_index = distr(eng);
+
+    //Select the random face handle
+    Face_handle selected_face = vector_new_faces[random_index];
+
+    //Now you can use selected_face as needed, for example:
+    //cout << "Selected Face Handle: " << selected_face << endl;
+
+    /*switch(random_steiner){
+        //If circumcenter steiner is outside of the boundary, continue
+        case 0: 
+            if(!insert_circumcenter(simulate_cdt, selected_face, polygon, steiner_point)){
+                continue;
+            }
+            break;
+        case 1: insert_midpoint(simulate_cdt, selected_face, polygon, steiner_point, longest_edge); break;
+        case 2: insert_projection(simulate_cdt, selected_face, polygon, steiner_point, opposite_edge); break;
+        case 3:
+            //If the polygon of the adjacent steiner is not convex or if the face has no obtuse neighbors, skip the face
+            is_polygon_convex = insert_adjacent_steiner(simulate_cdt, selected_face, polygon, steiner_point);
+            if((!is_polygon_convex)){
+                insert_projection(simulate_cdt, selected_face, polygon, steiner_point, opposite_edge);
+                random_steiner = PROJECTION;
+            }
+            break;
+        case 4: insert_centroid(simulate_cdt, selected_face, polygon, steiner_point); break;
+        default: break;
+    }*/
+}
+
+
+void test(Custom_CDT& best_cdt, Polygon& polygon){
+    Point_2 in_projection;
+    Segment_2 opposide_edge;
+    Custom_CDT curent_cdt = best_cdt; 
+    vector<Face_handle> vector_new_faces;
+    vector_new_faces.clear();
+    Face_handle random_oobtuse_face = give_random_obtuse(curent_cdt, polygon);
+    Point p1 = random_oobtuse_face->vertex(0)->point();
+    Point p2 = random_oobtuse_face->vertex(1)->point();
+    Point p3 = random_oobtuse_face->vertex(2)->point();
+    cout<<"choose face: ("<<fixed<<p1.x()<<" , "<<p1.y()<<")"<<"  "<<"("<<p2.x()<<" , "<<p2.y()<<")"<<"  "<<"("<<
+    p3.x()<<" , "<<p3.y()<<")"<<"  "<<endl;
+    
+    insert_projection(curent_cdt, random_oobtuse_face, polygon, in_projection, opposide_edge);
+    cout<<"steiner point inserted into : "<<in_projection<<endl;
+    update_new_faces_cdts(best_cdt, curent_cdt, vector_new_faces);
+    for(auto face : vector_new_faces){
+        Point p1 = face->vertex(0)->point();
+        Point p2 = face->vertex(1)->point();
+        Point p3 = face->vertex(2)->point();
+        cout<<"NEW face: ("<<p1.x()<<" , "<<p1.y()<<")"<<"  "<<"("<<p2.x()<<" , "<<p2.y()<<")"<<"  "<<"("<<
+        p3.x()<<" , "<<p3.y()<<")"<<"  "<<endl;
+    }
+    best_cdt = curent_cdt;
+}
+
 //Ant colony method
-void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance){
+void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, 
+                const double& chi, const double& psi, const double& lamda, const int& L, const int& kappa, 
+                const std_string& name_of_instance, bool& randomization){
     int init_vertices = custom_cdt.number_of_vertices();
     int obtuse_faces = count_obtuse_triangles(custom_cdt, polygon);
     int new_obtuse_faces = obtuse_faces; 
     int best_obtuses = new_obtuse_faces;
+    int best_vertices = init_vertices;
     double best_E = calculate_energy(new_obtuse_faces, 0, alpha, beta);
-    int best_num_steiner = 0, best_obtuse_faces = obtuse_faces, counter_steiner = 0;
+    int counter_steiner = 0;
     int count_ants = kappa;
     cout<<"Num of ants: "<<count_ants<<endl;
-    bool obtuse_neighbors = false, can_we_use_adjacent = false;
+    bool obtuse_neighbors = false, can_we_use_adjacent = false, progress = false, try_randomization = false;
+    //If we dont have progress for 4 loops, use random steiner
+    int progress_counter = 0, progress_obtuses = obtuse_faces;
     double ro = 0.0;
     //3rd task
+    Point_2 random_steiner;
+    vector<Point_2> vector_random_steiners;
+    vector<Point_2> inserted_steiners;
     double p_sum = 0.0;
-    time_t start_time, end_time; 
+    time_t start_time, end_time;
+    //Let the program running for 15 loops without progress
+    int non_progress_counter = 15;
     time(&start_time);
     int num_of_steiners = 0;
-    vector<int> count_steiners(5, 0);
+    vector<int> count_steiners(6, 0);
     //Midpoint edge: We need this edge to check if the steiner was entered on the boundary
     Segment_2 longest_edge;
     //Projection edge: We need this edge to check if the steiner was entered on the boundary
@@ -721,24 +813,21 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
     Point_2 curent_steiner_point;
     Custom_CDT curent_cdt = custom_cdt;
     Custom_CDT best_cdt = custom_cdt;
+    Custom_CDT random_cdt = custom_cdt;
     SteinerMethod curent_method;
 
     /////////////////////////////////////////////////////
     for (int cycle = 0; cycle < L; ++cycle) {
         if (new_obtuse_faces == 0) break;
-        //Clean vectors
+        //Clean the vectors
         ant_reduce_obtuses_vector.clear();
         ant_last_winners_vector.clear();      
         //Ants
         for (int ant_index = 0; ant_index < count_ants; ++ant_index) {
             ants[ant_index].set_Custom_CDT(curent_cdt);
-
+            //if(try_randomization) cout<<"3=VERTICES: "<<curent_cdt.number_of_vertices()<<endl;
             //Chose obtuse face and check it, give_random_obtuse has check is_obtuse(face), is_face_inside_region(face, polygon)
             Face_handle face = give_random_obtuse(ants[ant_index].get_Custom_CDT(), polygon);
-            //give_random_obtuse has check these
-            //if (!is_obtuse(face)) continue;
-            //if (!is_face_inside_region(face, polygon)) continue;
-
             /*Improve triangulation*/
             ro = calculate_radius_to_height(face, curent_cdt);
             obtuse_neighbors = has_obtuse_neighbors(curent_cdt, face, polygon);
@@ -765,7 +854,7 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
                     break;
                 default: break;
             }
-            
+            //if(try_randomization) cout<<"4=VERTICES: "<<curent_cdt.number_of_vertices()<<endl;
             //Save the No of method into Ant
             ants[ant_index].set_steiner_method(curent_method);
             //Save the curent cdt into Ant
@@ -783,12 +872,14 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
             /*Evaluate the resulting triangulation*/
             //Update if this steiner improve the triangulation
             if (ants[ant_index].get_DeltaE() < 0) {
+                //DEBUG DELETE
                 if( (new_obtuse_faces >= count_obtuse_triangles(best_cdt, polygon))){
                     cout<<"POOOOOOOO"<<endl;
                     cout<<" new_obtuse_faces : "<<new_obtuse_faces<<" best obtuses : "<<
                     count_obtuse_triangles(best_cdt, polygon)<<" counter_steiner : "<<counter_steiner<<
                     " best cdt steiners : "<<(count_vertices(best_cdt) - init_vertices)<<" curent_method : "<<curent_method<<
                     " temp_st : "<<temp_st<<endl;
+                    return;
                 }
                 /*cout<<"ant_reduce_obtuses_vector ==>  new_obtuse_faces : "<<new_obtuse_faces<<" best obtuses : "<<
                     count_obtuse_triangles(best_cdt, polygon)<<" counter_steiner : "<<counter_steiner<<
@@ -802,8 +893,11 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
                     ants[ant_index].set_opposite_edge_projection(opposite_edge);
             }
             else ants[ant_index].set_reduce_obtuses(false);
-            curent_cdt = best_cdt;
+            if(!try_randomization) curent_cdt = best_cdt;
+            else curent_cdt = random_cdt;
+
         }
+        
         //Save the bests ants (not the last winners)
         for (int ant_index = 0; ant_index < count_ants; ++ant_index){
             //If this ant didnt reduce the obtuses faces of cdt, ignore it
@@ -826,23 +920,53 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
             //cout<<"OUT OF SAVE THE BEST"<<endl;
         }
 
-        //3rd task
+        //3rd task, 
         int num_of_obtuses_before = 0, num_of_obtuses_after = 0;
         /*Save the best triangulation*/
+        num_of_obtuses_before = count_obtuse_triangles(best_cdt, polygon);
+        //cout<<"best obtuses before: "<<num_of_obtuses_before<<endl;
         for(int i = 0; i < ant_last_winners_vector.size(); i++){
-            //3rd task
+           
+            //3rd task, p_sum
+            //We add in the place 4 of vector the centroid
+            if(ant_last_winners_vector[i].get_steiner_method() == CENTROID){
+                cout<<"IMPRESIVE"<<endl;
+                ant_last_winners_vector[i].set_steiner_method(NUM_METHODS);
+            }
             num_of_obtuses_before = count_obtuse_triangles(best_cdt, polygon);
-
+            if(try_randomization) {
+                best_cdt.insert_no_flip(random_steiner);
+                start_the_flips(best_cdt, polygon);
+                cout<<fixed<<"Random steiner: "<<random_steiner<<endl;
+                inserted_steiners.emplace_back(random_steiner);
+                
+            }
+            for(auto& point : inserted_steiners) {
+                if (point == ant_last_winners_vector[i].get_steiner_point()){
+                    cout<<"Point: "<<point<<" exist"<<endl;
+                }
+            }
+            inserted_steiners.emplace_back(ant_last_winners_vector[i].get_steiner_point());
+            
             count_steiners[ant_last_winners_vector[i].get_steiner_method()]++;
             best_cdt.insert_no_flip(ant_last_winners_vector[i].get_steiner_point());
             start_the_flips(best_cdt, polygon);
-            //3rd task
+            cout<<"Inserted method: "<<ant_last_winners_vector[i].get_steiner_method()<<endl;
+            //if(try_randomization) cout<<"STEINER INSERTED INTO : "<<ant_last_winners_vector[i].get_steiner_point()<<endl;
+            //3rd task, p_sum
             num_of_steiners = best_cdt.number_of_vertices() - init_vertices;
             num_of_obtuses_after = count_obtuse_triangles(best_cdt, polygon);
             p_sum += p_sum_function(num_of_steiners - 1, num_of_obtuses_before, num_of_obtuses_after);
-            /*cout<<"ant_last_winners_vector ==> i: "<<i<<" num_of_obtuses_before : "<<num_of_obtuses_before<<" num_of_obtuses_after: "<<num_of_obtuses_after<<
-            " p_sum : "<<p_sum<<" num_of_steiners : "<<num_of_steiners<<" DEltaE : "<<ant_last_winners_vector[i].get_DeltaE()<<
-            " steiner point : "<<ant_last_winners_vector[i].get_steiner_point()<<endl;*/
+            if(num_of_obtuses_before < num_of_obtuses_after){
+                cout<<"ant_last_winners_vector ==> i: "<<i<<" num_of_obtuses_before : "<<num_of_obtuses_before<<" num_of_obtuses_after: "<<num_of_obtuses_after<<
+                " p_sum : "<<p_sum<<" num_of_steiners : "<<num_of_steiners<<" DEltaE : "<<ant_last_winners_vector[i].get_DeltaE()<<
+                " steiner point : "<<ant_last_winners_vector[i].get_steiner_point()<<endl;
+                cout<<"ENERGY OF ANT: "<<ant_last_winners_vector[i].get_energy()<<" ENERGY OF BEST: "<<best_E<<endl;
+                cout<<"Ant has the cdt with obtuses: "<<count_obtuse_triangles(ant_last_winners_vector[i].get_Custom_CDT(), polygon)<<
+                " and vertices: "<<ant_last_winners_vector[i].get_Custom_CDT().number_of_vertices()<<endl;
+                cout<<"Best has vertices: "<<best_cdt.number_of_vertices()<<endl;
+                return;
+            }
 
             curent_steiner_point = ant_last_winners_vector[i].get_steiner_point();
             longest_edge = ant_last_winners_vector[i].get_longest_edge_midpoint();
@@ -854,8 +978,59 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
             if((curent_method == 2) && (polygon.bounded_side(curent_steiner_point) == CGAL::ON_BOUNDARY))
                 update_polygon(polygon, curent_steiner_point, opposite_edge.source(), opposite_edge.target());
         }
+        num_of_obtuses_after = count_obtuse_triangles(best_cdt, polygon);
+        //<<"best obtuses after: "<<num_of_obtuses_after<<endl;
+        if(num_of_obtuses_after > num_of_obtuses_before) cout<<"................"<<endl;
         //Update the best triangulation and the best_E
         best_obtuses = count_obtuse_triangles(best_cdt, polygon);
+        //3rd task. Check for 4 loops if wee dont have progress, to activate the random steiner
+        if(best_obtuses < progress_obtuses){
+            progress = true;
+            
+            progress_obtuses = best_obtuses;
+            progress_counter = 0;
+            best_vertices = best_cdt.number_of_vertices();
+            //if(try_randomization) cout<<"WEEEEEEEEL"<<endl;
+            //cout<<"1=VERTICES: "<<best_vertices<<" random steiner: "<<random_steiner<<endl;
+            if(try_randomization) {
+                randomization = true;
+                vector_random_steiners.emplace_back(random_steiner);
+            }
+            try_randomization = false;
+            
+        }
+        else  progress_counter++;
+
+        //Reset the curent cdt and random_cdt
+        curent_cdt= best_cdt;
+        random_cdt = best_cdt;
+        //Try to insert insert_steiner_around_centroid (3rd task)
+        if (progress_counter >= non_progress_counter) try_randomization = true;
+        //cout<<" try_randomization: "<<try_randomization<<endl;
+        if (try_randomization) {
+            //cout<<"Activate the random steiner at cycle: "<<cycle<<" best_obtuses : "<<best_obtuses<<endl;
+            try_randomization = true;
+            progress_counter = 0;
+            //cout<<"1=VERTICES: "<<random_cdt.number_of_vertices()<<endl;
+            try_steiner_around_centroid(random_cdt, polygon, random_steiner);
+            //cout<<"2=VERTICES: "<<random_cdt.number_of_vertices()<<endl;
+            int obtuses = count_obtuse_triangles(random_cdt, polygon);
+            //cout<<"New obtuses: "<<obtuses<<endl;
+            curent_cdt = random_cdt;
+            if(obtuses < best_obtuses) {
+                best_cdt = random_cdt;
+                curent_cdt = best_cdt;
+                best_obtuses = obtuses;
+                progress_obtuses = obtuses;
+                counter_steiner = best_cdt.number_of_vertices() - init_vertices;
+                randomization = true;
+                vector_random_steiners.emplace_back(random_steiner);
+                //best_E = calculate_energy(best_obtuses, counter_steiner, alpha, beta);
+                cout<<fixed<<"LEGEND! random_steiner: "<<random_steiner<<" counter_steiner: "<<counter_steiner<<" vertices: "<<
+                                best_cdt.number_of_vertices()<<endl;
+            }
+        }
+        
         counter_steiner = best_cdt.number_of_vertices() - init_vertices;
         best_E = calculate_energy(best_obtuses, counter_steiner, alpha, beta);
         
@@ -863,20 +1038,17 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
         if(ant_reduce_obtuses_vector.size() > 0) updatePheromones(taf, delta_taf, ant_reduce_obtuses_vector, lamda);
         ///Restart the ants
         Ant::initialize_Ants(ants, best_cdt);
-    }
-
-    //Try to insert insert_steiner_around_centroid (3rd task)
-    //if(best_obtuses > 0) try_steiner_around_centroid(best_cdt, polygon);
- 
+    }    
+    cout<<endl;
     //3rd task
     double front;
-    if (num_of_steiners > 1)
-        front = abs(1.0/(num_of_steiners - 1.0));
+    if (counter_steiner > 1)
+        front = abs(1.0/(counter_steiner - 1.0));
     else front = 0.5;
-    cout<<"num_of_steiners : "<<num_of_steiners<<endl;
-    cout<<"p_sum : "<<p_sum<<endl;
-    cout<<"(1/(num_of_steiners - 1)) : "<<front<<endl;
-    cout<<"front * p_sum: "<<front * p_sum<<endl;
+    cout<<"num_of_steiners : "<<counter_steiner<<endl;
+    /*cout<<"p_sum : "<<p_sum<<endl;
+    cout<<"(1/(counter_steiner - 1)) : "<<front<<endl;
+    cout<<"front * p_sum: "<<front * p_sum<<endl;*/
     time(&end_time);
     double time_taken = double(end_time - start_time); 
     cout<<"Time taken by program is : "<<time_taken<<" sec "<<endl;
@@ -884,7 +1056,9 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
     custom_cdt = best_cdt;
     std_string method_name = "Ant";
     new_obtuse_faces = count_obtuse_triangles(best_cdt, polygon);
-    //method_output(count_steiners, method_name, name_of_instance, counter_steiner, new_obtuse_faces);
+    for(auto& instance : vector_random_steiners) cout<<"Random: "<<instance<<endl;
+    count_steiners[5] = vector_random_steiners.size();
+    method_output(count_steiners, method_name, name_of_instance, counter_steiner, new_obtuse_faces, randomization, vector_random_steiners);
 }
 
 //Check for conflict between 2 ants
@@ -1019,6 +1193,25 @@ void affected_faces(Custom_CDT& best_cdt, Ant& ant) {
         }
         //If best_face != ant_face means that we have conflict
         if (!found_face) ant.set_face_in_ant_affect_faces(best_face);
+    }
+}
+
+//After insterting a steiner, found the new faces that creating
+void update_new_faces_cdts(Custom_CDT& previous_cdt, Custom_CDT& new_cdt, vector<Face_handle>& vector_new_faces) {
+    
+    for (auto new_face = new_cdt.finite_faces_begin(); 
+        new_face != new_cdt.finite_faces_end(); ++new_face) {
+        bool found_face = false;
+        for (auto previous_face = previous_cdt.finite_faces_begin(); 
+            previous_face != previous_cdt.finite_faces_end(); ++previous_face) {
+            //Check the faces if are equals
+            if (are_faces_equal(previous_face, new_face)) {
+                found_face = true;
+                break;
+            }
+        }
+        //If previous_face != new_face means that we have conflict
+        if (!found_face) vector_new_faces.push_back(new_face);
     }
 }
 
@@ -1340,6 +1533,7 @@ void start_the_flips(Custom_CDT& cdt, const Polygon& polygon){
             Point_2 p4 = f2->vertex(mirror_index)->point();         
             if(is_it_worth_flip(p1, p2, p3, p4)){
                 cdt.flip(f1, i);
+                //cout<<"FLIPED!"<<p1<<" .. "<<p2<<" .. "<<p3<<" .. "<<p4<<" .. "<<endl;
                 progress = true;
                 break;
             }
@@ -2008,10 +2202,10 @@ double compute_bounding_circle_radius(Face_handle face, const Point_2& centroid)
 }
 
 //Insert steiner point around the centroid with gaussian distribution
-void insert_steiner_around_centroid(Custom_CDT& custom_cdt, Face_handle face, Polygon& polygon, Point_2& steiner_around_centroid) {
+void insert_steiner_around_centroid(Custom_CDT& custom_cdt, Face_handle& face, Polygon& polygon, Point_2& steiner_around_centroid) {
     double stddev_ratio = 0.33;
     //Compute the centroid of the triangle
-    Point_2 centroid = CGAL::centroid(face->vertex(0)->point(),face->vertex(1)->point(),face->vertex(2)->point());
+    Point_2 centroid = CGAL::centroid(face->vertex(0)->point(), face->vertex(1)->point(), face->vertex(2)->point());
 
     //Compute the bounding circle's radius
     double max_distance = compute_bounding_circle_radius(face, centroid);
@@ -2057,10 +2251,10 @@ void try_steiner_around_centroid(Custom_CDT& best_cdt, Polygon& polygon, Point_2
     Point p1 = random_oobtuse_face->vertex(0)->point();
     Point p2 = random_oobtuse_face->vertex(1)->point();
     Point p3 = random_oobtuse_face->vertex(2)->point();
-    cout<<"choose face: ("<< fixed <<setprecision(0)<<p1.x()<<" , "<<p1.y()<<")"<<"  "<<"("<<p2.x()<<" , "<<p2.y()<<")"<<"  "<<"("<<
-    p3.x()<<" , "<<p3.y()<<")"<<"  "<<endl;
+    /*cout<<"choose face: ("<<fixed<<p1.x()<<" , "<<p1.y()<<")"<<"  "<<"("<<p2.x()<<" , "<<p2.y()<<")"<<"  "<<"("<<
+    p3.x()<<" , "<<p3.y()<<")"<<"  "<<endl;*/
     Point_2 steiner_temp;
     insert_steiner_around_centroid(best_cdt, random_oobtuse_face, polygon, steiner_temp);
     random_steiner = steiner_temp;
-    cout<<"Steiner inserted into: ("<<steiner_temp.x()<<" , "<<steiner_temp.y()<<")"<<endl;
+    //cout<<"Steiner inserted into: ("<<steiner_temp.x()<<" , "<<steiner_temp.y()<<")"<<endl;
 }

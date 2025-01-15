@@ -226,7 +226,11 @@ int main(int argc, char** argv) {
     //CGAL::draw(custom_cdt);
     double success;
     bool randomization = false;
+    //Start the flips before copy simulated cdt
+    start_the_flips(custom_cdt, polygon);
+
     Custom_CDT simulated_cdt = custom_cdt;
+    simulated_polygon = polygon;   
     //Run task1 if delaunay parameter is false
     if(!delaunay) {
         cout<<"**Run task1**"<<endl;
@@ -236,12 +240,10 @@ int main(int argc, char** argv) {
         cout<<"Sum of steiners after task 1: "<<count_vertices(simulated_cdt) - initial_vertexes<<endl;
         if(init_obtuse_faces > 0) success = ((double)obtuses_faces/(double)init_obtuse_faces)*100;
         cout<<100-success<<"%"<<" obtuse triangles reduction success after task 1"<<endl;
-    }
-
-    simulated_polygon = polygon;
-    
+    } 
+    //test(simulated_cdt, simulated_polygon);
     //Flips
-    start_the_flips(simulated_cdt, simulated_polygon);
+    
     //Local Search
     if(run_Local_Search){
         cout<<"Local Search is starting.."<<endl;
@@ -252,16 +254,16 @@ int main(int argc, char** argv) {
     //SA
     if(run_Simulated_Annealing){
         cout<<"Simulated Annealing is starting.. "<<endl;
-        simulated_annealing(simulated_cdt, simulated_polygon, L, alpha, beta, batch_size, instance_uid);
+        simulated_annealing(simulated_cdt, simulated_polygon, L, alpha, beta, batch_size, instance_uid, randomization);
         cout <<"**Number of Obtuses after from Simulated Annealing: "<<count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
     }
     //Ant Colony
     if(run_Ant_Colony){
         cout<<"Ant Colony is starting.. "<<endl;
-        ant_colony(simulated_cdt, simulated_polygon, alpha, beta, chi, psi, lamda , L, kappa, instance_uid);
+        ant_colony(simulated_cdt, simulated_polygon, alpha, beta, chi, psi, lamda , L, kappa, instance_uid, randomization);
         cout <<"**Number of Obtuses after from Ant Colony: "<<count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
     }
-
+    
     obtuses_faces = count_obtuse_triangles(simulated_cdt, simulated_polygon);
     cout<<"Final obtuses faces: "<<obtuses_faces<<endl;
     cout<<"Sum of steiners: "<<simulated_cdt.number_of_vertices() - initial_vertexes<<endl;
@@ -274,14 +276,30 @@ int main(int argc, char** argv) {
     
     /*Print from Extra_Graphics*/
     //Calculate min_y and max_y
-    double min_y = numeric_limits<double>::max();
+    /*double min_y = numeric_limits<double>::max();
     double max_y = numeric_limits<double>::lowest();
 
     for (const auto& point : points) {
         double y = CGAL::to_double(point.y());
         min_y = min(min_y, y);
         max_y = max(max_y, y);
+    }*/
+
+    double min_x = std::numeric_limits<double>::max();
+    double max_x = std::numeric_limits<double>::lowest();
+    double min_y = std::numeric_limits<double>::max();
+    double max_y = std::numeric_limits<double>::lowest();
+
+    // Calculate min and max for both x and y coordinates
+    for (const auto& point : points) {
+        double x = CGAL::to_double(point.x());
+        double y = CGAL::to_double(point.y());
+        min_x = std::min(min_x, x);
+        max_x = std::max(max_x, x);
+        min_y = std::min(min_y, y);
+        max_y = std::max(max_y, y);
     }
+
     QApplication app(argc, argv);
     CDTGraphicsView view(simulated_cdt, polygon);
     view.setRenderHint(QPainter::Antialiasing);
@@ -289,15 +307,19 @@ int main(int argc, char** argv) {
     view.resize(1000, 1000);
     //Center and zoom the view
     view.fitInView(view.scene()->sceneRect(), Qt::KeepAspectRatio);
-    view.scale(1.5, 1.5);
+    double scaleFactor = 1.5;
+    view.scale(scaleFactor, scaleFactor);
 
-    double centerY = (min_y + max_y) / 2; //Calculate the center y position based on your points
-    view.verticalScrollBar()->setValue(centerY);
+    //double centerY = (min_y + max_y) / 2; //Calculate the center y position based on the points
+    double centerX = (min_x + max_x) / 2;
+    double centerY = (min_y + max_y) / 2;
+    //view.verticalScrollBar()->setValue(centerY);
+    
+    view.translate(-centerX * scaleFactor + view.width() / 2, -centerY * scaleFactor + view.height() / 2);
     view.show();
     //////////// PHASE 3: JSON FILE OUTPUT //////////////////////////////
 
     output(jv, simulated_cdt, points, obtuses_faces, output_path, randomization);
-
     return app.exec();
     //return 0;
 }

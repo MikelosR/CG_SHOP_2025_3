@@ -18,13 +18,13 @@ configurations = {
     },
     "ant": {
         "method": "ant",
-        "parameters": {"alpha": 2.4, "beta": 0.2, "xi": 1.0, "psi": 2.0, "lambda": 0.2, "kappa": 10, "L": 50},
+        "parameters": {"alpha": 2.4, "beta": 0.2, "xi": 1.0, "psi": 2.0, "lambda": 0.2, "kappa": 10, "L": 150},
         "delaunay": True
     }
 }
 
 #Select which configuration to apply (choose from: "local", "sa", "ant")
-selected_configuration = "local"  # Change this to "local" or "ant" as needed
+selected_configuration = "ant"  # Change this to "local" or "ant" as needed
 
 #Validate selection
 if selected_configuration not in configurations:

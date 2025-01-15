@@ -1297,9 +1297,15 @@
             247
         ]
     ],
-    "method": "local",
+    "method": "ant",
     "parameters": {
-        "L": 50
+        "alpha": 2.4,
+        "beta": 0.2,
+        "xi": 1.0,
+        "psi": 2.0,
+        "lambda": 0.2,
+        "kappa": 10,
+        "L": 150
     },
     "delaunay": true
 }

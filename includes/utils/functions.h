@@ -27,7 +27,7 @@ bool insert_adjacent_steiner(Custom_CDT& custom_cdt, const Face_handle& face, co
 void insert_adjacent_steiner_local_search(Custom_CDT& custom_cdt, const Face_handle& face1, const Polygon& polygon, Point_2& adjacent_steiner);
 bool insert_circumcenter(Custom_CDT& circumcenter_cdt, const Face_handle& face, const Polygon& polygon, Point_2& circumcenter_steiner);
 void insert_centroid(Custom_CDT& centroid_cdt, const Face_handle& face, const Polygon& polygon, Point_2& centroid_steiner);
-void insert_steiner_around_centroid(Custom_CDT& custom_cdt, Face_handle face, Polygon& polygon, Point_2& steiner_around_centroid);
+void insert_steiner_around_centroid(Custom_CDT& custom_cdt, Face_handle& face, Polygon& polygon, Point_2& steiner_around_centroid);
 
 //Helper function for circumcenter, checking if the circumcenter was placed in neighbor face
 bool is_circumcenter_in_neighbor(const Custom_CDT& cdt, const Face_handle& face, const Point_2& circumcenter);
@@ -38,8 +38,11 @@ bool has_obtuse_neighbors(const Custom_CDT& custom_cdt, const Face_handle& face,
 
 //Algorithms
 void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_string& name_of_instance, bool& randomization);
-void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, const double& beta, const int& batch_size, const std_string& name_of_instance);
-void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance);
+void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, 
+        const double& beta, const int& batch_size, const std_string& name_of_instance, bool& randomization);
+void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, 
+                const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance, 
+                bool& randomization);
 
 //Helper functions for Simulated Annealing
 bool should_accept_bad_steiner(const double deltaE, const double T);
@@ -114,5 +117,8 @@ double p_sum_function(int n_steiner, int previous_obtuses, int obtuse_faces);
 double compute_bounding_circle_radius(Face_handle face, const Point_2& centroid);
 void try_steiner_around_centroid(Custom_CDT& cdt, Polygon& polygon, Point_2& random_steiner);
 void stats_output(const std_string& name_of_instance, const std_string& category);
-
+void update_new_faces_cdts(Custom_CDT& previous_cdt, Custom_CDT& new_cdt, vector<Face_handle>& vector_new_faces);
+void test(Custom_CDT& curent_cdt, Polygon& polygon);
+void insert_steiner_into_specific_area(Custom_CDT& simulate_cdt, vector<Face_handle>& vector_new_faces, 
+                                        int random_steiner, Polygon& polygon);
 #endif
