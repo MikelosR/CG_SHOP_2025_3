@@ -3055,7 +3055,7 @@ CMakeFiles/opt_triangulation.dir/project.cpp.o: \
  /home/mikelos/Projects/boost_1_80_0/boost_install/include/boost/json/visit.hpp \
  /home/mikelos/Projects/boost_1_80_0/boost_install/include/boost/json/impl/visit.hpp \
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/ant.h \
- /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/extra_graphics2.h \
+ /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/extra_graphics.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QGraphicsView \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qgraphicsview.h \
  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qscrollarea.h \

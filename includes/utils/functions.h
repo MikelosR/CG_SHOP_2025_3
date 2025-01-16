@@ -38,13 +38,13 @@ bool has_obtuse_neighbors(const Custom_CDT& custom_cdt, const Face_handle& face,
 
 //Algorithms
 void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_string& name_of_instance, bool& randomization, 
-                const double& alpha, const double& beta, vector<int> subset, std_string category);
+                const double& alpha, const double& beta, vector<int> subset, std_string category, const bool& run_auto_method);
 void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, 
                 const double& beta, const int& batch_size, const std_string& name_of_instance, bool& randomization, 
-                vector<int> subset, std_string category);
+                vector<int> subset, std_string category, const bool& run_auto_method);
 void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, 
                 const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance, 
-                bool& randomization, vector<int> subset, std_string category);
+                bool& randomization, vector<int> subset, std_string category, const bool& run_auto_method);
 
 //Helper functions for Simulated Annealing
 bool should_accept_bad_steiner(const double deltaE, const double T);
@@ -109,22 +109,12 @@ void method_output(const vector<int> count_steiners, std_string method_name, con
                     const int num_steiners, const int init_num_obtuses, const int num_obtuses, bool randomization, 
                     vector<Point_2>& random_steiners, const double rate_of_convergence, double Energy, vector<int> subset,
                     std_string category);
-bool is_same_edge(const Segment_2& seg1, const Segment_2& seg2);
 
-vector<Face_handle> find_faces_intersecting_polygon_edges(const Custom_CDT& cdt, const Polygon& polygon);
-vector<Face_handle> find_faces_inside_boundary(const Custom_CDT& cdt, const Polygon& polygon);
 bool are_constraints_open(const vector<pair<int, int>>& additional_constraints, int num_points);
-vector<Segment_2> find_shared_edges(CDT& cdt, const Polygon& polygon);
-vector<Segment_2> find_non_touching_boundary_edges(const Polygon& polygon, const CDT& cdt, vector<Segment_2>& shared_edges);
-vector<Segment_2> edges_new_boundary(const Polygon& polygon, vector<Segment_2>& shared_edges);
 double p_sum_function(int n_steiner, int previous_obtuses, int obtuse_faces);
 double compute_bounding_circle_radius(Face_handle face, const Point_2& centroid);
 void try_steiner_around_centroid(Custom_CDT& cdt, Polygon& polygon, Point_2& random_steiner);
 void stats_output(const std_string& name_of_instance, const std_string& category);
-void update_new_faces_cdts(Custom_CDT& previous_cdt, Custom_CDT& new_cdt, vector<Face_handle>& vector_new_faces);
-void test(Custom_CDT& curent_cdt, Polygon& polygon);
-void insert_steiner_into_specific_area(Custom_CDT& simulate_cdt, vector<Face_handle>& vector_new_faces, 
-                                        int random_steiner, Polygon& polygon);
 
 vector<vector<int>> generateSubsetsWith2(int start, int end);
 #endif

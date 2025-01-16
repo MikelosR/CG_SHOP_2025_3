@@ -1,5 +1,5 @@
 #include "includes/utils/functions.h"
-#include "includes/utils/extra_graphics2.h"
+#include "includes/utils/extra_graphics.h"
 #include "includes/utils/functions_task1.h"
 
 using namespace boost::json;
@@ -22,7 +22,7 @@ int main(int argc, char** argv) {
     double alpha = 2.2, beta = 0.1, chi = 3.0, psi = 1.0, lamda = 0.5, kappa = 5;
     int L = 1230, batch_size = 5;
     value jv;
-
+    vector<int> my_methods = {0,1,2,3,4};
     std_string input_path, output_path;
     //Parse command-line arguments
     for (int i = 1; i < argc; ++i) {
@@ -39,9 +39,7 @@ int main(int argc, char** argv) {
         return 1;
     }
     //Check the names of the test cases in folder tests
-    //f.e. ./opt_triangulation -i tests/test_SA.json -o solution_output.json
-    //./opt_triangulation -i tests/test_Ants.json -o solution_output.json
-    //./opt_triangulation -i tests/test_Local.json -o solution_output.json
+    //f.e. ./opt_triangulation -i tests/challenge_instances/ortho_20_e2aff192.instance.json -o solution_output.json
     
     read_json(input_path, jv);
     Custom_CDT custom_cdt;
@@ -67,7 +65,6 @@ int main(int argc, char** argv) {
         delaunay = obj.at("delaunay").as_bool();
 
         //Output method and delaunay
-        //cout<<"method: "<<method<<endl;
         L = parameters_obj.at("L").as_int64();
         
         //Chosen method
@@ -95,10 +92,12 @@ int main(int argc, char** argv) {
         }
         else if(method == "auto"){
             run_auto_method = true;
+            run_Simulated_Annealing = true;
             alpha = parameters_obj.at("alpha").as_double();
             beta = parameters_obj.at("beta").as_double();
             //How many "bad" steiners we accept to insert, until we will try again to add steiners in the best_cdt
             batch_size = parameters_obj.at("batch_size").as_int64();
+            my_methods = {0,1,2,3,4};
         }
         else {
             cerr<<"Error: wrong method"<<endl;
@@ -146,33 +145,20 @@ int main(int argc, char** argv) {
             custom_cdt.insert_constraint(points[constraint.first], points[constraint.second]);
         }
 
-        /*********************************/
         //Check if the polygon is convex (3rd Task)
         if(polygon.is_convex()) is_polygon_convex = true;
         //Check if the polygon (boundary) has straight lines (3rd Task)
         if(boundary_straight_lines(polygon)) has_boundary_straight_lines = true;
         if(!additional_constraints.empty()) has_constraints = true;
 
-        //cout<<"the instance has constraints: "<<has_constraints<<" and is convex: "<<is_polygon_convex<<endl;
-        //cout<<"has_boundary_straight_lines: "<<has_boundary_straight_lines<<endl;
-
         //3rd Task
-        if(!has_constraints && !is_polygon_convex && !has_boundary_straight_lines) {
-            unspecified = true;
-            //cout<<"AkANoNiStO"<<endl;
-        }
-        /*********************************/        
+        if(!has_constraints && !is_polygon_convex && !has_boundary_straight_lines) unspecified = true;
+                
         //Check if the instance has opened or closed constraints
         if(has_constraints){
-            if(are_constraints_closed(additional_constraints, points.size(), points, polygon)) {
-                has_closed_constraints = true;
-                //cout<<"has_closed_constraints: "<<has_closed_constraints<<endl;
-            }
+            if(are_constraints_closed(additional_constraints, points.size(), points, polygon)) has_closed_constraints = true;
             //If has not closed constraints and we have constraint, so we have open constraints
-            else{
-                has_open_constraints = true;
-                //cout<<"has_open_constraints: "<<has_open_constraints<<endl;
-            }
+            else has_open_constraints = true;
         }
     }
     else {
@@ -201,9 +187,8 @@ int main(int argc, char** argv) {
         //category = "UNSPECIFIED_BOUNDARY";
         category ="E";
     }
-
+    //This vector return array of arrays like [2], [0,2], [0,1,2]..
     vector<vector<int>> subsets = generateSubsetsWith2(0, 4);    
-    //stats_output(instance_uid, category);
     //////////// PHASE 2: FLIPS & STEINER POINTS //////////////////////////////
     int obtuses_faces = count_obtuse_triangles(custom_cdt, polygon);
     int init_obtuse_faces = obtuses_faces;
@@ -227,47 +212,30 @@ int main(int argc, char** argv) {
         cout<<"Sum of steiners after task 1: "<<count_vertices(simulated_cdt) - initial_vertexes<<endl;
         if(init_obtuse_faces > 0) success = ((double)obtuses_faces/(double)init_obtuse_faces)*100;
         cout<<100-success<<"%"<<" obtuse triangles reduction success after task 1"<<endl;
-    } 
-    //test(simulated_cdt, simulated_polygon);
-    //Flips
+    }
     //Local Search
     if(run_Local_Search){
         cout<<"Local Search is starting.."<<endl;
-        for (const auto& subset : subsets){
-            local_search(simulated_cdt, simulated_polygon, L, instance_uid, randomization, alpha, beta, subset, category);
-            cout<<"**Number of Obtuses after from Local Search: "<<
-                count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
-            simulated_cdt = custom_cdt;
-            simulated_polygon = polygon;
-            randomization = false;
-        }
+        local_search(simulated_cdt, simulated_polygon, L, instance_uid, randomization, alpha, beta, my_methods, category,
+                        run_auto_method);
+        cout<<"**Number of Obtuses after from Local Search: "<<
+            count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
     }
-
     //SA
     if(run_Simulated_Annealing){
         cout<<"Simulated Annealing is starting.. "<<endl;
-        for (const auto& subset : subsets){
-            simulated_annealing(simulated_cdt, simulated_polygon, L, alpha, beta, batch_size, instance_uid, randomization, 
-                subset, category);
-            cout<<"**Number of Obtuses after from Simulated Annealing: "<<
-                count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
-            simulated_cdt = custom_cdt;
-            simulated_polygon = polygon;
-            randomization = false;
-        }   
+        simulated_annealing(simulated_cdt, simulated_polygon, L, alpha, beta, batch_size, instance_uid, randomization, 
+            my_methods, category, run_auto_method);
+        cout<<"**Number of Obtuses after from Simulated Annealing: "<<
+            count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
     }
     //Ant Colony
     if(run_Ant_Colony){
         cout<<"Ant Colony is starting.. "<<endl;
-        for (const auto& subset : subsets){
-            ant_colony(simulated_cdt, simulated_polygon, alpha, beta, chi, psi, lamda , L, kappa, instance_uid, randomization,
-                subset, category);
-            cout<<"**Number of Obtuses after from Ant Colony: "<<
-                count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
-            simulated_cdt = custom_cdt;
-            simulated_polygon = polygon;
-            randomization = false;
-        }
+        ant_colony(simulated_cdt, simulated_polygon, alpha, beta, chi, psi, lamda , L, kappa, instance_uid, randomization,
+            my_methods, category, run_auto_method);
+        cout<<"**Number of Obtuses after from Ant Colony: "<<
+            count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
     }
     
     obtuses_faces = count_obtuse_triangles(simulated_cdt, simulated_polygon);

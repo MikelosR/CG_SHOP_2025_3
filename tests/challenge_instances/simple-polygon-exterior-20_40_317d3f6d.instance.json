@@ -220,15 +220,11 @@
             0
         ]
     ],
-    "method": "ant",
+    "method": "local",
     "parameters": {
+        "L": 150,
         "alpha": 2.4,
-        "beta": 0.2,
-        "xi": 1.0,
-        "psi": 2.0,
-        "lambda": 0.2,
-        "kappa": 10,
-        "L": 150
+        "beta": 0.2
     },
     "delaunay": true
 }

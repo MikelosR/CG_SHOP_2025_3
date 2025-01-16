@@ -3777,7 +3777,7 @@ CMakeFiles/opt_triangulation.dir/functions.cpp.o
  /home/mikelos/CGAL-5.6.1/include/CGAL/wmult.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/Custom_Constrained_Delaunay_triangulation_2.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/ant.h
- /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/extra_graphics2.h
+ /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/extra_graphics.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/functions.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/libraries.h
  /home/mikelos/Projects/CG_SHOP_2025_3/ui_ImageInterface.h
@@ -9972,7 +9972,7 @@ CMakeFiles/opt_triangulation.dir/project.cpp.o
  /home/mikelos/CGAL-5.6.1/include/CGAL/wmult.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/Custom_Constrained_Delaunay_triangulation_2.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/ant.h
- /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/extra_graphics2.h
+ /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/extra_graphics.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/functions.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/functions_task1.h
  /home/mikelos/Projects/CG_SHOP_2025_3/includes/utils/libraries.h

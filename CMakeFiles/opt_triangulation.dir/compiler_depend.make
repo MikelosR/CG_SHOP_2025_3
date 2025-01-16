@@ -3775,7 +3775,7 @@ CMakeFiles/opt_triangulation.dir/functions.cpp.o: functions.cpp \
   /home/mikelos/CGAL-5.6.1/include/CGAL/wmult.h \
   includes/utils/Custom_Constrained_Delaunay_triangulation_2.h \
   includes/utils/ant.h \
-  includes/utils/extra_graphics2.h \
+  includes/utils/extra_graphics.h \
   includes/utils/functions.h \
   includes/utils/libraries.h \
   ui_ImageInterface.h \
@@ -9968,7 +9968,7 @@ CMakeFiles/opt_triangulation.dir/project.cpp.o: project.cpp \
   /home/mikelos/CGAL-5.6.1/include/CGAL/wmult.h \
   includes/utils/Custom_Constrained_Delaunay_triangulation_2.h \
   includes/utils/ant.h \
-  includes/utils/extra_graphics2.h \
+  includes/utils/extra_graphics.h \
   includes/utils/functions.h \
   includes/utils/functions_task1.h \
   includes/utils/libraries.h \
@@ -12423,6 +12423,8 @@ functions_task1.cpp:
 
 includes/utils/functions.h:
 
+includes/utils/extra_graphics.h:
+
 functions.cpp:
 
 /usr/lib/gcc/x86_64-linux-gnu/11/include/xsaveoptintrin.h:
@@ -14292,8 +14294,6 @@ includes/utils/ant.h:
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdarg.h:
 
 /home/mikelos/CGAL-5.6.1/include/CGAL/Triangulation_face_base_2.h:
-
-includes/utils/extra_graphics2.h:
 
 /home/mikelos/Projects/boost_1_80_0/boost_install/include/boost/multiprecision/debug_adaptor.hpp:
 

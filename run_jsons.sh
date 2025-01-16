@@ -7,7 +7,7 @@ input_directory="tests/challenge_instances"
 output_file="solution_output.json"
 
 # Loop through each JSON file in the specified directory
-for json_file in "$input_directory"/*.json; do
+for json_file in "$input_directory"/simple-polygon_*.json; do
     # Check if the file exists
     if [[ -f "$json_file" ]]; then
         echo "Processing $json_file..."
