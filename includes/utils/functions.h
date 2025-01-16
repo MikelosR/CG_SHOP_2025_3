@@ -37,12 +37,14 @@ Segment_2 find_longest_edge(const Face_handle& face);
 bool has_obtuse_neighbors(const Custom_CDT& custom_cdt, const Face_handle& face, const Polygon& polygon);
 
 //Algorithms
-void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_string& name_of_instance, bool& randomization);
+void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_string& name_of_instance, bool& randomization, 
+                const double& alpha, const double& beta, vector<int> subset, std_string category);
 void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_iterations, const double& alpha, 
-        const double& beta, const int& batch_size, const std_string& name_of_instance, bool& randomization);
+                const double& beta, const int& batch_size, const std_string& name_of_instance, bool& randomization, 
+                vector<int> subset, std_string category);
 void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, const double& chi, 
                 const double& psi, const double& lamda, const int& L, const int& kappa, const std_string& name_of_instance, 
-                bool& randomization);
+                bool& randomization, vector<int> subset, std_string category);
 
 //Helper functions for Simulated Annealing
 bool should_accept_bad_steiner(const double deltaE, const double T);
@@ -104,7 +106,9 @@ bool is_closed_from_boundary(const vector<pair<int, int>>& additional_constraint
 bool is_closed_from_circle(const vector<pair<int, int>>& additional_constraints, const vector<Point_2>& points, 
                             const vector<int> degree, const Polygon& polygon);
 void method_output(const vector<int> count_steiners, std_string method_name, const std_string& name_of_instance, 
-                    const int num_steiners, const int num_obtuses, bool randomization, vector<Point_2>& random_steiners);
+                    const int num_steiners, const int init_num_obtuses, const int num_obtuses, bool randomization, 
+                    vector<Point_2>& random_steiners, const double rate_of_convergence, double Energy, vector<int> subset,
+                    std_string category);
 bool is_same_edge(const Segment_2& seg1, const Segment_2& seg2);
 
 vector<Face_handle> find_faces_intersecting_polygon_edges(const Custom_CDT& cdt, const Polygon& polygon);
@@ -121,4 +125,6 @@ void update_new_faces_cdts(Custom_CDT& previous_cdt, Custom_CDT& new_cdt, vector
 void test(Custom_CDT& curent_cdt, Polygon& polygon);
 void insert_steiner_into_specific_area(Custom_CDT& simulate_cdt, vector<Face_handle>& vector_new_faces, 
                                         int random_steiner, Polygon& polygon);
+
+vector<vector<int>> generateSubsetsWith2(int start, int end);
 #endif

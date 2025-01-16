@@ -8,23 +8,28 @@ directory = "tests/challenge_instances"
 configurations = {
     "local": {
         "method": "local",
-        "parameters": {"L": 50},
+        "parameters": {"L": 200, "alpha": 2.4, "beta": 0.2},
         "delaunay": True
     },
     "sa": {
         "method": "sa",
-        "parameters": {"alpha": 2.4, "beta": 0.2, "L": 1050, "batch_size": 4},
+        "parameters": {"alpha": 2.4, "beta": 0.2, "L": 800, "batch_size": 6},
         "delaunay": True
     },
     "ant": {
         "method": "ant",
         "parameters": {"alpha": 2.4, "beta": 0.2, "xi": 1.0, "psi": 2.0, "lambda": 0.2, "kappa": 10, "L": 150},
         "delaunay": True
+    },
+    "auto": {
+        "method": "auto",
+        "parameters": {"alpha": 2.4, "beta": 0.2, "L": 800, "batch_size": 6},
+        "delaunay": True
     }
 }
 
 #Select which configuration to apply (choose from: "local", "sa", "ant")
-selected_configuration = "sa"  # Change this to "local" or "ant" as needed
+selected_configuration = "ant"  # Change this to "local" or "ant" as needed
 
 #Validate selection
 if selected_configuration not in configurations:

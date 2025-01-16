@@ -16,12 +16,11 @@ using std_string = std::string;
 
 int main(int argc, char** argv) {
 
-    bool run_Simulated_Annealing = false, run_Local_Search = false, run_Ant_Colony = false;
+    bool run_Simulated_Annealing = false, run_Local_Search = false, run_Ant_Colony = false, run_auto_method = false;
     bool has_constraints= false, is_polygon_convex = false, has_closed_constraints = false, has_open_constraints = false;
     bool has_boundary_straight_lines = false, unspecified = false;
     double alpha = 2.2, beta = 0.1, chi = 3.0, psi = 1.0, lamda = 0.5, kappa = 5;
     int L = 1230, batch_size = 5;
-    int sum_convex_no_constraints = 0, sum_convex_open = 0, sum_convex_closed = 0, sum_convex_parallel = 0, sum_unspecified_boundary = 0; 
     value jv;
 
     std_string input_path, output_path;
@@ -74,6 +73,8 @@ int main(int argc, char** argv) {
         //Chosen method
         if(method == "local") {
             run_Local_Search = true;
+            alpha = parameters_obj.at("alpha").as_double();
+            beta = parameters_obj.at("beta").as_double();
         }
         else if(method == "sa") {
             run_Simulated_Annealing = true;
@@ -91,6 +92,13 @@ int main(int argc, char** argv) {
             chi = parameters_obj.at("xi").as_double();
             psi = parameters_obj.at("psi").as_double();
             kappa = parameters_obj.at("kappa").as_int64();
+        }
+        else if(method == "auto"){
+            run_auto_method = true;
+            alpha = parameters_obj.at("alpha").as_double();
+            beta = parameters_obj.at("beta").as_double();
+            //How many "bad" steiners we accept to insert, until we will try again to add steiners in the best_cdt
+            batch_size = parameters_obj.at("batch_size").as_int64();
         }
         else {
             cerr<<"Error: wrong method"<<endl;
@@ -133,19 +141,6 @@ int main(int argc, char** argv) {
             custom_cdt.insert(point);
         }
 
-        /*for (auto fit = custom_cdt.finite_faces_begin(); fit != custom_cdt.finite_faces_end(); ++fit) {
-            for (int i = 0; i < 3; ++i) { // Each triangle has 3 edges
-                Point_2 p1 = fit->vertex((i + 1) % 3)->point();
-                Point_2 p2 = fit->vertex((i + 2) % 3)->point();
-
-                // Check if the edge is constrained and on the boundary
-                if (custom_cdt.is_constrained(CDT::Edge(fit, i)) && is_edge_on_boundary(p1, p2, polygon)) {
-                    // Remove the constraint from the edge
-                    custom_cdt.remove_constraint(fit, i);
-                }
-            }
-        }*/
-
         //Insert additional constraints
         for (const auto& constraint : additional_constraints) {
             custom_cdt.insert_constraint(points[constraint.first], points[constraint.second]);
@@ -187,35 +182,27 @@ int main(int argc, char** argv) {
 
     std_string category = "Null";
     if(is_polygon_convex && !has_constraints){
-        category = "CONVEX_NO_CONSTRAINTS";
-        
-        //cout<<"instance : "<<instance_uid<<" belongs to the category : CONVEX_NO_CONSTRAINTS"<<endl;
-        sum_convex_no_constraints++;
+        //category = "CONVEX_NO_CONSTRAINTS";
+        category ="A";
     }
     if(is_polygon_convex && has_open_constraints){
-        category = "CONVEX_OPEN_CONSTRAINTS";
-        
-        //cout<<"instance : "<<instance_uid<<" belongs to the category : CONVEX_OPEN_CONSTRAINTS"<<endl;
-        sum_convex_open++;
+        //category = "CONVEX_OPEN_CONSTRAINTS";
+        category ="B";
     }
     if(is_polygon_convex && has_closed_constraints){
-        category = "CONVEX_CLOSED_CONSTRAINTS";
-        
-        //cout<<"instance : "<<instance_uid<<" belongs to the category : CONVEX_CLOSED_CONSTRAINTS"<<endl;
-        sum_convex_closed++;
+        //category = "CONVEX_CLOSED_CONSTRAINTS";
+        category ="C";
     }
     if(!is_polygon_convex && has_boundary_straight_lines){
-        category = "NOT_CONVEX_PARALLEL_N0_CONSTRAINTS";
-        
-        //cout<<"instance : "<<instance_uid<<" belongs to the category : NOT_CONVEX_PARALLEL_N0_CONSTRAINTS"<<endl;
-        sum_convex_parallel++;
+        //category = "NOT_CONVEX_PARALLEL_N0_CONSTRAINTS";
+        category ="D";
     }
     if(!is_polygon_convex && unspecified){
-        category = "UNSPECIFIED_BOUNDARY";
-        
-        //cout<<"instance : "<<instance_uid<<" belongs to the category : UNSPECIFIED_BOUNDARY"<<endl;
-        sum_unspecified_boundary++;
+        //category = "UNSPECIFIED_BOUNDARY";
+        category ="E";
     }
+
+    vector<vector<int>> subsets = generateSubsetsWith2(0, 4);    
     //stats_output(instance_uid, category);
     //////////// PHASE 2: FLIPS & STEINER POINTS //////////////////////////////
     int obtuses_faces = count_obtuse_triangles(custom_cdt, polygon);
@@ -243,25 +230,44 @@ int main(int argc, char** argv) {
     } 
     //test(simulated_cdt, simulated_polygon);
     //Flips
-    
     //Local Search
     if(run_Local_Search){
         cout<<"Local Search is starting.."<<endl;
-        local_search(simulated_cdt, simulated_polygon, L, instance_uid, randomization);
-        cout <<"**Number of Obtuses after from Local Search: "<<count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
+        for (const auto& subset : subsets){
+            local_search(simulated_cdt, simulated_polygon, L, instance_uid, randomization, alpha, beta, subset, category);
+            cout<<"**Number of Obtuses after from Local Search: "<<
+                count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
+            simulated_cdt = custom_cdt;
+            simulated_polygon = polygon;
+            randomization = false;
+        }
     }
 
     //SA
     if(run_Simulated_Annealing){
         cout<<"Simulated Annealing is starting.. "<<endl;
-        simulated_annealing(simulated_cdt, simulated_polygon, L, alpha, beta, batch_size, instance_uid, randomization);
-        cout <<"**Number of Obtuses after from Simulated Annealing: "<<count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
+        for (const auto& subset : subsets){
+            simulated_annealing(simulated_cdt, simulated_polygon, L, alpha, beta, batch_size, instance_uid, randomization, 
+                subset, category);
+            cout<<"**Number of Obtuses after from Simulated Annealing: "<<
+                count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
+            simulated_cdt = custom_cdt;
+            simulated_polygon = polygon;
+            randomization = false;
+        }   
     }
     //Ant Colony
     if(run_Ant_Colony){
         cout<<"Ant Colony is starting.. "<<endl;
-        ant_colony(simulated_cdt, simulated_polygon, alpha, beta, chi, psi, lamda , L, kappa, instance_uid, randomization);
-        cout <<"**Number of Obtuses after from Ant Colony: "<<count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
+        for (const auto& subset : subsets){
+            ant_colony(simulated_cdt, simulated_polygon, alpha, beta, chi, psi, lamda , L, kappa, instance_uid, randomization,
+                subset, category);
+            cout<<"**Number of Obtuses after from Ant Colony: "<<
+                count_obtuse_triangles(simulated_cdt, simulated_polygon)<<" **"<<endl;
+            simulated_cdt = custom_cdt;
+            simulated_polygon = polygon;
+            randomization = false;
+        }
     }
     
     obtuses_faces = count_obtuse_triangles(simulated_cdt, simulated_polygon);
@@ -274,18 +280,7 @@ int main(int argc, char** argv) {
     //CGAL::draw(simulated_cdt);
     //print_polygon_edges(simulated_polygon);
     
-    /*Print from Extra_Graphics*/
-    //Calculate min_y and max_y
-    /*double min_y = numeric_limits<double>::max();
-    double max_y = numeric_limits<double>::lowest();
-
-    for (const auto& point : points) {
-        double y = CGAL::to_double(point.y());
-        min_y = min(min_y, y);
-        max_y = max(max_y, y);
-    }*/
-
-    double min_x = std::numeric_limits<double>::max();
+    /*double min_x = std::numeric_limits<double>::max();
     double max_x = std::numeric_limits<double>::lowest();
     double min_y = std::numeric_limits<double>::max();
     double max_y = std::numeric_limits<double>::lowest();
@@ -320,6 +315,6 @@ int main(int argc, char** argv) {
     //////////// PHASE 3: JSON FILE OUTPUT //////////////////////////////
 
     output(jv, simulated_cdt, points, obtuses_faces, output_path, randomization);
-    return app.exec();
-    //return 0;
+    return app.exec();*/
+    return 0;
 }

@@ -434,16 +434,6 @@ Centroid was selected: 0 times
 Random steiner was selected: 0 times
 ** 
 
-** Local Search method, with number of steiners: 5 for the instance ortho_80_06ee55d4
-Number of obtuses: 25
-Used Random steiner: false
-Circumcenter was selected: 0 times
-Midpoint was selected: 1 times
-Projection was selected: 4 times
-Polygon method was selected: 0 times
-Centroid was selected: 0 times
-Random steiner was selected: 0 times
-** 
 ##
 ** SA method, with number of steiners: 71 for the instance ortho_100_bd1e4a14
 Number of obtuses: 13
@@ -546,17 +536,6 @@ Centroid was selected: 2 times
 Random steiner was selected: 0 times
 ** 
 
-** SA method, with number of steiners: 46 for the instance ortho_80_06ee55d4
-Number of obtuses: 15
-Used Random steiner: false
-Circumcenter was selected: 0 times
-Midpoint was selected: 2 times
-Projection was selected: 43 times
-Polygon method was selected: 0 times
-Centroid was selected: 1 times
-Random steiner was selected: 0 times
-** 
-
 ** SA method, with number of steiners: 45 for the instance ortho_40_56a6f463
 Number of obtuses: 0
 Used Random steiner: false
@@ -601,14 +580,1212 @@ Centroid was selected: 4 times
 Random steiner was selected: 0 times
 ** 
 
-** SA method, with number of steiners: 85 for the instance ortho_60_f744490d
-Number of obtuses: 2
+** SA method, with number of steiners: 91 for the instance ortho_60_f744490d
+Number of obtuses: 0
 Used Random steiner: false
 Circumcenter was selected: 0 times
-Midpoint was selected: 3 times
-Projection was selected: 79 times
+Midpoint was selected: 2 times
+Projection was selected: 85 times
 Polygon method was selected: 1 times
+Centroid was selected: 3 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 58 for the instance point-set_100_0245ce31
+Number of obtuses: 8
+Used Random steiner: false
+Circumcenter was selected: 2 times
+Midpoint was selected: 3 times
+Projection was selected: 52 times
+Polygon method was selected: 0 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 126 for the instance point-set_100_05594822
+Number of obtuses: 58
+Used Random steiner: false
+Circumcenter was selected: 2 times
+Midpoint was selected: 12 times
+Projection was selected: 106 times
+Polygon method was selected: 1 times
+Centroid was selected: 5 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 77 for the instance point-set_100_dd67678e
+Number of obtuses: 53
+Used Random steiner: true
+The Random steiner inserted at: 2202.194076139652225 481.053720586635450 => 1279.955490329444729 504.810936421267343 => 
+
+Circumcenter was selected: 1 times
+Midpoint was selected: 4 times
+Projection was selected: 66 times
+Polygon method was selected: 1 times
+Centroid was selected: 3 times
+Random steiner was selected: 2 times
+** 
+
+** SA method, with number of steiners: 22 for the instance point-set_10_13860916
+Number of obtuses: 0
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 2 times
+Projection was selected: 19 times
+Polygon method was selected: 0 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 9 for the instance point-set_10_4bcb7c21
+Number of obtuses: 0
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 9 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 9 for the instance point-set_10_7451a2a9
+Number of obtuses: 0
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 9 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 13 for the instance point-set_10_97578aae
+Number of obtuses: 0
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 13 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 11 for the instance point-set_10_ae0fff93
+Number of obtuses: 0
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 11 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 15 for the instance point-set_10_c04b0024
+Number of obtuses: 0
+Used Random steiner: false
+Circumcenter was selected: 1 times
+Midpoint was selected: 2 times
+Projection was selected: 11 times
+Polygon method was selected: 0 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 23 for the instance point-set_10_f999dc7f
+Number of obtuses: 0
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 23 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 22 for the instance point-set_10_d009159f
+Number of obtuses: 1
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 22 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 60 for the instance point-set_40_1b92b629
+Number of obtuses: 15
+Used Random steiner: false
+Circumcenter was selected: 2 times
+Midpoint was selected: 4 times
+Projection was selected: 54 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 58 for the instance point-set_40_9451c229
+Number of obtuses: 8
+Used Random steiner: false
+Circumcenter was selected: 1 times
+Midpoint was selected: 2 times
+Projection was selected: 55 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 74 for the instance point-set_40_ae33a7ea
+Number of obtuses: 11
+Used Random steiner: false
+Circumcenter was selected: 1 times
+Midpoint was selected: 4 times
+Projection was selected: 69 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 53 for the instance point-set_40_f511c8ce
+Number of obtuses: 25
+Used Random steiner: false
+Circumcenter was selected: 1 times
+Midpoint was selected: 2 times
+Projection was selected: 48 times
+Polygon method was selected: 0 times
 Centroid was selected: 2 times
 Random steiner was selected: 0 times
 ** 
+
+** SA method, with number of steiners: 70 for the instance point-set_40_8cbf31aa
+Number of obtuses: 2
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 1 times
+Projection was selected: 69 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 63 for the instance point-set_60_27bc003d
+Number of obtuses: 45
+Used Random steiner: true
+The Random steiner inserted at: 9306.954454580371021 10609.904803576037011 => 
+
+Circumcenter was selected: 2 times
+Midpoint was selected: 2 times
+Projection was selected: 56 times
+Polygon method was selected: 1 times
+Centroid was selected: 1 times
+Random steiner was selected: 1 times
+** 
+
+** SA method, with number of steiners: 87 for the instance point-set_60_2ff8f975
+Number of obtuses: 37
+Used Random steiner: false
+Circumcenter was selected: 1 times
+Midpoint was selected: 3 times
+Projection was selected: 78 times
+Polygon method was selected: 0 times
+Centroid was selected: 5 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 72 for the instance point-set_60_74409a1d
+Number of obtuses: 23
+Used Random steiner: true
+The Random steiner inserted at: 3403.563532857117934 1813.269372784118104 => 
+
+Circumcenter was selected: 4 times
+Midpoint was selected: 3 times
+Projection was selected: 62 times
+Polygon method was selected: 0 times
+Centroid was selected: 2 times
+Random steiner was selected: 1 times
+** 
+
+** SA method, with number of steiners: 90 for the instance point-set_60_9fc02edd
+Number of obtuses: 36
+Used Random steiner: false
+Circumcenter was selected: 2 times
+Midpoint was selected: 10 times
+Projection was selected: 73 times
+Polygon method was selected: 1 times
+Centroid was selected: 4 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 83 for the instance point-set_60_ac318d72
+Number of obtuses: 27
+Used Random steiner: false
+Circumcenter was selected: 2 times
+Midpoint was selected: 5 times
+Projection was selected: 76 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 75 for the instance point-set_80_1675b331
+Number of obtuses: 18
+Used Random steiner: false
+Circumcenter was selected: 1 times
+Midpoint was selected: 9 times
+Projection was selected: 59 times
+Polygon method was selected: 0 times
+Centroid was selected: 6 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 114 for the instance point-set_80_837b0f11
+Number of obtuses: 58
+Used Random steiner: false
+Circumcenter was selected: 2 times
+Midpoint was selected: 5 times
+Projection was selected: 102 times
+Polygon method was selected: 2 times
+Centroid was selected: 3 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 96 for the instance point-set_80_8383fead
+Number of obtuses: 47
+Used Random steiner: true
+The Random steiner inserted at: 10629.808176823829854 6677.736636171328428 => 
+
+Circumcenter was selected: 3 times
+Midpoint was selected: 13 times
+Projection was selected: 75 times
+Polygon method was selected: 1 times
+Centroid was selected: 3 times
+Random steiner was selected: 1 times
+** 
+
+** SA method, with number of steiners: 131 for the instance point-set_80_d77fb670
+Number of obtuses: 13
+Used Random steiner: true
+The Random steiner inserted at: 7267.431252009613672 7117.209505919262483 => 
+
+Circumcenter was selected: 4 times
+Midpoint was selected: 6 times
+Projection was selected: 116 times
+Polygon method was selected: 1 times
+Centroid was selected: 3 times
+Random steiner was selected: 1 times
+** 
+
+** SA method, with number of steiners: 87 for the instance point-set_80_ff15444b
+Number of obtuses: 44
+Used Random steiner: true
+The Random steiner inserted at: 2928.517063599664198 686.348378344316416 => 
+
+Circumcenter was selected: 2 times
+Midpoint was selected: 8 times
+Projection was selected: 72 times
+Polygon method was selected: 0 times
+Centroid was selected: 4 times
+Random steiner was selected: 1 times
+**
+
+** SA method, with number of steiners: 66 for the instance point-set_80_9a8373fb
+Number of obtuses: 4
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 5 times
+Projection was selected: 60 times
+Polygon method was selected: 1 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+
+** SA method, with number of steiners: 81 for the instance point-set_80_9a8373fb
+Number of obtuses: 5
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 3 times
+Projection was selected: 76 times
+Polygon method was selected: 0 times
+Centroid was selected: 2 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 6 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 6 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** SA method, with number of steiners: 19 for the instance point-set_10_d009159f
+Number of obtuses: 3
+Used Random steiner: false
+Circumcenter was selected: 0 times
+Midpoint was selected: 2 times
+Projection was selected: 17 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+** 
+
+** Local Search method, with number of steiners: 5 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: true
+The Random steiner inserted at: 1374.32 1938.62 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 4 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 0.42
+Energy: 10.60
+50.00% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 15 for the instance point-set_10_d009159f
+Number of obtuses: 2
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 15 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.770064
+Energy: 7.8
+75% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 80 for the instance ortho_60_c423f527
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 80 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.953791
+Energy: 28
+Choosing methods: [2]
+78.2609% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 77 for the instance ortho_60_c423f527
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 77 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.40155
+Energy: 22.6
+Choosing methods: [0, 2]
+86.9565% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 77 for the instance ortho_60_c423f527
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 3 times
+Projection was selected: 74 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.13848
+Energy: 25
+Choosing methods: [1, 2]
+82.6087% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 69 for the instance ortho_60_c423f527
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 1 times
+Midpoint was selected: 4 times
+Projection was selected: 64 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.22078
+Energy: 23.4
+Choosing methods: [0, 1, 2]
+82.6087% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 92 for the instance ortho_60_c423f527
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 92 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.33295
+Energy: 25.6
+Choosing methods: [2, 3]
+86.9565% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 91 for the instance ortho_60_c423f527
+Number of obtuses: 1
+Used Random steiner: false
+
+Circumcenter was selected: 1 times
+Midpoint was selected: 0 times
+Projection was selected: 90 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 2.2993
+Energy: 20.6
+Choosing methods: [0, 2, 3]
+95.6522% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 79 for the instance ortho_60_c423f527
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 79 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.40426
+Energy: 23
+Choosing methods: [1, 2, 3]
+86.9565% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 76 for the instance ortho_60_c423f527
+Number of obtuses: 4
+Used Random steiner: true
+The Random steiner inserted at: 165881.53 483216.20 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 2 times
+Projection was selected: 73 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 1.56
+Energy: 24.80
+Choosing methods: [0, 1, 2, 3]
+82.61% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 53 for the instance ortho_60_c423f527
+Number of obtuses: 10
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 52 times
+Polygon method was selected: 0 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.449833
+Energy: 34.6
+Choosing methods: [2, 4]
+56.5217% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 70 for the instance ortho_60_c423f527
+Number of obtuses: 6
+Used Random steiner: false
+
+Circumcenter was selected: 1 times
+Midpoint was selected: 0 times
+Projection was selected: 66 times
+Polygon method was selected: 0 times
+Centroid was selected: 3 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.860384
+Energy: 28.4
+Choosing methods: [0, 2, 4]
+73.913% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 74 for the instance ortho_60_c423f527
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 2 times
+Projection was selected: 71 times
+Polygon method was selected: 0 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.31388
+Energy: 26.8
+Choosing methods: [1, 2, 4]
+78.2609% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 74 for the instance ortho_60_c423f527
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 2 times
+Midpoint was selected: 0 times
+Projection was selected: 70 times
+Polygon method was selected: 0 times
+Centroid was selected: 2 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.42019
+Energy: 26.8
+Choosing methods: [0, 1, 2, 4]
+78.2609% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 71 for the instance ortho_60_c423f527
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 71 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.901579
+Energy: 26.2
+Choosing methods: [2, 3, 4]
+78.2609% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 79 for the instance ortho_60_c423f527
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 77 times
+Polygon method was selected: 0 times
+Centroid was selected: 2 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.48982
+Energy: 23
+Choosing methods: [0, 2, 3, 4]
+86.9565% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 68 for the instance ortho_60_c423f527
+Number of obtuses: 6
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 3 times
+Projection was selected: 64 times
+Polygon method was selected: 0 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.831764
+Energy: 28
+Choosing methods: [1, 2, 3, 4]
+73.913% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 60 for the instance ortho_60_c423f527
+Number of obtuses: 8
+Used Random steiner: false
+
+Circumcenter was selected: 3 times
+Midpoint was selected: 2 times
+Projection was selected: 54 times
+Polygon method was selected: 0 times
+Centroid was selected: 1 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.68495
+Energy: 31.2
+Choosing methods: [0, 1, 2, 3, 4]
+65.2174% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 12 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 12 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.391827
+Energy: 12
+Choosing methods: [2]
+50% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 9 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 9 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.363559
+Energy: 11.4
+Choosing methods: [0, 2]
+50% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 10 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 10 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.369388
+Energy: 11.6
+Choosing methods: [1, 2]
+50% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 19 for the instance point-set_10_d009159f
+Number of obtuses: 2
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 1 times
+Projection was selected: 18 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.80893
+Energy: 8.6
+Choosing methods: [0, 1, 2]
+75% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 23 for the instance point-set_10_d009159f
+Number of obtuses: 1
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 23 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 1.44866
+Energy: 7
+Choosing methods: [2, 3]
+87.5% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 17 for the instance point-set_10_d009159f
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 17 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.599957
+Energy: 10.6
+Choosing methods: [0, 2, 3]
+62.5% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 21 for the instance point-set_10_d009159f
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 1 times
+Projection was selected: 20 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.927217
+Energy: 11.4
+Choosing methods: [1, 2, 3]
+62.5% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 14 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: true
+The Random steiner inserted at: 2753.97 3348.76 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 3 times
+Projection was selected: 10 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 0.93
+Energy: 12.40
+Choosing methods: [0, 1, 2, 3]
+50.00% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 8 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 8 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.530078
+Energy: 11.2
+Choosing methods: [2, 4]
+50% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 9 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 9 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.585517
+Energy: 11.4
+Choosing methods: [0, 2, 4]
+50% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 13 for the instance point-set_10_d009159f
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 13 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.491486
+Energy: 9.8
+Choosing methods: [1, 2, 4]
+62.5% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 13 for the instance point-set_10_d009159f
+Number of obtuses: 3
+Used Random steiner: true
+The Random steiner inserted at: 1091.86 2018.90 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 12 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 0.93
+Energy: 9.80
+Choosing methods: [0, 1, 2, 4]
+62.50% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 17 for the instance point-set_10_d009159f
+Number of obtuses: 3
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 17 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.591957
+Energy: 10.6
+Choosing methods: [2, 3, 4]
+62.5% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 11 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 11 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.661262
+Energy: 11.8
+Choosing methods: [0, 2, 3, 4]
+50% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 21 for the instance point-set_10_d009159f
+Number of obtuses: 2
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 21 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.90034
+Energy: 9
+Choosing methods: [1, 2, 3, 4]
+75% obtuse triangles reduction success
+** 
+
+** SA method, with number of steiners: 8 for the instance point-set_10_d009159f
+Number of obtuses: 4
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 8 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.387221
+Energy: 11.2
+Choosing methods: [0, 1, 2, 3, 4]
+50% obtuse triangles reduction success
+** 
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [2]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [0, 2]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [1, 2]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [0, 1, 2]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [2, 3]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 4 for the instance point-set_10_d009159f category: A
+Number of obtuses: 4
+Used Random steiner: true
+The Random steiner inserted at: 1371.06 1937.86 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 0.22
+Energy: 10.40
+Choosing methods: [0, 2, 3]
+50.00% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 4 for the instance point-set_10_d009159f category: A
+Number of obtuses: 4
+Used Random steiner: true
+The Random steiner inserted at: 1373.97 1938.75 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 0.22
+Energy: 10.40
+Choosing methods: [1, 2, 3]
+50.00% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 4 for the instance point-set_10_d009159f category: A
+Number of obtuses: 4
+Used Random steiner: true
+The Random steiner inserted at: 1373.42 1938.52 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 0.22
+Energy: 10.40
+Choosing methods: [0, 1, 2, 3]
+50.00% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [2, 4]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [0, 2, 4]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [1, 2, 4]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [0, 1, 2, 4]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [2, 3, 4]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [0, 2, 3, 4]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 3 for the instance point-set_10_d009159f category: A
+Number of obtuses: 5
+Used Random steiner: false
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 0 times
+
+Rate of convergence: 0.336026
+Energy: 12.6
+Choosing methods: [1, 2, 3, 4]
+37.5% obtuse triangles reduction success
+## 
+
+## Ant method, with number of steiners: 4 for the instance point-set_10_d009159f category: A
+Number of obtuses: 4
+Used Random steiner: true
+The Random steiner inserted at: 1375.71 1942.26 => 
+
+Circumcenter was selected: 0 times
+Midpoint was selected: 0 times
+Projection was selected: 3 times
+Polygon method was selected: 0 times
+Centroid was selected: 0 times
+Random steiner was selected: 1 times
+
+Rate of convergence: 0.22
+Energy: 10.40
+Choosing methods: [0, 1, 2, 3, 4]
+50.00% obtuse triangles reduction success
+## 
 
