@@ -1,6 +1,0 @@
-/home/mikelos/Projects/CG_SHOP_2025_3/CMakeFiles/CGAL_Qt5_moc_and_resources.dir
-/home/mikelos/Projects/CG_SHOP_2025_3/CMakeFiles/opt_triangulation.dir
-/home/mikelos/Projects/CG_SHOP_2025_3/CMakeFiles/edit_cache.dir
-/home/mikelos/Projects/CG_SHOP_2025_3/CMakeFiles/rebuild_cache.dir
-/home/mikelos/Projects/CG_SHOP_2025_3/CMakeFiles/CGAL_Qt5_moc_and_resources_autogen_timestamp_deps.dir
-/home/mikelos/Projects/CG_SHOP_2025_3/CMakeFiles/CGAL_Qt5_moc_and_resources_autogen.dir

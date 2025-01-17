@@ -23,13 +23,13 @@ configurations = {
     },
     "auto": {
         "method": "auto",
-        "parameters": {"alpha": 2.4, "beta": 0.2, "L": 700, "batch_size": 6},
-        "delaunay": True
+        "parameters": {"alpha": 2.4, "beta": 0.2, "L": 800, "batch_size": 6},
+        "delaunay": False
     }
 }
 
 #Select which configuration to apply (choose from: "local", "sa", "ant")
-selected_configuration = "local"  # Change this to "local" or "ant" as needed
+selected_configuration = "auto"  # Change this to "local" or "ant" as needed
 
 #Validate selection
 if selected_configuration not in configurations:

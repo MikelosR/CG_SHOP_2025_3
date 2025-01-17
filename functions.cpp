@@ -381,22 +381,24 @@ void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_st
                 custom_cdt = cdt_variants[min_index];
                 best_cdt = custom_cdt;
                 obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
-                //3rd task
-                if(try_randomization){
-                    in_randomization = true;
-                    cout<<"Random steiner inserted: "<<temp_random_steiner<<endl;
-                    random_steiners.emplace_back(temp_random_steiner);
-                    count_steiners[5]++;
-                    try_randomization = false;
+                if(run_auto_method){                
+                    //3rd task
+                    if(try_randomization){
+                        in_randomization = true;
+                        cout<<"Random steiner inserted: "<<temp_random_steiner<<endl;
+                        random_steiners.emplace_back(temp_random_steiner);
+                        count_steiners[5]++;
+                        try_randomization = false;
+                    }
+                    else progress = true;
                 }
-                else progress = true;
-            
 
                 count_steiners[min_index]++;
                 //3rd task
-                num_of_steiners = custom_cdt.number_of_vertices() - init_vertices;
-                p_sum += p_sum_function(num_of_steiners - 1, num_of_obtuses_before, obtuses_after[min_index]);
-                
+                if(run_auto_method){
+                    num_of_steiners = custom_cdt.number_of_vertices() - init_vertices;
+                    p_sum += p_sum_function(num_of_steiners - 1, num_of_obtuses_before, obtuses_after[min_index]);
+                }
 
                 //For projection or midpoint check if the steiner inserted in the boundary of polygon and update the polygon
                 if(min_index == 1) update_polygon(polygon, steiner_points[min_index], longest_edge.source(), longest_edge.target());
@@ -408,47 +410,48 @@ void local_search(Custom_CDT& custom_cdt, Polygon& polygon, int& L, const std_st
         if(!progress){
             L--;
             custom_cdt = best_cdt;
-            try_steiner_around_centroid(custom_cdt, polygon, temp_random_steiner);
-            obtuse_custom = count_obtuse_triangles(custom_cdt, polygon);
-            obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
-            
-            try_randomization = true;
-            if(obtuse_custom < obtuse_best_cdt) {
-                in_randomization = true;
-                best_cdt = custom_cdt;
-                count_steiners[5]++;
-                random_steiners.emplace_back(temp_random_steiner);
-                try_randomization = false;
-                cout<<"Random steiner inserted: "<<temp_random_steiner<<endl;
+            if(run_auto_method){
+                try_steiner_around_centroid(custom_cdt, polygon, temp_random_steiner);
+                obtuse_custom = count_obtuse_triangles(custom_cdt, polygon);
+                obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
+                
+                try_randomization = true;
+                if(obtuse_custom < obtuse_best_cdt) {
+                    in_randomization = true;
+                    best_cdt = custom_cdt;
+                    count_steiners[5]++;
+                    random_steiners.emplace_back(temp_random_steiner);
+                    try_randomization = false;
+                    cout<<"Random steiner inserted: "<<temp_random_steiner<<endl;
+                }
+                //Try this new cdt
             }
-            //Try this new cdt
-            
         }
     }
 
     custom_cdt = best_cdt;
-    
-    double front;
-    num_of_steiners = best_cdt.number_of_vertices() - init_vertices;
-    if (num_of_steiners > 1)
-        front = abs(1.0/(num_of_steiners - 1.0));
-    else front = 0.0;
+    if(run_auto_method){
+        double front;
+        num_of_steiners = best_cdt.number_of_vertices() - init_vertices;
+        if (num_of_steiners > 1)
+            front = abs(1.0/(num_of_steiners - 1.0));
+        else front = 0.0;
 
-    double rate_of_convergence = front * p_sum;
-    obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
-    double Energy = calculate_energy(obtuse_best_cdt, num_of_steiners, alpha, beta);
-    std_string method_name = "Local Search";
-    int num_of_steiner = 0;
+        double rate_of_convergence = front * p_sum;
+        obtuse_best_cdt = count_obtuse_triangles(best_cdt, polygon);
+        double Energy = calculate_energy(obtuse_best_cdt, num_of_steiners, alpha, beta);
+        std_string method_name = "Local Search";
+        int num_of_steiner = 0;
 
-    //Sum the total number of steiners
-    for(int i = 0; i < count_steiners.size(); ++i) {
-        num_of_steiner += count_steiners[i];
-    }
+        //Sum the total number of steiners
+        for(int i = 0; i < count_steiners.size(); ++i) {
+            num_of_steiner += count_steiners[i];
+        }
 
-    num_of_obtuses = count_obtuse_triangles(custom_cdt, polygon);
-    method_output(count_steiners, method_name, name_of_instance, num_of_steiner, init_num_obtuses, num_of_obtuses, 
-                in_randomization, random_steiners, rate_of_convergence, Energy, subset, category);
-
+        num_of_obtuses = count_obtuse_triangles(custom_cdt, polygon);
+        method_output(count_steiners, method_name, name_of_instance, num_of_steiner, init_num_obtuses, num_of_obtuses, 
+                    in_randomization, random_steiners, rate_of_convergence, Energy, subset, category);
+    }  
     time(&end_time);
     double time_taken = double(end_time - start_time); 
     cout<<"Time taken by program: "<<name_of_instance<<" is : "<<time_taken<<" sec "<<endl;
@@ -567,12 +570,14 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                 best_E = E_new;
 
                 //Optional for prints
-                best_obtuse_faces = obtuse_faces;                
+                best_obtuse_faces = obtuse_faces;
                 //3rd task
-                p_sum += p_sum_function(counter_steiner - 1, previous_obtuses, obtuse_faces) + temp_p_sum;
-                previous_obtuses = obtuse_faces;
-                temp_p_sum = 0;
-                p_sum_best = p_sum;
+                if(run_auto_method){                
+                    p_sum += p_sum_function(counter_steiner - 1, previous_obtuses, obtuse_faces) + temp_p_sum;
+                    previous_obtuses = obtuse_faces;
+                    temp_p_sum = 0;
+                    p_sum_best = p_sum;
+                }
                 
                 //Restart the counter of bad steiner insertions
                 num_of_transition = 0;
@@ -583,7 +588,7 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                     count_steiners[i] += temp_counter_steiner[i];
                 }
 
-                if(try_randomization){
+                if(try_randomization && run_auto_method){
                     cout<<"Random steiner inserted: "<<temp_random_steiner<<endl;
                     vector_random_steiners.emplace_back(temp_random_steiner);
                     randomization = true;
@@ -599,8 +604,10 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
             else if(should_accept_bad_steiner(delta_E,T)){
                 num_of_transition++;
                 //3rd task
-                temp_p_sum += p_sum_function(counter_steiner - 1, previous_obtuses, obtuse_faces);
-                previous_obtuses = obtuse_faces;
+                if(run_auto_method){
+                    temp_p_sum += p_sum_function(counter_steiner - 1, previous_obtuses, obtuse_faces);
+                    previous_obtuses = obtuse_faces;
+                }
                 
                 //Run the for loop with the simulated_cdt
                 curent_cdt = simulate_cdt;
@@ -613,7 +620,7 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
                     temp_p_sum = 0;
                     fill(temp_counter_steiner.begin(), temp_counter_steiner.end(), 0);
                     //Try to insert insert_steiner_around_centroid (3rd task)
-                    if(i > max_iterations/1.5 && best_obtuse_faces > 1) {
+                    if(i > max_iterations/1.5 && best_obtuse_faces > 1 && run_auto_method) {
                         try_steiner_around_centroid(simulate_cdt, polygon, temp_random_steiner);
                         temp_counter_steiner[5]++;
                         try_randomization = true;
@@ -647,29 +654,33 @@ void simulated_annealing(Custom_CDT& custom_cdt, Polygon& polygon, int max_itera
         }
         //Update temperature (decrease)
         T = T*(cooling_rate);
-        cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" best_E: "<<best_E<<endl; 
+        //cout<<"Iteration: " <<i<< ", T: "<<T<<", best_obtuse_faces: "<<best_obtuse_faces<<" best_E: "<<best_E<<endl; 
     }
 
     //"Return" the best cdt
     custom_cdt = best_cdt;
-    double front;
-    best_num_steiner = best_cdt.number_of_vertices() - init_vertices;
-    if (best_num_steiner > 1)
-        front = abs(1.0/(best_num_steiner - 1.0));
-    else front = 0.0;    
-    double rate_of_convergence = front * p_sum_best;
+    if(run_auto_method){
+        double front;
+        best_num_steiner = best_cdt.number_of_vertices() - init_vertices;
+        if (best_num_steiner > 1)
+            front = abs(1.0/(best_num_steiner - 1.0));
+        else front = 0.0;    
+        double rate_of_convergence = front * p_sum_best;
+        
+        std_string method_name = "SA";
+        
+        obtuse_faces = count_obtuse_triangles(best_cdt, polygon);
+        best_E  = calculate_energy(obtuse_faces, best_num_steiner, alpha, beta);
+        
+        method_output(count_steiners, method_name, name_of_instance, best_num_steiner, init_num_obtuses, 
+                        best_obtuse_faces, randomization, vector_random_steiners, rate_of_convergence, best_E,
+                        subset, category);
+    }
     time(&end_time);
     double time_taken = double(end_time - start_time); 
-    cout<<"Time taken by  : "<<name_of_instance<<" is : "<<" sec "<<time_taken<<endl;
-    std_string method_name = "SA";
-    
-    obtuse_faces = count_obtuse_triangles(best_cdt, polygon);
-    best_E  = calculate_energy(obtuse_faces, best_num_steiner, alpha, beta);
-    
-    method_output(count_steiners, method_name, name_of_instance, best_num_steiner, init_num_obtuses, 
-                    best_obtuse_faces, randomization, vector_random_steiners, rate_of_convergence, best_E,
-                    subset, category);    
+    cout<<"Time taken by  : "<<name_of_instance<<" is : "<<" sec "<<time_taken<<endl;    
 }
+
 
 //Ant colony method
 void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, const double& beta, 
@@ -801,10 +812,13 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
                     ants[ant_index].set_opposite_edge_projection(opposite_edge);
             }
             else ants[ant_index].set_reduce_obtuses(false);
-
-            //If the try_randomization is activated, use other cdt
-            if(!try_randomization) curent_cdt = best_cdt;
-            else curent_cdt = random_cdt;
+            
+            if(run_auto_method){
+                //If the try_randomization is activated, use other cdt
+                if(!try_randomization) curent_cdt = best_cdt;
+                else curent_cdt = random_cdt;
+            }
+            else curent_cdt = best_cdt;
         }
         
         //Save the bests ants (not the last winners)
@@ -832,14 +846,13 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
         /*Save the best triangulation*/
         for(int i = 0; i < ant_last_winners_vector.size(); i++){
            
-            //3rd task, p_sum
             //We add in the place 4 of vector the centroid
             if(ant_last_winners_vector[i].get_steiner_method() == CENTROID){
                 ant_last_winners_vector[i].set_steiner_method(NUM_METHODS);
             }
             num_of_obtuses_before = count_obtuse_triangles(best_cdt, polygon);
             //3rd task
-            if(try_randomization) {
+            if(try_randomization && run_auto_method) {
                 best_cdt.insert_no_flip(random_steiner);
                 start_the_flips(best_cdt, polygon);
                 cout<<fixed<<"Random steiner inserted: "<<random_steiner<<endl;
@@ -851,10 +864,12 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
             count_steiners[ant_last_winners_vector[i].get_steiner_method()]++;
             best_cdt.insert_no_flip(ant_last_winners_vector[i].get_steiner_point());
             start_the_flips(best_cdt, polygon);
-            //3rd task, p_sum
-            num_of_steiners = best_cdt.number_of_vertices() - init_vertices;
-            num_of_obtuses_after = count_obtuse_triangles(best_cdt, polygon);
-            p_sum += p_sum_function(num_of_steiners - 1, num_of_obtuses_before, num_of_obtuses_after);
+            if(run_auto_method){
+                //3rd task, p_sum
+                num_of_steiners = best_cdt.number_of_vertices() - init_vertices;
+                num_of_obtuses_after = count_obtuse_triangles(best_cdt, polygon);
+                p_sum += p_sum_function(num_of_steiners - 1, num_of_obtuses_before, num_of_obtuses_after);
+            }
            
             curent_steiner_point = ant_last_winners_vector[i].get_steiner_point();
             longest_edge = ant_last_winners_vector[i].get_longest_edge_midpoint();
@@ -866,44 +881,47 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
             if((curent_method == 2) && (polygon.bounded_side(curent_steiner_point) == CGAL::ON_BOUNDARY))
                 update_polygon(polygon, curent_steiner_point, opposite_edge.source(), opposite_edge.target());
         }
+        
         //Update the best triangulation and the best_E
         best_obtuses = count_obtuse_triangles(best_cdt, polygon);
-        //3rd task. Check for 4 loops if wee dont have progress, to activate the random steiner
-        if(best_obtuses < progress_obtuses){
-            progress = true;
-            
-            progress_obtuses = best_obtuses;
-            progress_counter = 0;
-            if(try_randomization) {
-                randomization = true;
-                vector_random_steiners.emplace_back(random_steiner);
+        if(run_auto_method){
+            //3rd task. Check for 15 loops if we dont have progress, to activate the random steiner
+            if(best_obtuses < progress_obtuses){
+                progress = true;
+                
+                progress_obtuses = best_obtuses;
+                progress_counter = 0;
+                if(try_randomization) {
+                    randomization = true;
+                    vector_random_steiners.emplace_back(random_steiner);
+                }
+                try_randomization = false;
+                
             }
-            try_randomization = false;
-            
-        }
-        else  progress_counter++;
+            else  progress_counter++;
 
-        //Reset the curent cdt and random_cdt
-        curent_cdt= best_cdt;
-        random_cdt = best_cdt;
-        //Try to insert insert_steiner_around_centroid (3rd task)
-        if (progress_counter >= non_progress_counter) try_randomization = true;
-        if (try_randomization) {
-            non_progress_counter = 10;
-            try_randomization = true;
-            progress_counter = 0;
-            try_steiner_around_centroid(random_cdt, polygon, random_steiner);
-            int obtuses = count_obtuse_triangles(random_cdt, polygon);
-            curent_cdt = random_cdt;
-            if(obtuses < best_obtuses) {
-                best_cdt = random_cdt;
-                curent_cdt = best_cdt;
-                best_obtuses = obtuses;
-                progress_obtuses = obtuses;
-                counter_steiner = best_cdt.number_of_vertices() - init_vertices;
-                randomization = true;
-                vector_random_steiners.emplace_back(random_steiner);
-                cout<<fixed<<"Random steiner inserted: "<<random_steiner<<endl;
+            //Reset the curent cdt and random_cdt
+            curent_cdt = best_cdt;
+            random_cdt = best_cdt;
+            //Try to insert insert_steiner_around_centroid (3rd task)
+            if (progress_counter >= non_progress_counter) try_randomization = true;
+            if (try_randomization) {
+                non_progress_counter = 10;
+                try_randomization = true;
+                progress_counter = 0;
+                try_steiner_around_centroid(random_cdt, polygon, random_steiner);
+                int obtuses = count_obtuse_triangles(random_cdt, polygon);
+                curent_cdt = random_cdt;
+                if(obtuses < best_obtuses) {
+                    best_cdt = random_cdt;
+                    curent_cdt = best_cdt;
+                    best_obtuses = obtuses;
+                    progress_obtuses = obtuses;
+                    counter_steiner = best_cdt.number_of_vertices() - init_vertices;
+                    randomization = true;
+                    vector_random_steiners.emplace_back(random_steiner);
+                    cout<<fixed<<"Random steiner inserted: "<<random_steiner<<endl;
+                }
             }
         }
         
@@ -916,26 +934,28 @@ void ant_colony(Custom_CDT& custom_cdt, Polygon& polygon, const double& alpha, c
         Ant::initialize_Ants(ants, best_cdt);
     }    
     cout<<endl;
-    //3rd task
-    double front;
-    if (counter_steiner > 1)
-        front = abs(1.0/(counter_steiner - 1.0));
-    else front = 0.0;
+    //Return the best cdt
+    custom_cdt = best_cdt;
+    if(run_auto_method){
+        //3rd task
+        double front;
+        if (counter_steiner > 1)
+            front = abs(1.0/(counter_steiner - 1.0));
+        else front = 0.0;
 
-    double rate_of_convergence = front * p_sum;
+        double rate_of_convergence = front * p_sum;
+        std_string method_name = "Ant";
+        new_obtuse_faces = count_obtuse_triangles(best_cdt, polygon);
+
+        //Update the index 5 "how many times random steiner choosed"
+        count_steiners[5] = vector_random_steiners.size();
+        best_E = calculate_energy(new_obtuse_faces, counter_steiner, alpha, beta);
+        method_output(count_steiners, method_name, name_of_instance, counter_steiner, init_num_obtuses, new_obtuse_faces, 
+                    randomization, vector_random_steiners, rate_of_convergence, best_E, subset, category);
+    }
     time(&end_time);
     double time_taken = double(end_time - start_time); 
     cout<<"Time taken by program: "<<name_of_instance<<" is : "<<time_taken<<" sec "<<endl;
-
-    custom_cdt = best_cdt;
-    std_string method_name = "Ant";
-    new_obtuse_faces = count_obtuse_triangles(best_cdt, polygon);
-
-    //Update the index 5 "how many times random steiner choosed"
-    count_steiners[5] = vector_random_steiners.size();
-    best_E = calculate_energy(new_obtuse_faces, counter_steiner, alpha, beta);
-    method_output(count_steiners, method_name, name_of_instance, counter_steiner, init_num_obtuses, new_obtuse_faces, 
-                randomization, vector_random_steiners, rate_of_convergence, best_E, subset, category);
 }
 
 //Check for conflict between 2 ants
@@ -1755,7 +1775,7 @@ void method_output(const vector<int> count_steiners, std_string method_name, con
                     const int num_steiners, const int init_num_obtuses, const int num_obtuses, bool randomization, 
                     vector<Point_2>& random_steiners, const double rate_of_convergence, double Energy, vector<int> subset,
                     std_string category){
-    ofstream outFile("output_simple-polygon_.md", std::ios::app); //Open file for writing
+    ofstream outFile("output_simple-polygon-exterior.md", std::ios::app); //Open file for writing
 
     if (!outFile) {
         cerr<<"Error: Could not open output_best_instances.md for writing!"<<endl;

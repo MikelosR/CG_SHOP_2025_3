@@ -31,6 +31,9 @@ int main(int argc, char** argv) {
         } else if (std_string(argv[i]) == "-o" && i + 1 < argc) {
             output_path = argv[++i];
         }
+        else if (std_string(argv[i]) == "auto") {
+            run_auto_method = true;
+        }
     }
 
     if (input_path.empty() || output_path.empty()) {

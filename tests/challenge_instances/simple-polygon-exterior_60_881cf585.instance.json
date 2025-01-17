@@ -371,11 +371,12 @@
             0
         ]
     ],
-    "method": "local",
+    "method": "auto",
     "parameters": {
-        "L": 150,
         "alpha": 2.4,
-        "beta": 0.2
+        "beta": 0.2,
+        "L": 800,
+        "batch_size": 6
     },
-    "delaunay": true
+    "delaunay": false
 }
