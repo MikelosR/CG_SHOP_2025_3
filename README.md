@@ -175,4 +175,3 @@ Step 4: ./opt_triangulation -i tests/challenge_instances/ortho_10_d2723dcc.insta
 - Πάντοτε ο Simualted Annealing αλγόριθμος είναι καλύτερος σε όλα τα instances του διαγωνισμού.
 Τρέχοντας όλα τα υποσύνολα από steiner points, παρατηρήθηκε ότι τα καλύτερα αποτελέσματα προήλθαν είτε χρησιμοποιόντας μόνο την μέθοδο projection, είτε και τις 5 γνωστές μεθόδους (projection, midpoint, polygon, centroid, circumcenter).
 - Στο να μηδενίζονται τα instances επικράτησαν και οι 5 μέθοδοι, γιατί σε περιπτώσεις τοπικού ελάχίτου, είχαν εναλλακτικές επιλογές από steiner points.
-
