@@ -17,21 +17,12 @@ class Custom_Constrained_Delaunay_triangulation_2
 public:
 
     using Base = CGAL::Constrained_Delaunay_triangulation_2<Gt, Tds, Itag>;
-
-    
-
     using typename Base::Face_handle;
-
     using typename Base::Point;
-
     using typename Base::Vertex_handle;
-
     using typename Base::Locate_type;
 
-    
-    //using CGAL::Delaunay_triangulation_2<Gt, Tds>::nearest_vertex;
-
-    // Constructors
+    //Constructors
 
     Custom_Constrained_Delaunay_triangulation_2(const Gt& gt = Gt())
 
@@ -53,37 +44,27 @@ public:
 
 
 
-    // New insert method without flips
+    //New insert method without flips
 
     Vertex_handle insert_no_flip(const Point& a, Face_handle start = Face_handle()) {
 
-        // Call Ctr::insert without flip_around
+        //Call Ctr::insert without flip_around
 
-        Vertex_handle va = this->Base::Ctr::insert(a, start); // Directly call Ctr::insert from the base
+        Vertex_handle va = this->Base::Ctr::insert(a, start); //Directly call Ctr::insert from the base
 
         return va;
 
     }
-    /*void remove_no_flip(Vertex_handle v) {
-
-        this->Base::Ctr::remove(v);
-
-    }
-
-     void remove_constraint_no_flip(Face_handle f, int i){
-        this->Base::Ctr::remove_constrained_edge(f, i);
-    }*/
     
-    // Another insert method with known location
+    //Another insert method with known location
 
     Vertex_handle insert_no_flip(const Point& a, Locate_type lt, Face_handle loc, int li) {
 
-        Vertex_handle va = this->Base::Ctr::insert(a, lt, loc, li); // Directly call Ctr::insert from the base
+        Vertex_handle va = this->Base::Ctr::insert(a, lt, loc, li); //Directly call Ctr::insert from the base
 
         return va;
 
     }
 };
 
-
-#endif // CGAL_CUSTOM_CONSTRAINED_DELAUNAY_TRIANGULATION_2_H
+#endif //CGAL_CUSTOM_CONSTRAINED_DELAUNAY_TRIANGULATION_2_H

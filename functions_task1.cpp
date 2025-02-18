@@ -27,42 +27,6 @@ bool is_obtuse(const Point_2 &a, const Point_2 &b, const Point_2 &c)
             CGAL::angle(a, c, b) == CGAL::OBTUSE);
 }
 
-//Read JSON file
-/*void read_json(const std::string &filename, value &jv)
-{
-    std::ifstream file(filename);
-    if (!file)
-    {
-        std::cerr << "Error opening file: " << filename << endl;
-        return;
-    }
-    std::string json_str((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-    jv = parse(json_str);
-}
-
-// Just check if an edge is part of the additional constrains
-bool is_in_constraints(const std::pair<int, int> &edge, const vector<std::pair<int, int>> &constraints)
-{
-    return std::find(constraints.begin(), constraints.end(), edge) != constraints.end() ||
-           std::find(constraints.begin(), constraints.end(), std::make_pair(edge.second, edge.first)) != constraints.end();
-    // checks for the edge in reverse order as well
-}
-
-// Just check if an edge is part of the region boundary
-bool is_in_region_boundary(const std::pair<int, int> &edge, const vector<int> &boundary)
-{
-    for (int i = 0; i < boundary.size(); ++i)
-    {
-        int idx1 = boundary[i];
-        int idx2 = boundary[(i + 1) % boundary.size()];
-        if ((edge.first == idx1 && edge.second == idx2) || (edge.first == idx2 && edge.second == idx1))
-        {
-            return true;
-        }
-    }
-    return false;
-}*/
-
 //Just count the number of obtuses triangles in a cdt
 int count_obtuse_triangles_1(CDT &cdt, const Polygon &polygon)
 {
@@ -601,15 +565,6 @@ bool is_face_on_boundary(const Custom_CDT &cdt, Face_handle face)
     return false;
 }
 
-// Function to check if a vertex in custom_cdt is a Steiner point
-/*bool is_steiner_point(Vertex_handle vertex, const vector<Point_2> &original_points)
-{
-    const Point_2 &v_point = vertex->point();
-    // Check if v_point is in the original_points vector
-    return std::none_of(original_points.begin(), original_points.end(), [&v_point](const Point_2 &p)
-                        { return p == v_point; });
-}*/
-
 void run_task1(Custom_CDT& custom_cdt, Polygon& polygon){
     int init_obtuses = count_obtuse_triangles_1(custom_cdt, polygon);
     cout<<"Initial number of obtuses: "<<init_obtuses<<endl;
@@ -660,13 +615,7 @@ void run_task1(Custom_CDT& custom_cdt, Polygon& polygon){
 bool is_face_inside_region_1(const Face_handle& face, const Polygon& polygon) {
     Point_2 p1 = face->vertex(0)->point();
     Point_2 p2 = face->vertex(1)->point();
-    Point_2 p3 = face->vertex(2)->point();
-    //Calculate the centroid of the triangle
-    /*Point_2 centroid = CGAL::centroid(p1, p2, p3);
-
-    //Check if the centroid is inside or on the boundary of the polygon
-    bool centroid_inside = (polygon.bounded_side(centroid) == CGAL::ON_BOUNDED_SIDE ||
-                            polygon.bounded_side(centroid) == CGAL::ON_BOUNDARY);*/
+    Point_2 p3 = face->vertex(2)->point(); 
 
     //Check if vertices are inside or on the boundary of the polygon
     bool vertices_inside = 
@@ -708,7 +657,7 @@ bool is_face_inside_region_1(const Face_handle& face, const Polygon& polygon) {
             }
         }
     }
-    return true;  //&& centroid_inside;
+    return true;
 }
 
 void update_polygon_1(Polygon& polygon, const Point_2& steiner_point, const Point_2& p1, const Point_2& p2) {

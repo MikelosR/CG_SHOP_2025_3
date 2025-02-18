@@ -99,7 +99,6 @@ void Ant::set_conflict_loser(bool in_ant_conflict_loser){
     ant_conflict_loser = in_ant_conflict_loser;
 }
 
-
 ///////////////Getters
 set<Face_handle>& Ant::get_affected_faces(){
     return ant_affect_faces;

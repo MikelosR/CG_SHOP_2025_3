@@ -243,5 +243,4 @@ private:
     QPointF dragStartPos; //To store the position when dragging starts
     bool dragInProgress = false; //To track if dragging is happening
 };
-
 #endif //EXTRA_GRAPHICS_H

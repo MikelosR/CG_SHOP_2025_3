@@ -462,7 +462,7 @@ double calculate_energy(const int obtuse_faces, const int steiner_points, const 
     return alpha * obtuse_faces + beta * steiner_points;
 }
 
-bool should_accept_bad_steiner(const double deltaE,const double T) {
+bool should_accept_bad_steiner(const double deltaE, const double T) {
     //Compute e^(-∆E / T)
     double probability = exp(-deltaE / T);
     
@@ -1678,7 +1678,8 @@ std_string convert_to_string(const K::FT& coord) {
 }
 
 /*3rd Task*/
-bool are_constraints_closed(const vector<pair<int, int>>& additional_constraints, int num_points, const vector<Point_2>& points, const Polygon& polygon) {
+bool are_constraints_closed(const vector<pair<int, int>>& additional_constraints, int num_points, 
+                            const vector<Point_2>& points, const Polygon& polygon) {
     if(additional_constraints.empty()) return false;
     
     vector<int> degree(num_points, 0);
@@ -1743,7 +1744,7 @@ bool is_closed_from_boundary(const vector<pair<int, int>>& additional_constraint
             continue;
         }
         if(touch_boundary && (!polygon.has_on_boundary(points[a]) || !polygon.has_on_boundary(points[b]))) non_boundary = true;
-        //If the edge touxh again the boundary and touch_boundary == true, we have closed constraints
+        //If the edge touch again the boundary and touch_boundary == true, we have closed constraints
         if(polygon.has_on_boundary(points[b]) && touch_boundary && non_boundary) return true;
         //Restart
         if(degree[b] == 1) {
@@ -1860,7 +1861,7 @@ void insert_steiner_around_centroid(Custom_CDT& custom_cdt, Face_handle& face, P
     //Compute the bounding circle's radius
     double max_distance = compute_bounding_circle_radius(face, centroid);
 
-    //Use a fraction of the bounding radius as the standard deviation
+    //Use a fraction of the bounding radius as the standard deviation, determines the spread of the distribution
     double stddev = stddev_ratio * max_distance;
 
     std::random_device rd;
@@ -1892,9 +1893,9 @@ void insert_steiner_around_centroid(Custom_CDT& custom_cdt, Face_handle& face, P
 void try_steiner_around_centroid(Custom_CDT& best_cdt, Polygon& polygon, Point_2& random_steiner){
 
     Face_handle random_oobtuse_face = give_random_obtuse(best_cdt, polygon);
-    Point p1 = random_oobtuse_face->vertex(0)->point();
+    /*Point p1 = random_oobtuse_face->vertex(0)->point();
     Point p2 = random_oobtuse_face->vertex(1)->point();
-    Point p3 = random_oobtuse_face->vertex(2)->point();
+    Point p3 = random_oobtuse_face->vertex(2)->point();*/
     Point_2 steiner_temp;
     insert_steiner_around_centroid(best_cdt, random_oobtuse_face, polygon, steiner_temp);
     random_steiner = steiner_temp;

@@ -217,5 +217,5 @@ Rate of convergence: 0.953791
 Energy: 28
 Choosing methods: [2]
 78.2609% obtuse triangles reduction success
-## 
+##
 

@@ -29,7 +29,7 @@ configurations = {
 }
 
 #Select which configuration to apply (choose from: "local", "sa", "ant")
-selected_configuration = "auto"  # Change this to "local" or "ant" as needed
+selected_configuration = "sa"  # Change this to "local" or "ant" as needed
 
 #Validate selection
 if selected_configuration not in configurations:

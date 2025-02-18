@@ -26,13 +26,15 @@ int main(int argc, char** argv) {
     std_string input_path, output_path;
     //Parse command-line arguments
     for (int i = 1; i < argc; ++i) {
+        
         if (std_string(argv[i]) == "-i" && i + 1 < argc) {
             input_path = argv[++i];
-        } else if (std_string(argv[i]) == "-o" && i + 1 < argc) {
+        }
+        else if (std_string(argv[i]) == "-o" && i + 1 < argc) {
             output_path = argv[++i];
         }
-        else if (std_string(argv[i]) == "auto") {
-            run_auto_method = true;
+        else if (std_string(argv[i]) == "-auto") {
+            run_auto_method = true; 
         }
     }
 
@@ -202,7 +204,7 @@ int main(int argc, char** argv) {
     double success;
     bool randomization = false;
     //Start the flips before copy simulated cdt
-    start_the_flips(custom_cdt, polygon);
+    //start_the_flips(custom_cdt, polygon);
 
     Custom_CDT simulated_cdt = custom_cdt;
     simulated_polygon = polygon;   
@@ -248,10 +250,11 @@ int main(int argc, char** argv) {
     if(init_obtuse_faces > 0) success = ((double)obtuses_faces/(double)init_obtuse_faces)*100;
     cout<<100-success<<"%"<<" obtuse triangles reduction success"<<endl;
     cout<<"Final form of Custom CDT "<<endl;
+
     //CGAL::draw(simulated_cdt);
     //print_polygon_edges(simulated_polygon);
     
-    /*double min_x = std::numeric_limits<double>::max();
+    double min_x = std::numeric_limits<double>::max();
     double max_x = std::numeric_limits<double>::lowest();
     double min_y = std::numeric_limits<double>::max();
     double max_y = std::numeric_limits<double>::lowest();
@@ -282,10 +285,10 @@ int main(int argc, char** argv) {
     //view.verticalScrollBar()->setValue(centerY);
     
     view.translate(-centerX * scaleFactor + view.width() / 2, -centerY * scaleFactor + view.height() / 2);
-    view.show();
+    //view.show();
     //////////// PHASE 3: JSON FILE OUTPUT //////////////////////////////
 
     output(jv, simulated_cdt, points, obtuses_faces, output_path, randomization);
-    return app.exec();*/
+    //return app.exec();
     return 0;
 }

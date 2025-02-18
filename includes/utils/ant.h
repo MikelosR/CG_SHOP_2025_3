@@ -66,5 +66,4 @@ private:
     bool ant_reduce_obtuses;
     int num_of_obtuses;
 };
-
 #endif
